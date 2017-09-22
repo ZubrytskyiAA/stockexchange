@@ -7,8 +7,19 @@
     <groupId>ua.study.example</groupId>
     <artifactId>stock-exchange</artifactId>
     <version>1.0</version>
-
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+<packaging>war</packaging>
 
     <dependencies>
         <dependency>
@@ -61,6 +72,12 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+
 
     </dependencies>
 
