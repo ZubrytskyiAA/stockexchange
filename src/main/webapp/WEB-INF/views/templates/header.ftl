@@ -11,9 +11,10 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Trade Site</a>
+            <a class="navbar-brand" href="/" ><img src="dok.jpg">Trade Site</a>
         </div>
         <ul class="nav navbar-nav navbar-left">
+            <li class="active"><a href="/qouteRetrieval">Qoute Retrieval</a></li>
             <li class="active"><a href="/users">Users</a></li>
             <li class="active"><a href="/qutes">Quotes</a></li>
             <li class="active"><a href="/issues">Issues</a></li>

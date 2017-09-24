@@ -9,4 +9,7 @@ public interface UserDao {
     List<User> getAll();
 
 
+    void deleteById(int id);
+
+
 }

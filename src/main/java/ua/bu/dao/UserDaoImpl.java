@@ -20,4 +20,10 @@ public class UserDaoImpl implements UserDao {
         String sql = "SELECT * FROM user";
         return jdbcTemplate.query(sql, new UserMapper());
     }
+
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE FROM user WHERE id =?";
+        jdbcTemplate.update(sql, id);
+    }
 }
