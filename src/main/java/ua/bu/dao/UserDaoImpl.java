@@ -1,29 +1,63 @@
 package ua.bu.dao;
 
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ua.bu.entity.User;
-import ua.bu.mappers.UserMapper;
 
-import javax.sql.DataSource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Component
 public class UserDaoImpl implements UserDao {
 
-    private JdbcTemplate jdbcTemplate;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
-    public UserDaoImpl(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    public void persist(User user) {
+        entityManager.persist(user);
     }
 
+
     @Override
+    @Transactional
     public List<User> getAll() {
-        String sql = "SELECT * FROM user";
-        return jdbcTemplate.query(sql, new UserMapper());
+        return entityManager.createQuery("SELECT u FROM User u order by u.id", User.class).getResultList();
+
     }
 
     @Override
-    public void deleteById(int id) {
-        String sql = "DELETE FROM user WHERE id =?";
-        jdbcTemplate.update(sql, id);
+    @Transactional
+    public User getById(int id) {
+        return entityManager.createQuery("select u from User u where u.id=:id", User.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
+
+    @Override
+    @Transactional
+    public void deleteById(int id) {
+        System.out.println(id);
+        System.out.println("====================================================");
+        entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
+    }
+
+    @Override
+    @Transactional
+    public void save(User user) {
+        entityManager.persist(user);
+    }
+
+    @Override
+    public boolean isLoginNameUnique(String loginName) {
+        List<User> users = entityManager.createQuery("select u from User u where u.loginName=:loginName", User.class)
+                .setParameter("loginName", loginName)
+                .getResultList();
+        if (users.size() > 0) {
+            return false;
+        } else return true;
+
+    }
+
+
 }

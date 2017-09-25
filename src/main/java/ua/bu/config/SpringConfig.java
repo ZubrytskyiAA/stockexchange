@@ -14,15 +14,19 @@ public class SpringConfig {
     public UserService getUserService() {
         return new UserServiceImpl();
     }
-
-
     @Bean
-    public UserDao getUserDaoImpl() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl("jdbc:mysql://localhost:3306/se");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        return new UserDaoImpl(dataSource);
+    public UserDao getUserDao() {
+        return new UserDaoImpl();
     }
+
+
+//    @Bean
+//    public UserDao getUserDaoImpl() {
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setUrl("jdbc:mysql://localhost:3306/se");
+//        dataSource.setUsername("root");
+//        dataSource.setPassword("root");
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        return new UserDaoImpl(dataSource);
+//    }
 }

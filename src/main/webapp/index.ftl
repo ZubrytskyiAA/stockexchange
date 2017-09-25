@@ -6,6 +6,6 @@
 </head>
 <body class="container">
 <#include "WEB-INF/views/templates/header.ftl" >
-
+Валідол
 </body class="container">
 </html>

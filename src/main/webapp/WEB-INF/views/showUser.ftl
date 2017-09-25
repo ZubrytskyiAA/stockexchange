@@ -14,15 +14,19 @@
             <td>${user.id}</a></td>
         </tr>
         <tr>
-            <td>Name</td>
-            <td>${user.name}</td>
+            <td>loginName</td>
+            <td>${user.loginName}</td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td>${user.email}</td>
+            <td>password</td>
+            <td>${user.password}</td>
         </tr>
-        <td>Age</td>
-        <td>${user.age}</td>
+        <tr>
+            <td>fio</td>
+            <td>${user.fio}</td>
+        </tr>
+        <td>phoneNumber</td>
+        <td>${user.phoneNumber}</td>
         </tr>
     </table>
 </div>
@@ -35,15 +39,15 @@
             <td>Name</a></td>
             <td>Price</a></td>
         </tr>
-    <#list user.goodsList as goods>
-        <tr>
-            <td>${goods.id}</td>
-            <td>${goods.name}</td>
-            <td>${goods.price}</td>
-        </tr>
-    <#else>
-        <h1>Empty goods</h1>
-    </#list>
+    <#--<#list user.goodsList as goods>-->
+        <#--<tr>-->
+            <#--<td>${goods.id}</td>-->
+            <#--<td>${goods.name}</td>-->
+            <#--<td>${goods.price}</td>-->
+        <#--</tr>-->
+    <#--<#else>-->
+        <#--<h1>Empty goods</h1>-->
+    <#--</#list>-->
 
     </table>
 </div>

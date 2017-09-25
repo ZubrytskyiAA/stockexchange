@@ -20,6 +20,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
         resolver.setCache(true);
         resolver.setPrefix("");
         resolver.setSuffix(".ftl");
+        resolver.setContentType("text/html;charset=UTF-8");
         resolver.setOrder(1);
 
         return resolver;
@@ -29,6 +30,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
     public FreeMarkerConfigurer freemarkerConfig() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPaths("/", "/WEB-INF/views/", "/WEB-INF/views/templates/");
+        freeMarkerConfigurer.setDefaultEncoding("UTF-8");
         return freeMarkerConfigurer;
     }
 

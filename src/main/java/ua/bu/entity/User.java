@@ -1,20 +1,34 @@
 package ua.bu.entity;
 
-import java.util.List;
+import com.sun.istack.internal.NotNull;
 
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
+    @Column(name = "loginName", unique = true, nullable = false)
     private String loginName;
+    @Column(name = "password")
+    @NotNull
     private String password;
+    @Column(name = "fio")
     private String fio;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
 
-    private List<Issue> issues;
+    //private List<Issue> issues;
 
 
-    private boolean status;
+    //private boolean status;
 
     public User() {
     }
@@ -68,21 +82,21 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
+//    public boolean isStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(boolean status) {
+//        this.status = status;
+//    }
 
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public List<Issue> getIssues() {
-        return issues;
-    }
-
-    public void setIssues(List<Issue> issues) {
-        this.issues = issues;
-    }
+//    public List<Issue> getIssues() {
+//        return issues;
+//    }
+//
+//    public void setIssues(List<Issue> issues) {
+//        this.issues = issues;
+//    }
 
 
     @Override
@@ -94,8 +108,8 @@ public class User {
                 ", fio='" + fio + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", issues=" + issues +
-                ", status=" + status +
+                //  ", issues=" + issues +
+                //  ", status=" + status +
                 '}';
     }
 }
