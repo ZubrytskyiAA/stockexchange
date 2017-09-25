@@ -3,8 +3,12 @@ package ua.bu.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import ua.bu.dao.IssueDao;
+import ua.bu.dao.IssueDaoImpl;
 import ua.bu.dao.UserDao;
 import ua.bu.dao.UserDaoImpl;
+import ua.bu.service.IssueService;
+import ua.bu.service.IssueServiceImpl;
 import ua.bu.service.UserService;
 import ua.bu.service.UserServiceImpl;
 @Configuration
@@ -17,6 +21,16 @@ public class SpringConfig {
     @Bean
     public UserDao getUserDao() {
         return new UserDaoImpl();
+    }
+
+
+    @Bean
+    public IssueService getIssueService() {
+        return new IssueServiceImpl();
+    }
+    @Bean
+    public IssueDao getIssueDao() {
+        return new IssueDaoImpl();
     }
 
 

@@ -14,9 +14,7 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     protected EntityManager entityManager;
 
-    public void persist(User user) {
-        entityManager.persist(user);
-    }
+
 
 
     @Override
@@ -32,14 +30,13 @@ public class UserDaoImpl implements UserDao {
         return entityManager.createQuery("select u from User u where u.id=:id", User.class)
                 .setParameter("id", id)
                 .getSingleResult();
+
     }
 
     @Override
     @Transactional
     public void deleteById(int id) {
-        System.out.println(id);
-        System.out.println("====================================================");
-        entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
+             entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
     }
 
     @Override
@@ -57,6 +54,12 @@ public class UserDaoImpl implements UserDao {
             return false;
         } else return true;
 
+    }
+
+    @Override
+    public User updateUser(User user) {
+        entityManager.merge(user);
+        return user;
     }
 
 

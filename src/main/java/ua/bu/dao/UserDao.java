@@ -18,5 +18,7 @@ public interface UserDao {
 
     boolean isLoginNameUnique(String loginName);
 
+    public User updateUser(User user);
+
 
 }

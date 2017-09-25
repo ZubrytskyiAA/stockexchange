@@ -1,9 +1,24 @@
 package ua.bu.entity;
 
-public class Issue {
+import javax.persistence.*;
+import java.io.Serializable;
+
+
+@Entity
+@Table(name = "issue")
+public class Issue implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "full_name")
     private String fullName;
+
 
     public Issue() {
     }

@@ -1,8 +1,11 @@
 package ua.bu.entity;
 
 import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -20,12 +23,19 @@ public class User {
     @Column(name = "fio")
     private String fio;
     @Column(name = "email")
+    @Nullable
     private String email;
     @Column(name = "phonenumber")
     private String phoneNumber;
 
-
-    //private List<Issue> issues;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable
+            (
+                    name="user_to_issue",
+                    joinColumns={ @JoinColumn(name="user_id", referencedColumnName="id") },
+                    inverseJoinColumns={ @JoinColumn(name="issue_id", referencedColumnName="id", unique=true) }
+            )
+    private List<Issue> issueList = new ArrayList<Issue>();
 
 
     //private boolean status;
@@ -90,13 +100,13 @@ public class User {
 //        this.status = status;
 //    }
 
-//    public List<Issue> getIssues() {
-//        return issues;
-//    }
-//
-//    public void setIssues(List<Issue> issues) {
-//        this.issues = issues;
-//    }
+    public List<Issue> getIssueList() {
+        return issueList;
+    }
+
+    public void setIssueList(List<Issue> issueList) {
+        this.issueList = issueList;
+    }
 
 
     @Override
@@ -108,8 +118,7 @@ public class User {
                 ", fio='" + fio + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                //  ", issues=" + issues +
-                //  ", status=" + status +
+                ", issueList=" + issueList +
                 '}';
     }
 }

@@ -10,13 +10,32 @@
     <caption>Users list</caption>
     <table class="table table-striped">
         <tr>
-        <#--<th>Id</th>-->
+
             <th>login</th>
             <th>password</th>
             <th>fio</th>
             <th>email</th>
             <th>Phonenumber</th>
             <th>Actions</th>
+
+        </tr>
+
+        <tr>
+
+            <form action="/newUser" method="post" name="user" class="form-group">
+
+                <td><input title="loginname" type="text" name="loginName"/></td>
+
+                <td><input title="password" type="password" name="password"/></td>
+
+                <td><input title="fio" type="text" name="fio"/></td>
+
+                <td><input title="email" type="text" name="email"/></td>
+
+                <td><input title="phonenumber" type="text" name="phoneNumber"/></td>
+
+                <td><input type="submit" title="OK" value="Добавить"/></td>
+            </form>
 
         </tr>
     <#list users as user>

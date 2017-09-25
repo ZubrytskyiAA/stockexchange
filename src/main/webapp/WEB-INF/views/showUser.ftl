@@ -32,22 +32,22 @@
 </div>
 
 <div class="table-responsive">
-    <caption>User goods</caption>
+    <caption>User issues</caption>
     <table class="table table-striped">
         <tr>
             <td>Id</td>
             <td>Name</a></td>
             <td>Price</a></td>
         </tr>
-    <#--<#list user.goodsList as goods>-->
-        <#--<tr>-->
-            <#--<td>${goods.id}</td>-->
-            <#--<td>${goods.name}</td>-->
-            <#--<td>${goods.price}</td>-->
-        <#--</tr>-->
-    <#--<#else>-->
-        <#--<h1>Empty goods</h1>-->
-    <#--</#list>-->
+    <#list user.issueList as issues>
+        <tr>
+            <td>${issues.id}</td>
+            <td>${issues.name}</td>
+            <td>${issues.fullName}</td>
+        </tr>
+    <#else>
+        <h1>Empty goods</h1>
+    </#list>
 
     </table>
 </div>
