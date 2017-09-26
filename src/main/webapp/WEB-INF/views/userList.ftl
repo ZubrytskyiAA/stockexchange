@@ -56,6 +56,6 @@
     </#list>
     </table>
 </div>
-<#include "templates/createUserForm.ftl"/>
+<#--<#include "templates/createUserForm.ftl"/>-->
 </body>
 </html>

@@ -20,8 +20,6 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public void deleteById(int id) {
-        System.out.println("=======================================");
-        System.out.println(id);
         issueDao.deleteById(id);
     }
 
@@ -34,6 +32,7 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Issue getById(int id) {
-        return null;
+        return issueDao.getById(id);
+
     }
 }

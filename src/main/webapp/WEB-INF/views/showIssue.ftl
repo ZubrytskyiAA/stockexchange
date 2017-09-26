@@ -15,16 +15,12 @@
         </tr>
         <tr>
             <td>full_name</td>
-            <td>${issue.full_name}</td>
+            <td>${issue.fullName}</td>
         </tr>
         <tr>
             <td>name</td>
             <td>${issue.name}</td>
-        </tr>
-
-        <td>phoneNumber</td>
-        <td>${issue.phoneNumber}</td>
-        </tr>
+   
     </table>
 </div>
 

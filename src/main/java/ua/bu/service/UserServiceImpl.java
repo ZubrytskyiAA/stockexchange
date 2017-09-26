@@ -34,10 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(int id) {
-        User user = userDao.getById(id);
-        System.out.println("=====================================================================");
-        System.out.println(user.toString());
-        return  user;
+          return   userDao.getById(id);
     }
 
     @Override

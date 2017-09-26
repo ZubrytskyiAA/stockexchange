@@ -32,8 +32,8 @@ public class User {
     @JoinTable
             (
                     name="user_to_issue",
-                    joinColumns={ @JoinColumn(name="user_id", referencedColumnName="id") },
-                    inverseJoinColumns={ @JoinColumn(name="issue_id", referencedColumnName="id", unique=true) }
+                    joinColumns=@JoinColumn(name="user_id") ,
+                    inverseJoinColumns=@JoinColumn(name="issue_id")
             )
     private List<Issue> issueList = new ArrayList<Issue>();
 
