@@ -3,11 +3,9 @@ package ua.bu;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import ua.bu.config.SpringConfig;
-import ua.bu.entity.Issue;
 import ua.bu.entity.User;
-import ua.bu.service.UserService;
+import ua.bu.service.interfaces.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Application {

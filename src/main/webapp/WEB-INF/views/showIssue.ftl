@@ -24,14 +24,14 @@
     </table>
 </div>
 
-<div class="table-responsive">
-    <caption>Issue goods</caption>
-    <table class="table table-striped">
-        <tr>
-            <td>Id</td>
-            <td>Name</a></td>
-            <td>Price</a></td>
-        </tr>
+<#--<div class="table-responsive">-->
+    <#--<caption>Issue goods</caption>-->
+    <#--<table class="table table-striped">-->
+        <#--<tr>-->
+            <#--<td>Id</td>-->
+            <#--<td>Name</a></td>-->
+            <#--<td>Price</a></td>-->
+        <#--</tr>-->
     <#--<#list user.goodsList as goods>-->
         <#--<tr>-->
             <#--<td>${goods.id}</td>-->
@@ -42,8 +42,8 @@
         <#--<h1>Empty goods</h1>-->
     <#--</#list>-->
 
-    </table>
-</div>
+    <#--</table>-->
+<#--</div>-->
 <a type="button" href="/issues" class="button">Back</a>
 </body>
 </html>

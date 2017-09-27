@@ -1,6 +1,6 @@
 <form action="/newUser" method="post" name="user" class="form-group">
     <p>loginname</p>
-    <input title="loginname" type="text" name="loginName"/>
+    <input title="loginname" type="text" name="loginName" required/>
     <p>Password</p>
     <input title="password" type="password" name="password"/>
     <p>FIO</p>

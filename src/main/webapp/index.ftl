@@ -8,6 +8,6 @@
 <body class="container">
 <#include "WEB-INF/views/templates/header.ftl" >
 Валідол
-<img src="1111okki_Dokki.jpg">
+
 </body class="container">
 </html>

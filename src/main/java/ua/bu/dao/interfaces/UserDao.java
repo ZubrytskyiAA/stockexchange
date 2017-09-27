@@ -1,4 +1,4 @@
-package ua.bu.dao;
+package ua.bu.dao.interfaces;
 
 import org.springframework.stereotype.Component;
 import ua.bu.entity.User;
@@ -10,9 +10,9 @@ public interface UserDao {
 
     List<User> getAll();
 
-    User getById(int id);
+    User getById(long id);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
     void save(User user);
 

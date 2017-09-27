@@ -2,8 +2,9 @@ package ua.bu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.bu.dao.IssueDao;
+import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.entity.Issue;
+import ua.bu.service.interfaces.IssueService;
 
 import java.util.List;
 

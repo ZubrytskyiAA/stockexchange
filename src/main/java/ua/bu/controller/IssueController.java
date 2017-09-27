@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ua.bu.entity.Issue;
-import ua.bu.service.IssueService;
+import ua.bu.service.interfaces.IssueService;
 
 @Controller
 @RequestMapping("/")

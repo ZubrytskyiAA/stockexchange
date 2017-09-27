@@ -1,4 +1,4 @@
-package ua.bu.dao;
+package ua.bu.dao.interfaces;
 
 import org.springframework.stereotype.Component;
 import ua.bu.entity.Issue;

@@ -2,6 +2,7 @@ package ua.bu.dao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ua.bu.dao.interfaces.UserDao;
 import ua.bu.entity.User;
 
 import javax.persistence.EntityManager;
@@ -26,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
-    public User getById(int id) {
+    public User getById(long id) {
         return entityManager.createQuery("select u from User u where u.id=:id", User.class)
                 .setParameter("id", id)
                 .getSingleResult();
@@ -35,7 +36,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     @Transactional
-    public void deleteById(int id) {
+    public void deleteById(long id) {
              entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
     }
 

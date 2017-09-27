@@ -1,4 +1,4 @@
-package ua.bu.service;
+package ua.bu.service.interfaces;
 
 import ua.bu.entity.Issue;
 

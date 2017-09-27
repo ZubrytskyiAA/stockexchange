@@ -4,18 +4,24 @@ import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "loginName")})
+@Access(AccessType.FIELD)
+public class User implements Serializable {
+
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-    @Column(name = "loginName", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
+    private long id;
+    @Column(name = "loginName",unique = true, nullable = false, length = 20)
     private String loginName;
     @Column(name = "password")
     @NotNull
@@ -28,26 +34,34 @@ public class User {
     @Column(name = "phonenumber")
     private String phoneNumber;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable
-            (
-                    name="user_to_issue",
-                    joinColumns=@JoinColumn(name="user_id") ,
-                    inverseJoinColumns=@JoinColumn(name="issue_id")
-            )
-    private List<Issue> issueList = new ArrayList<Issue>();
+    @Column(name = "active")
+    private boolean active;
 
 
-    //private boolean status;
+
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Trade.class)
+//    @JoinColumn(name = "id")
+//    private List<Trade> trades = new ArrayList<>();
+
+
+
 
     public User() {
     }
 
-    public int getId() {
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -92,33 +106,15 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-//    public boolean isStatus() {
-//        return status;
+//    public List<Trade> getTrades() {
+//        return trades;
 //    }
 //
-//    public void setStatus(boolean status) {
-//        this.status = status;
+//    public void setTrades(List<Trade> trades) {
+//        this.trades = trades;
 //    }
 
-    public List<Issue> getIssueList() {
-        return issueList;
-    }
-
-    public void setIssueList(List<Issue> issueList) {
-        this.issueList = issueList;
-    }
 
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", loginName='" + loginName + '\'' +
-                ", password='" + password + '\'' +
-                ", fio='" + fio + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", issueList=" + issueList +
-                '}';
-    }
+
 }

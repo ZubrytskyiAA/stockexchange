@@ -2,14 +2,13 @@ package ua.bu.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import ua.bu.dao.IssueDao;
+import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.dao.IssueDaoImpl;
-import ua.bu.dao.UserDao;
+import ua.bu.dao.interfaces.UserDao;
 import ua.bu.dao.UserDaoImpl;
-import ua.bu.service.IssueService;
+import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.IssueServiceImpl;
-import ua.bu.service.UserService;
+import ua.bu.service.interfaces.UserService;
 import ua.bu.service.UserServiceImpl;
 @Configuration
 public class SpringConfig {

@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.bu.entity.Issue;
 import ua.bu.entity.User;
-import ua.bu.service.UserService;
+import ua.bu.service.interfaces.IssueService;
+import ua.bu.service.interfaces.UserService;
 
 @Controller
 @RequestMapping("/")
@@ -13,6 +15,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private IssueService issueService;
 
     @GetMapping("/")
     public String index() {
@@ -33,6 +37,7 @@ public class UserController {
 
     @PostMapping("/newUser")
     public String createUser(@ModelAttribute User user) {
+
         userService.save(user);
         return "redirect:users";
     }
@@ -45,6 +50,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public String getUserById(@PathVariable("id") int id, Model model) {
         model.addAttribute("user", userService.getById(id));
+        model.addAttribute("listIssue", issueService.getAll());
         return "showUser";
     }
     @GetMapping("/edit/{id}")
@@ -58,6 +64,15 @@ public class UserController {
     public String editUser(@ModelAttribute User user, Model model) {
         userService.update(user);
         return "redirect:edit/" + user.getId();
+    }
+    @PostMapping("/addIssueToUser")
+    public String addIssueToUser( @ModelAttribute("select1") int issueId, @ModelAttribute("userId") int userId) {
+        Issue issue = issueService.getById(issueId);
+        User user = userService.getById(userId);
+       // user.getIssueList().add(issue);
+        System.out.println(issue);
+        System.out.println(user);
+        return "redirect:showUser/user/" ;
     }
 
 

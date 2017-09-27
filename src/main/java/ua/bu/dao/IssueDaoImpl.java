@@ -2,6 +2,7 @@ package ua.bu.dao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.entity.Issue;
 
 import javax.persistence.EntityManager;

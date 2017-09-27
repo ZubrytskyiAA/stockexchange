@@ -2,6 +2,11 @@ package ua.bu.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -19,8 +24,30 @@ public class Issue implements Serializable{
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "create_moment", nullable = false)
+    private Timestamp createMoment;
 
     public Issue() {
+    }
+
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Timestamp getCreateMoment() {
+        return createMoment;
+    }
+
+    public void setCreateMoment(Timestamp createMoment) {
+        this.createMoment = createMoment;
     }
 
     public int getId() {

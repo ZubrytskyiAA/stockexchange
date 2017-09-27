@@ -2,8 +2,9 @@ package ua.bu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ua.bu.dao.UserDao;
+import ua.bu.dao.interfaces.UserDao;
 import ua.bu.entity.User;
+import ua.bu.service.interfaces.UserService;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         userDao.deleteById(id);
     }
 
@@ -33,12 +34,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(int id) {
+    public User getById(long id) {
           return   userDao.getById(id);
     }
 
     @Override
     public void update(User user) {
+
         userDao.updateUser(user);
     }
 

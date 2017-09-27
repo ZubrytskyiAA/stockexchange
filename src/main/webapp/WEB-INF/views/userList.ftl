@@ -24,7 +24,7 @@
 
             <form action="/newUser" method="post" name="user" class="form-group">
 
-                <td><input title="loginname" type="text" name="loginName"/></td>
+                <td><input title="loginname" type="text" name="loginName" required="jhj"/></td>
 
                 <td><input title="password" type="password" name="password"/></td>
 

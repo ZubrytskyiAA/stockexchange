@@ -1,4 +1,4 @@
-package ua.bu.service;
+package ua.bu.service.interfaces;
 
 import ua.bu.entity.User;
 
@@ -8,11 +8,11 @@ public interface UserService {
 
     List<User> getAll();
 
-    void deleteById(int id);
+    void deleteById(long id);
 
     void save(User user);
 
-    User getById(int id);
+    User getById(long id);
 
     void update(User user);
 }
