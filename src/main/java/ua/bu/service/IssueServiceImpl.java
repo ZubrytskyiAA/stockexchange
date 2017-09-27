@@ -20,7 +20,7 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         issueDao.deleteById(id);
     }
 
@@ -32,7 +32,7 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public Issue getById(int id) {
+    public Issue getById(long id) {
         return issueDao.getById(id);
 
     }

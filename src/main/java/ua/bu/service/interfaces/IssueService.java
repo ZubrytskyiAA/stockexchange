@@ -8,11 +8,11 @@ public interface IssueService {
 
     List<Issue> getAll();
 
-    void deleteById(int id);
+    void deleteById(long id);
 
     void save(Issue issue);
 
-    Issue getById(int id);
+    Issue getById(long id);
 
 
 }

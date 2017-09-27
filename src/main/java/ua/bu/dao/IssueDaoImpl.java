@@ -25,14 +25,14 @@ public class IssueDaoImpl implements IssueDao {
     }
 
     @Override
-    public Issue getById(int id) {
+    public Issue getById(long id) {
         return entityManager.createQuery("select i from Issue i where i.id=:id", Issue.class)
                 .setParameter("id", id)
                 .getSingleResult();
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(long id) {
         entityManager.createQuery(" delete FROM Issue i WHERE i.id=" + id).executeUpdate();
     }
 
@@ -54,7 +54,7 @@ public class IssueDaoImpl implements IssueDao {
     }
 
     @Override
-    public void addIssueToUserId(int id) {
+    public void addIssueToUserId(long id) {
 
     }
 }

@@ -23,10 +23,10 @@ public class User implements Serializable {
     private long id;
     @Column(name = "loginName",unique = true, nullable = false, length = 20)
     private String loginName;
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     @NotNull
     private String password;
-    @Column(name = "fio")
+    @Column(name = "fio", nullable = false)
     private String fio;
     @Column(name = "email")
     @Nullable
@@ -34,7 +34,7 @@ public class User implements Serializable {
     @Column(name = "phonenumber")
     private String phoneNumber;
 
-    @Column(name = "active")
+    @Column(name = "active", nullable = false)
     private boolean active;
 
 

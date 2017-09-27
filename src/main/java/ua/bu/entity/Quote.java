@@ -27,11 +27,11 @@ public class Quote {
     private long qty;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id" , nullable = false)
     private User userId;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Issue.class)
-    @JoinColumn(name = "issue_id")
+    @JoinColumn(name = "issue_id" , nullable = false)
     private Issue issueId;
 
 

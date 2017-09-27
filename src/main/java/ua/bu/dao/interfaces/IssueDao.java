@@ -10,15 +10,15 @@ import java.util.List;
 public interface IssueDao {
     List<Issue> getAll();
 
-    Issue getById(int id);
+    Issue getById(long id);
 
-    void deleteById(int id);
+    void deleteById(long id);
 
     void save(Issue issue);
 
     boolean isLoginNameUnique(String name);
 
-    void addIssueToUserId(int id);
+    void addIssueToUserId(long id);
 
 
 
