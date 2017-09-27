@@ -16,7 +16,7 @@ public class Issue implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -50,11 +50,11 @@ public class Issue implements Serializable{
         this.createMoment = createMoment;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -74,12 +74,15 @@ public class Issue implements Serializable{
         this.fullName = fullName;
     }
 
+
     @Override
     public String toString() {
         return "Issue{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", fullName='" + fullName + '\'' +
+                ", active=" + active +
+                ", createMoment=" + createMoment +
                 '}';
     }
 }

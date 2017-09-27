@@ -106,15 +106,16 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-//    public List<Trade> getTrades() {
-//        return trades;
-//    }
-//
-//    public void setTrades(List<Trade> trades) {
-//        this.trades = trades;
-//    }
-
-
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", loginName='" + loginName + '\'' +
+                ", password='" + password + '\'' +
+                ", fio='" + fio + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", active=" + active +
+                '}';
+    }
 }

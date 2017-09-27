@@ -149,4 +149,23 @@ public class Trade {
     public void setIssue(Issue issue) {
         this.issue = issue;
     }
+
+
+    @Override
+    public String toString() {
+        return "Trade{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", status=" + status +
+                ", price=" + price +
+                ", qty=" + qty +
+                ", volume=" + volume +
+                ", tradeMoment=" + tradeMoment +
+                ", initAction='" + initAction + '\'' +
+                ", confAction='" + confAction + '\'' +
+                ", issue=" + issue +
+                ", userInit=" + userInit +
+                ", userConf=" + userConf +
+                '}';
+    }
 }
