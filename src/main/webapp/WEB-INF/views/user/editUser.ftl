@@ -5,7 +5,7 @@
     <title>UserData</title>
 </head>
 <body class="container">
-<#include "templates/header.ftl">
+<#include "../header.ftl">
 
 <form action="/editUser" method="post" name="user" class="form-group">
     <input title="Id" type="number" name="id" value="${user.id}"/>

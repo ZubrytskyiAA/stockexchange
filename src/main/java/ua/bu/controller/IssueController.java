@@ -8,14 +8,14 @@ import ua.bu.entity.Issue;
 import ua.bu.service.interfaces.IssueService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/issue/")
 public class IssueController {
 
 
     @Autowired
     private IssueService issueService;
 
-     @GetMapping("/issues")
+     @GetMapping("/allissues")
     public String getAllIssues(Model model) {
         model.addAttribute("issues", issueService.getAll());
         return "issueList";

@@ -5,7 +5,7 @@
     <title>IssueData</title>
 </head>
 <body class="container">
-<#include "templates/header.ftl">
+<#include "*/../header.ftl">
 <div class="table-responsive">
     <caption>Issue info</caption>
     <table class="table table-striped">

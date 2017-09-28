@@ -5,7 +5,7 @@
     <title>UserData</title>
 </head>
 <body class="container">
-<#include "templates/header.ftl">
+<#include "../header.ftl">
 <div class="table-responsive">
     <caption>User info</caption>
     <table class="table table-striped">
@@ -55,7 +55,7 @@
     </table>
 
 
-    <form class="table table-striped1" name="addIssue" action="/addIssueToUser" method="post">
+    <form class="table table-striped1" name="addIssue" action="/user/addIssueToUser" method="post">
 <input type="hidden" name="userId" value=${user.id}>
         <select name="select1">
         <#list listIssue as issues1>
@@ -69,6 +69,6 @@
     </form>
 
 </div>
-<a type="button" href="/users" class="button">Back</a>
+<a type="button" href="/user/allusers" class="button">Back</a>
 </body>
 </html>

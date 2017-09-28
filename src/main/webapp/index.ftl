@@ -6,7 +6,7 @@
 
 </head>
 <body class="container">
-<#include "WEB-INF/views/templates/header.ftl" >
+<#include "WEB-INF/views/header.ftl" >
 Валідол
 
 </body class="container">

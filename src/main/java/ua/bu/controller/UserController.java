@@ -10,7 +10,7 @@ import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user/")
 public class UserController {
 
     @Autowired
@@ -18,12 +18,8 @@ public class UserController {
     @Autowired
     private IssueService issueService;
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
 
-    @GetMapping("/users")
+    @GetMapping("/allusers")
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAll());
         return "userList";
@@ -32,19 +28,19 @@ public class UserController {
     @PostMapping("/deleteUserById")
     public String deleteById(@ModelAttribute User user) {
         userService.deleteById(user.getId());
-        return "redirect:users";
+        return "redirect:allusers";
     }
 
     @PostMapping("/newUser")
     public String createUser(@ModelAttribute User user) {
 
         userService.save(user);
-        return "redirect:users";
+        return "redirect:allusers";
     }
     @PostMapping("/delete")
     public String deleteUser(@ModelAttribute("id") int id) {
         userService.deleteById(id);
-        return "redirect:users";
+        return "redirect:allusers";
     }
 
     @GetMapping("/user/{id}")
