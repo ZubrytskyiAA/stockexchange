@@ -11,6 +11,7 @@ public interface IssueDao {
     List<Issue> getAll();
 
     Issue getById(long id);
+    Issue getByName(String name);
 
     void deleteById(long id);
 

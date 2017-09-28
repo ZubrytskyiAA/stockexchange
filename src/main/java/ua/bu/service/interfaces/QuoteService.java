@@ -15,4 +15,6 @@ public interface QuoteService {
 
     void delete(Quote quote);
 
+    List<Quote> getAllQuoteByIssueId(long id);
+
 }

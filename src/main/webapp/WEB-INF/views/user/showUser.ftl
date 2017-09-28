@@ -5,7 +5,7 @@
     <title>UserData</title>
 </head>
 <body class="container">
-<#include "../header.ftl">
+<#include "*/header.ftl">
 <div class="table-responsive">
     <caption>User info</caption>
     <table class="table table-striped">

@@ -32,6 +32,13 @@ public class IssueDaoImpl implements IssueDao {
     }
 
     @Override
+    public Issue getByName(String name) {
+        return entityManager.createQuery("select i from Issue i where i.name=:name", Issue.class)
+                .setParameter("name", name)
+                .getSingleResult();
+    }
+
+    @Override
     public void deleteById(long id) {
         entityManager.createQuery(" delete FROM Issue i WHERE i.id=" + id).executeUpdate();
     }
@@ -57,4 +64,6 @@ public class IssueDaoImpl implements IssueDao {
     public void addIssueToUserId(long id) {
 
     }
+
+
 }

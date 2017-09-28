@@ -1,6 +1,7 @@
 package ua.bu.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.entity.Quote;
 
@@ -16,12 +17,22 @@ public class QuoteDaoImpl implements QuoteDao {
 
     @Override
     public void save(Quote quote) {
-       entityManager.persist(quote);
+        entityManager.persist(quote);
     }
 
     @Override
+    @Transactional
     public List<Quote> getAll() {
-        return null;
+        return entityManager.createQuery("SELECT q FROM Quote q order by q.id", Quote.class).getResultList();
+    }
+
+    @Override
+    public List<Quote> getAllQuoteByIssueId(long id) {
+
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.id=:id order by q.id", Quote.class)
+                .setParameter("id", id)
+                .getResultList();
+
     }
 
     @Override

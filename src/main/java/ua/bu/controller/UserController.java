@@ -63,11 +63,7 @@ public class UserController {
     }
     @PostMapping("/addIssueToUser")
     public String addIssueToUser( @ModelAttribute("select1") int issueId, @ModelAttribute("userId") int userId) {
-        Issue issue = issueService.getById(issueId);
-        User user = userService.getById(userId);
-       // user.getIssueList().add(issue);
-        System.out.println(issue);
-        System.out.println(user);
+
         return "redirect:showUser/user/" ;
     }
 

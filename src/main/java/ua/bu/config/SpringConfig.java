@@ -2,18 +2,10 @@ package ua.bu.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ua.bu.dao.IssueDaoImpl;
-import ua.bu.dao.TradeDaoImpl;
-import ua.bu.dao.UserDaoImpl;
-import ua.bu.dao.interfaces.IssueDao;
-import ua.bu.dao.interfaces.TradeDao;
-import ua.bu.dao.interfaces.UserDao;
-import ua.bu.service.IssueServiceImpl;
-import ua.bu.service.TradeServiceImpl;
-import ua.bu.service.UserServiceImpl;
-import ua.bu.service.interfaces.IssueService;
-import ua.bu.service.interfaces.TradeService;
-import ua.bu.service.interfaces.UserService;
+import ua.bu.dao.*;
+import ua.bu.dao.interfaces.*;
+import ua.bu.service.*;
+import ua.bu.service.interfaces.*;
 
 @Configuration
 public class SpringConfig {
@@ -50,5 +42,26 @@ public class SpringConfig {
         return new TradeDaoImpl();
     }
 
+
+    @Bean
+    public AssetService getAssetService() {
+        return new AssetServiceImpl();
+    }
+
+    @Bean
+    public AssetDao getAssetDao() {
+        return new AssetDaoImpl();
+    }
+
+
+    @Bean
+    public QuoteService getQuoteService() {
+        return new QuoteServiceImpl();
+    }
+
+    @Bean
+    public QuoteDao getQuoteDao() {
+        return new QuoteDaoImpl();
+    }
 
 }

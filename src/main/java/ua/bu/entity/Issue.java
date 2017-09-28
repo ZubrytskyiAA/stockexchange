@@ -30,9 +30,32 @@ public class Issue implements Serializable{
     @Column(name = "create_moment", nullable = false)
     private Timestamp createMoment;
 
+
+    @Column(name = "user_id")
+    User userId;
+
+    @Column(name = "issue_id")
+    Issue issueId;
+
     public Issue() {
     }
 
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public Issue getIssueId() {
+        return issueId;
+    }
+
+    public void setIssueId(Issue issueId) {
+        this.issueId = issueId;
+    }
 
     public boolean isActive() {
         return active;

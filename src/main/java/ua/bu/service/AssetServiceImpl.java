@@ -1,4 +1,40 @@
 package ua.bu.service;
 
-public class AssetServiceImpl {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ua.bu.dao.interfaces.AssetDao;
+import ua.bu.entity.Asset;
+import ua.bu.service.interfaces.AssetService;
+
+import java.util.List;
+
+@Service
+public class AssetServiceImpl implements AssetService {
+
+    @Autowired
+    private AssetDao assetDao;
+    @Override
+    public Asset save(Asset issue) {
+        return null;
+    }
+
+    @Override
+    public List<Asset> getAll() {
+        return assetDao.getAll();
+    }
+
+    @Override
+    public Asset getById(long id) {
+        return null;
+    }
+
+    @Override
+    public Asset updateUser(Asset asset) {
+        return null;
+    }
+
+    @Override
+    public void delete(Asset asset) {
+
+    }
 }

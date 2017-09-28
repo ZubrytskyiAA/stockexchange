@@ -1,6 +1,7 @@
 package ua.bu.dao;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.AssetDao;
 import ua.bu.entity.Asset;
 
@@ -20,8 +21,9 @@ public class AssetDaoImpl implements AssetDao {
     }
 
     @Override
+    @Transactional
     public List<Asset> getAll() {
-        return null;
+        return entityManager.createQuery("SELECT a FROM Asset a order by a.id", Asset.class).getResultList();
     }
 
     @Override
