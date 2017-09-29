@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.bu.dao.interfaces.AssetDao;
 import ua.bu.entity.Asset;
+import ua.bu.entity.User;
 import ua.bu.service.interfaces.AssetService;
 
 import java.util.List;
@@ -36,5 +37,10 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public void delete(Asset asset) {
 
+    }
+
+    @Override
+    public List<Asset> getAssetsByUserId(long id) {
+        return assetDao.getAssetsByUserId(id);
     }
 }

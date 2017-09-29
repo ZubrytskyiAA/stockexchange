@@ -3,6 +3,7 @@ package ua.bu.dao.interfaces;
 
 import org.springframework.stereotype.Component;
 import ua.bu.entity.Asset;
+import ua.bu.entity.User;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface AssetDao {
     Asset updateUser(Asset asset);
 
     void delete(Asset asset);
+
+    List<Asset> getAssetsByUserId(long id);
 
 
     //void deleteById(long id);

@@ -22,13 +22,13 @@
 
         <tr>
 
-            <form action="/user/newUser" method="post" name="user" class="form-group">
+            <form action="/users/newUser" method="post" name="user" class="form-group">
 
-                <td><input title="loginname" type="text" name="loginName" required="jhj"/></td>
+                <td><input title="loginname" type="text" name="loginName" required/></td>
 
-                <td><input title="password" type="password" name="password"/></td>
+                <td><input title="password" type="password" name="password" required/></td>
 
-                <td><input title="fio" type="text" name="fio"/></td>
+                <td><input title="fio" type="text" name="fio" required/></td>
 
                 <td><input title="email" type="text" name="email"/></td>
 
@@ -41,13 +41,13 @@
     <#list users as user>
         <tr>
         <#--<td><a href="/user/${user.id}">${user.id}</a></td>-->
-            <td><a href="/user/user/${user.id}">${user.loginName}</a></td>
+            <td><a href="/users/${user.id}">${user.loginName}</a></td>
             <td>${user.password}</td>
             <td>${user.fio}</td>
             <td>${user.email}</td>
             <td>${user.phoneNumber}</td>
             <td>
-                <form action="/user/deleteUserById" method="post" name="user" class="form-group">
+                <form action="/users/deleteUserById" method="post" name="user" class="form-group">
                     <input title="id" type="hidden" name="id" value="${user.id}"/>
                     <input type="submit" title="OK" value="Delete"/>
                 </form>

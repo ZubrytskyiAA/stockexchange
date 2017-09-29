@@ -40,4 +40,12 @@ public class AssetDaoImpl implements AssetDao {
     public void delete(Asset asset) {
 
     }
+
+    @Override
+    public List<Asset> getAssetsByUserId(long id) {
+
+        return entityManager.createQuery("SELECT a FROM Asset a where a.userId.id=:userId order by a.id", Asset.class)
+                .setParameter("userId", id)
+                .getResultList();
+    }
 }

@@ -7,7 +7,7 @@
 <body class="container">
 <#include "*/header.ftl">
 <div class="table-responsive">
-    <caption>User info</caption>
+    <caption align="center">User info</caption>
     <table class="table table-striped">
         <tr>
             <td>Id</td>
@@ -31,44 +31,63 @@
     </table>
 </div>
 
-<div class="table-responsive1">
-    <caption>User issues</caption>
+<div class="table-responsive1" style="width: 200pt">
+
+<#if listAssets??>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <caption>User's assets</caption>
     <table class="table table-striped1">
-    <#list  user.issueList as ifNotNull>
+
+
         <tr>
-            <td>Id</td>
-            <td>Name</a></td>
-            <td>Price</a></td>
+            <td>Название Актива</td>
+            <td>Свободно средств</a></td>
+            <td>Заблокировано средств</a></td>
+
         </tr>
-        <#list user.issueList as issues>
+        <#list listAssets as assets>
             <tr>
-                <td>${issues.id}</td>
-                <td>${issues.name}</td>
-                <td>${issues.fullName}</td>
+                <td>${assets.issueId.name}</td>
+                <td>${assets.free}</td>
+                <td>${assets.blocked}</td>
             </tr>
 
         </#list>
-        <#break>
-    <#else>
-        <h1>Empty goods</h1>
-    </#list>
+
+
     </table>
 
 
-    <form class="table table-striped1" name="addIssue" action="/user/addIssueToUser" method="post">
-<input type="hidden" name="userId" value=${user.id}>
+    <form class="table table-striped1" name="addIssue" action="/users/withdraw" method="post">
+        <input type="hidden" name="userId" value=${user.id}>
+
+    <#if listIssue??>
         <select name="select1">
-        <#list listIssue as issues1>
-            <option  value=${issues1.id}>${issues1.name}</option>
+            <#list listIssue as issues1>
+                <option value=${issues1.id}>${issues1.name}</option>
 
-        </#list>
+            </#list>
         </select>
-
+    </#if>
         <input type="submit" title="add" value="ADD ISSUE"/>
 
     </form>
 
+
+<#else >
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h3>There isn't any assets</h3>
+</#if>
+
 </div>
-<a type="button" href="/user/allusers" class="button">Back</a>
+<a type="button" href="/users" class="button">Back</a>
 </body>
 </html>
