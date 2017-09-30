@@ -18,7 +18,7 @@
             <li class="active"><a href="/qouteRetrieval">Qoute Retrieval</a></li>
             <li class="active"><a href="/users">Users</a></li>
             <li class="active"><a href="/quote/allquotes">Quotes</a></li>
-            <li class="active"><a href="/issue/allissues">Issues</a></li>
+            <li class="active"><a href="/issue">Issues</a></li>
             <li class="active"><a href="/reports">Reports</a></li>
             <li class="active"><a href="/asset/allassets">Assets</a></li>
             <li class="active"><a href="/trade/alltrades">Trades</a></li>

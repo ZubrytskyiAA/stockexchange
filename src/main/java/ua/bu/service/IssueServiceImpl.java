@@ -37,5 +37,20 @@ public class IssueServiceImpl implements IssueService {
 
     }
 
+    @Override
+    public List<String> getAllActive() {
+        return issueDao.getAllActive();
+    }
+
+    @Override
+    public boolean isIssueActiveByName(String name) {
+        return issueDao.isIssueActiveByName(name);
+    }
+
+    @Override
+    public Issue updateIssue(Issue issue) {
+        return issueDao.updateIssue(issue);
+    }
+
 
 }

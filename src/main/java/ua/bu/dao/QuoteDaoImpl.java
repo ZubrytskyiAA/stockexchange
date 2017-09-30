@@ -29,10 +29,17 @@ public class QuoteDaoImpl implements QuoteDao {
     @Override
     public List<Quote> getAllQuoteByIssueId(long id) {
 
-        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.id=:id order by q.id", Quote.class)
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.id=:id order by q.price", Quote.class)
                 .setParameter("id", id)
                 .getResultList();
 
+    }
+
+    @Override
+    public List<Quote> getAllQuoteByIssueName(String name) {
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.name=:name order by q.price", Quote.class)
+                .setParameter("name", name)
+                .getResultList();
     }
 
     @Override

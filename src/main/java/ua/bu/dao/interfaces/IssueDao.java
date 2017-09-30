@@ -20,7 +20,9 @@ public interface IssueDao {
     boolean isLoginNameUnique(String name);
 
     void addIssueToUserId(long id);
-
+    List<String> getAllActive();
+    boolean isIssueActiveByName(String name);
+    Issue updateIssue(Issue issue);
 
 
 }

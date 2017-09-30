@@ -12,6 +12,7 @@ public interface QuoteDao {
 
     List<Quote> getAll();
     List<Quote> getAllQuoteByIssueId(long id);
+    List<Quote> getAllQuoteByIssueName(String name);
 
     Quote getById(long id);
 

@@ -7,6 +7,7 @@ import ua.bu.entity.Issue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Component
@@ -46,6 +47,8 @@ public class IssueDaoImpl implements IssueDao {
     @Override
     @Transactional
     public void save(Issue issue) {
+        issue.setCreateMoment(new Timestamp(System.currentTimeMillis()));
+
         entityManager.persist(issue);
     }
 
@@ -63,6 +66,36 @@ public class IssueDaoImpl implements IssueDao {
     @Override
     public void addIssueToUserId(long id) {
 
+    }
+
+    @Override
+    public List<String> getAllActive() {
+
+        return entityManager.createQuery("select i.name from Issue i where i.active = 1", String.class)
+                .getResultList();
+    }
+
+    @Override
+    public boolean isIssueActiveByName(String name) {
+
+
+        List<String> nameIssue;
+
+
+        nameIssue = entityManager.createQuery("select i.name from Issue i where i.active = 1 and i.name =:name", String.class)
+                .setParameter("name", name)
+                .getResultList();
+
+
+        if (nameIssue.isEmpty()) {
+            return false;
+        } else return true;
+    }
+
+    @Override
+    public Issue updateIssue(Issue issue) {
+        entityManager.merge(issue);
+        return issue;
     }
 
 

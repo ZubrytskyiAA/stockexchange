@@ -43,4 +43,9 @@ public class QuoteServiceImpl implements QuoteService{
     public List<Quote> getAllQuoteByIssueId(long id) {
         return quoteDao.getAllQuoteByIssueId(id);
     }
+
+    @Override
+    public List<Quote> getAllQuoteByIssueName(String name) {
+        return quoteDao.getAllQuoteByIssueName(name);
+    }
 }

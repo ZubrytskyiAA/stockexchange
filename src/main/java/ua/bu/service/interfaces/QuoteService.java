@@ -17,4 +17,6 @@ public interface QuoteService {
 
     List<Quote> getAllQuoteByIssueId(long id);
 
+    List<Quote> getAllQuoteByIssueName(String name);
+
 }

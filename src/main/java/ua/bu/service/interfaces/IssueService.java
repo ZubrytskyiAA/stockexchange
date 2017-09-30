@@ -14,6 +14,10 @@ public interface IssueService {
 
     Issue getById(long id);
 
+    List<String> getAllActive();
 
+    boolean isIssueActiveByName(String name);
+
+    Issue updateIssue(Issue issue);
 
 }

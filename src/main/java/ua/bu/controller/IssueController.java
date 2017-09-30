@@ -8,14 +8,14 @@ import ua.bu.entity.Issue;
 import ua.bu.service.interfaces.IssueService;
 
 @Controller
-@RequestMapping("/issue/")
+@RequestMapping("/issue")
 public class IssueController {
 
 
     @Autowired
     private IssueService issueService;
 
-     @GetMapping("/allissues")
+    @GetMapping("")
     public String getAllIssues(Model model) {
         model.addAttribute("issues", issueService.getAll());
         return "issueList";
@@ -24,21 +24,31 @@ public class IssueController {
     @PostMapping("/deleteIssueById")
     public String deleteById(@ModelAttribute Issue issue) {
         issueService.deleteById(issue.getId());
-        return "redirect:issues";
+        return "redirect:/issue";
     }
 
     @PostMapping("/newIssue")
     public String createIssue(@ModelAttribute Issue issue) {
         issueService.save(issue);
-        return "redirect:issues";
+        return "redirect:/issue";
     }
+
+    @PostMapping("/setActivities")
+    public String editUser(@ModelAttribute Issue setActive, Model model) {
+        Issue issue = issueService.getById(setActive.getId());
+        issue.setActive(setActive.isActive());
+        issueService.updateIssue(issue);
+        return "redirect:/issue";
+    }
+
+
 //    @PostMapping("/delete")
 //    public String deleteIssue(@ModelAttribute("id") int id) {
 //        issueService.deleteById(id);
 //        return "redirect:issues";
 //    }
 
-    @GetMapping("/issue/{id}")
+    @GetMapping("/{id}")
     public String getIssueById(@PathVariable("id") int id, Model model) {
         model.addAttribute("issue", issueService.getById(id));
         return "showIssue";

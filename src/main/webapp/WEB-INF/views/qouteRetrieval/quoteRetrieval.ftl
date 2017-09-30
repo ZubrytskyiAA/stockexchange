@@ -21,9 +21,6 @@
         }
 
 
-
-
-
     </style>
 
 </head>
@@ -33,9 +30,12 @@
 <caption>QuoteRetrieval sheet</caption>
 <br>
 <br>
-<br>
-<br>
-<div style="background: chartreuse">
+
+<#--<#if "${errorMsg}"??>-->
+<#--<h1>${errorMsg}</h1>-->
+<#if "${selectedIssueName}"??>
+
+<div style="background: chartreuse;">
     <div>
         <div></div>
         <div style="text-align: right">
@@ -43,18 +43,18 @@
             <form name="choseIssue" method="post">
                 <select name="select1" onchange="document.location=this.options[this.selectedIndex].value">
 
-                <#if "${selectedIssueName}"  == "">
-                    <option selected value=/qouteRetrieval/1></option>
-                <#else >
-                    <option selected value=/qouteRetrieval/${selectedIssueId}>${selectedIssueName}</option>
-                </#if>
+                <#--<#if "${selectedIssueName}"??>-->
+                <#--<option selected value=/qouteRetrieval/1></option>-->
+                <#--<#else >-->
+                    <option selected value=/qouteRetrieval/${selectedIssueName}>${selectedIssueName}</option>
+                <#--</#if>-->
 
-                <#list listIssue as issues>
-                    <#if "${selectedIssueName}"  != "${issues.name}">
-                        <option value=/qouteRetrieval/${issues.id}>${issues.name}</option>
-                    </#if>
+                    <#list listIssue as issueName>
+                        <#if "${selectedIssueName}"  != "${issueName}">
+                            <option value=/qouteRetrieval/${issueName}>${issueName}</option>
+                        </#if>
 
-                </#list>
+                    </#list>
                 </select>
             </form>
         </div>
@@ -74,14 +74,14 @@
                     <th style="text-align: center">цена</th>
                     <th style="text-align: center">объем</th>
                 </tr>
-                <#list quotes as quote>
-                    <#if "${quote.type}" == "P">
-                    <tr>
-                        <td>${quote.price}</td>
-                        <td>${quote.qty}</td>
-                    </tr>
-                    </#if>
-                </#list>
+                    <#list quotes as quote>
+                        <#if "${quote.type}" == "P">
+                        <tr>
+                            <td>${quote.price}</td>
+                            <td>${quote.qty}</td>
+                        </tr>
+                        </#if>
+                    </#list>
 
                 </tbody>
             </table>
@@ -95,14 +95,14 @@
                     <th style="text-align: center">цена</th>
                     <th style="text-align: center">объем</th>
                 </tr>
-                <#list quotes as quote>
-                    <#if "${quote.type}" == "S">
-                    <tr>
-                        <td>${quote.price}</td>
-                        <td>${quote.qty}</td>
-                    </tr>
-                    </#if>
-                </#list>
+                    <#list quotes as quote>
+                        <#if "${quote.type}" == "S">
+                        <tr>
+                            <td>${quote.price}</td>
+                            <td>${quote.qty}</td>
+                        </tr>
+                        </#if>
+                    </#list>
 
                 </tbody>
             </table>
@@ -110,6 +110,9 @@
     </div>
 </div>
 
-<#include "tradeForm1.ftl">
+    <#include "tradeForm1.ftl">
+<#else>
+<h1>Нету не одной активной бумаги в торгах</h1>
+</#if>
 </body>
 </html>

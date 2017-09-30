@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.QuoteService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/qouteRetrieval")
 public class QouteRetrievalController {
@@ -23,20 +25,46 @@ public class QouteRetrievalController {
     @GetMapping("")
     public String getAllQuotes(Model model) {
         model.addAttribute("quotes", quoteService.getAll());
-        model.addAttribute("listIssue", issueService.getAll());
-        model.addAttribute("selectedIssueName", "");
-        model.addAttribute("selectedIssueId", 1);
+        List<String> activeList = issueService.getAllActive();
+        if (!activeList.isEmpty()) {
+            model.addAttribute("listIssue", activeList);
+            model.addAttribute("selectedIssueName", activeList.get(0));
+            model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(activeList.get(0)));
+        }
+
+
+        //model.addAttribute("selectedIssueId", 1);
         return "quoteRetrieval";
     }
 
-    @GetMapping("/{id}")
-    public String getQRByName(@PathVariable("id") long id, Model model) {
-       // model.addAttribute("issueByName", issueService.getByName(name));
-        model.addAttribute("quotes", quoteService.getAllQuoteByIssueId(id));
-        model.addAttribute("listIssue", issueService.getAll());
-        model.addAttribute("selectedIssueName", issueService.getById(id).getName());
-        model.addAttribute("selectedIssueId", issueService.getById(id).getId());
-        return "quoteRetrieval";
+//
+//    @GetMapping("")
+//    public String getAllQuotes(Model model) {
+//        model.addAttribute("quotes", quoteService.getAll());
+//        model.addAttribute("listIssue", issueService.getAll());
+//        model.addAttribute("selectedIssueName", "");
+//        model.addAttribute("selectedIssueId", 1);
+//        return "quoteRetrieval";
+//    }
+
+
+    @GetMapping("/{issueName}")
+    public String getQRByName(@PathVariable("issueName") String issueName, Model model) {
+        if (issueService.isIssueActiveByName(issueName)) {
+            model.addAttribute("selectedIssueName", issueName);
+            model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(issueName));
+            model.addAttribute("listIssue", issueService.getAllActive());
+            return "quoteRetrieval";
+        }else{
+
+            String error = "dsdadasad";
+            model.addAttribute("errorMsg",error);
+            return "redirect:/qouteRetrieval";
+        }
+        // model.addAttribute("issueByName", issueService.getByName(name));
+
+
+
     }
 
 

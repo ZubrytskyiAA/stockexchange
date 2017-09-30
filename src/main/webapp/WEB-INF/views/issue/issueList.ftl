@@ -22,12 +22,18 @@
 
         <tr>
 
-            <form action="/newIssue" method="post" name="issue" class="form-group">
+            <form action="/issue/newIssue" method="post" name="issue" class="form-group">
 
                 <td><input title="name" type="text" name="name"/></td>
 
                 <td><input title="full_name" type="text" name="fullName"/></td>
-                <td></td>
+                <td>
+                    <select name="active">
+                        <option value=1>Активный</option>
+                        <option value=0>Деактивированый</option>
+                    </select>
+
+                </td>
                 <td></td>
 
             <#--<td><input title="fio" type="text" name="fio"/></td>-->
@@ -45,17 +51,18 @@
         <#--<td><a href="/user/${user.id}">${user.id}</a></td>-->
             <td><a href="/issue/${issue.id}">${issue.name}</a></td>
             <td>${issue.fullName}</td>
-            <td>${issue.active?then("Активна","Деактивирована")}</td>
+            <td>${issue.active?then("Активна","Деактивированный")}</td>
             <td>${issue.createMoment}</td>
 
 
             <td>
-                <form action="/deleteIssueById" method="post" name="issue" class="form-group">
+                <form action="/issue/deleteIssueById" method="post" name="issue" class="form-group">
                     <input title="id" type="hidden" name="id" value="${issue.id}"/>
                     <input type="submit" value="Delete"/>
                 </form>
-                <form action="/setActivities" method="post" name="activities" class="form-group">
-                    <input title="id" type="hidden" name="id" value=${issue.active?then("false","true")}/>
+                <form action="/issue/setActivities" method="post" name="setActive" class="form-group">
+                    <input title="id" type="hidden" name="id" value="${issue.id}">
+                    <input title="active" type="hidden" name="active" value=${issue.active?then("0","1")}>
                     <input type="submit" value=${issue.active?then("SET_OFF","SET_ON")}>
                 </form>
             </td>
