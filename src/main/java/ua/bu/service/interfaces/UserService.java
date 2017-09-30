@@ -15,4 +15,6 @@ public interface UserService {
     User getById(long id);
 
     void update(User user);
+
+    List<String> getListNamesAllUsers();
 }

@@ -7,31 +7,25 @@
 <body class="container">
 <#include "*/header.ftl">
 <div class="table-responsive" style="background-color: antiquewhite">
-    <caption>Trades list</caption>
+    <caption>Assets list</caption>
+
+<#include "changeAssetsTMPL.ftl">
+
+
     <table class="table table-striped">
         <tr>
-            <th>Название клиента</th>
+
             <th>Название инструмента</th>
             <th>Доступные средства</th>
             <th>Заблокированные средства</th>
 
         </tr>
 
+    <#include "showAsset.ftl">
 
-    <#list assets as asset>
-        <tr>
-
-            <td>${asset.userId.loginName}</td>
-            <td>${asset.issueId.name}</td>
-
-            <td>${asset.free}</td>
-            <td>${asset.blocked}</td>
-
-
-        </tr>
-    </#list>
     </table>
 </div>
+
 
 </body>
 </html>

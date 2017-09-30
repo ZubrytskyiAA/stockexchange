@@ -14,11 +14,12 @@ public interface IssueService {
 
     Issue getById(long id);
 
-    List<String> getAllActive();
+    List<String> getListNamesActiveIssue();
 
     boolean isIssueActiveByName(String name);
 
     Issue updateIssue(Issue issue);
     Issue getByName(String name);
+
 
 }

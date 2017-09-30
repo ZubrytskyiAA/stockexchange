@@ -1,7 +1,6 @@
 package ua.bu.service.interfaces;
 
 import ua.bu.entity.Asset;
-import ua.bu.entity.User;
 
 import java.util.List;
 
@@ -15,6 +14,9 @@ public interface AssetService {
     Asset updateUser(Asset asset);
 
     void delete(Asset asset);
+
     List<Asset> getAssetsByUserId(long id);
+
+    List<Asset> getListAssetsByUserName(String name);
 
 }

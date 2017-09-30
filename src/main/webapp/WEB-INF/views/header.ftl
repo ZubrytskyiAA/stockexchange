@@ -20,7 +20,7 @@
             <li class="active"><a href="/quote">Quotes</a></li>
             <li class="active"><a href="/issue">Issues</a></li>
             <li class="active"><a href="/reports">Reports</a></li>
-            <li class="active"><a href="/asset/allassets">Assets</a></li>
+            <li class="active"><a href="/asset">Assets</a></li>
             <li class="active"><a href="/trade/alltrades">Trades</a></li>
             <li class="active"><a href="/login">Login</a></li>
 

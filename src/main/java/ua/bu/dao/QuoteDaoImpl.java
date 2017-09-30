@@ -3,9 +3,7 @@ package ua.bu.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
-import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
-import ua.bu.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +19,7 @@ public class QuoteDaoImpl implements QuoteDao {
 
     @Override
     @Transactional
-       public void save(Quote quote) {
+    public void save(Quote quote) {
         quote.setCreateMoment(new Timestamp(System.currentTimeMillis()));
         entityManager.merge(quote);
     }

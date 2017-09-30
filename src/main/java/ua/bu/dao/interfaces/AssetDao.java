@@ -22,6 +22,7 @@ public interface AssetDao {
 
     List<Asset> getAssetsByUserId(long id);
 
+    List<Asset>  getListAssetsByUserName(String name);
 
     //void deleteById(long id);
 

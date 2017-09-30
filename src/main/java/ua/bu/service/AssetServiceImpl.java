@@ -43,4 +43,9 @@ public class AssetServiceImpl implements AssetService {
     public List<Asset> getAssetsByUserId(long id) {
         return assetDao.getAssetsByUserId(id);
     }
+
+    @Override
+    public List<Asset> getListAssetsByUserName(String name) {
+        return assetDao.getListAssetsByUserName(name);
+    }
 }

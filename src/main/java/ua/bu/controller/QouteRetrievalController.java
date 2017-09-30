@@ -25,7 +25,7 @@ public class QouteRetrievalController {
     @GetMapping("")
     public String getAllQuotes(Model model) {
         model.addAttribute("quotes", quoteService.getAll());
-        List<String> activeList = issueService.getAllActive();
+        List<String> activeList = issueService.getListNamesActiveIssue();
         if (!activeList.isEmpty()) {
             model.addAttribute("listIssue", activeList);
             model.addAttribute("selectedIssueName", activeList.get(0));
@@ -53,7 +53,7 @@ public class QouteRetrievalController {
         if (issueService.isIssueActiveByName(issueName)) {
             model.addAttribute("selectedIssueName", issueName);
             model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(issueName));
-            model.addAttribute("listIssue", issueService.getAllActive());
+            model.addAttribute("listIssue", issueService.getListNamesActiveIssue());
             return "quoteRetrieval";
         }else{
 

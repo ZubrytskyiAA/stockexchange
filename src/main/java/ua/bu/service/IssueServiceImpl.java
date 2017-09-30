@@ -38,7 +38,7 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public List<String> getAllActive() {
+    public List<String> getListNamesActiveIssue() {
         return issueDao.getAllActive();
     }
 
