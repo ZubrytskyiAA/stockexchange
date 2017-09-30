@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.bu.entity.Asset;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -38,7 +40,7 @@ public class AssetController {
 //            model.addAttribute("selectedIssueName", activeList.get(0));
 //
 
-            // model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(activeList.get(0)));
+        // model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(activeList.get(0)));
 //        }
 
         return "assetList";
@@ -50,35 +52,24 @@ public class AssetController {
 
         model.addAttribute("selectUserName", name);
         model.addAttribute("listNamesAllUsers", userService.getListNamesAllUsers());
-        model.addAttribute("listAssetsByUserName", assetService.getListAssetsByUserName(name));
 
-
-            List<String> activeList = issueService.getListNamesActiveIssue();
-            model.addAttribute("listIssue", activeList);
-            model.addAttribute("selectedIssueName", "");
-
-
-
-            return "assetList";
-
-
-    }
-
-
-    @GetMapping("/{userName}/{issueName}")
-    public String getWithdrawInformation(@PathVariable("userName") String userName,@PathVariable("issueName") String issueName, Model model) {
-
-
+        List<Asset> assetList = assetService.getListAssetsByUserName(name);
+        List<String> listIssueNamesActive = issueService.getListNamesActiveIssue();
+        if (!assetList.isEmpty()) {
+            model.addAttribute("listAssetsByUserName", assetList);
+            model.addAttribute("listIssueNamesActive", listIssueNamesActive);
+        }
         List<String> activeList = issueService.getListNamesActiveIssue();
         model.addAttribute("listIssue", activeList);
-        model.addAttribute("selectedIssueName", activeList.get(0));
-        model.addAttribute("listNamesAllUsers", userService.getListNamesAllUsers());
-        model.addAttribute("selectUserName", userName);
-        model.addAttribute("selectIssueName", issueName);
-        model.addAttribute("available", 1111);
+        model.addAttribute("selectedIssueName", "");
+
+
         return "assetList";
 
 
     }
+
+
+
 
 }

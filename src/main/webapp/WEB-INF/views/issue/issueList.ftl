@@ -49,7 +49,7 @@
     <#list issues as issue>
         <tr>
         <#--<td><a href="/user/${user.id}">${user.id}</a></td>-->
-            <td><a href="/issue/${issue.id}">${issue.name}</a></td>
+            <td><a href="/issue/${issue.name}">${issue.name}</a></td>
             <td>${issue.fullName}</td>
             <td>${issue.active?then("Активна","Деактивированный")}</td>
             <td>${issue.createMoment}</td>

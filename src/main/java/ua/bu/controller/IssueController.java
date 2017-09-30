@@ -48,9 +48,9 @@ public class IssueController {
 //        return "redirect:issues";
 //    }
 
-    @GetMapping("/{id}")
-    public String getIssueById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("issue", issueService.getById(id));
+    @GetMapping("/{name}")
+    public String getIssueById(@PathVariable("name") String name, Model model) {
+        model.addAttribute("issue", issueService.getByName(name));
         return "showIssue";
     }
 

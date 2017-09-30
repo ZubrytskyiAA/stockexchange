@@ -32,65 +32,56 @@
         <input type="hidden" value="${selectedIssueName}" name="issueName">
         <input type="hidden" value=1 name="userId">
         <div class="form-group">
-            <label class="control-label col-sm-4" for="price"> Actions:</label>
-            <div class="col-sm-5">
-                <div class="radio">
-                    <label><input type="radio" value="A" name="optradio" checked>Add asset</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" value="W" name="optradio">Withdraw asset</label>
-                </div>
-            </div>
-        </div>
+            <label class="control-label col-sm-2" for="price"> Вевести актив </label>
+            <div class="col-sm-1">
 
-
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="price"> Актив:</label>
-            <div class="col-sm-5">
-
-                <select name="selectIssue" onchange="document.location=this.options[this.selectedIndex].value">
-
+                <select name="withdraw">
                     <option selected value=/asset/${selectUserName}/dsd>dsds</option>
-
-
-                    <#list listIssue as issueName>
-                        <#if "${selectedIssueName}"  != "${issueName}">
-                            <option value=/asset/${selectUserName}/${selectedIssueName}>${selectedIssueName}</option>
-                        </#if>
-
+                    <#list listAssetsByUserName as assets>
+                        <option value=${assets.id}>${assets.issueId.name}</option>
                     </#list>
                 </select>
+            </div>
+            <div class="col-sm-1.5">
+                <input title="full_name" type="number" name="qtyWithdraw"/>
+            </div>
 
-
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="price"> Добавить актив </label>
+            <div class="col-sm-1">
+                <select name="add">
+                    <option selected value=/asset/${selectUserName}/dsd>dsds</option>
+                    <#list listIssueNamesActive as issueNames>
+                        <option value=${issueNames}>${issueNames}</option>
+                    </#list>
+                </select>
+            </div>
+            <div class="col-sm-1.2">
+                <input title="full_name" type="number" name="qtyWithdraw"/>
             </div>
         </div>
-    <#--<#if "${selectIssueName}" != "">-->
+
     <#--<div class="form-group">-->
-    <#--<label class="control-label col-sm-4" for="qty"> количество:</label>-->
+    <#--<label class="control-label col-sm-4" for="price"> Фильтр:</label>-->
     <#--<div class="col-sm-5">-->
-    <#--<input id="qty" type="number" class="form-control col-sm-4" name="qty">-->
-    <#--</div>-->
 
-    <#--</div>-->
+    <#--<select name="selectIssue" onchange="document.location=this.options[this.selectedIndex].value">-->
 
-    <#--<div class="form-group">-->
-    <#--<label class="control-label col-sm-4" for="available"> доступно:</label>-->
-    <#--<div class="col-sm-5">-->
-    <#--<input id="available" type="number" class="form-control col-sm-4" name="available"-->
-    <#--value=${available}-->
-    <#--disabled="disabled">-->
-    <#--</div>-->
-
-    <#--</div>-->
+    <#--<option selected value=/asset/${selectUserName}/dsd>dsds</option>-->
 
 
-    <#--<div class="form-group">-->
-    <#--<div class="col-sm-offset-4 col-sm-5">-->
-    <#--<button type="submit" class="btn btn-default">Submit</button>-->
-    <#--</div>-->
-    <#--</div>-->
+    <#--<#list listAssetsByUserName as assets>-->
 
-    <#--</#if>-->
+    <#--<option value=/asset/${selectUserName}/${assets.id}>${assets.issueId.name}</option>-->
+
+
+    <#--</#list>-->
+    <#--</select>-->
+
+
+    <#--</div>-->
+    <#--</div>-->
     </#if>
     </form>
 
