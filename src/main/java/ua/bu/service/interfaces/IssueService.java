@@ -19,5 +19,6 @@ public interface IssueService {
     boolean isIssueActiveByName(String name);
 
     Issue updateIssue(Issue issue);
+    Issue getByName(String name);
 
 }

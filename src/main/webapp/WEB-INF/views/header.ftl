@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav navbar-left">
             <li class="active"><a href="/qouteRetrieval">Qoute Retrieval</a></li>
             <li class="active"><a href="/users">Users</a></li>
-            <li class="active"><a href="/quote/allquotes">Quotes</a></li>
+            <li class="active"><a href="/quote">Quotes</a></li>
             <li class="active"><a href="/issue">Issues</a></li>
             <li class="active"><a href="/reports">Reports</a></li>
             <li class="active"><a href="/asset/allassets">Assets</a></li>

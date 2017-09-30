@@ -1,19 +1,13 @@
 package ua.bu.entity;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 
 @Entity
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(columnNames = "loginName")})
-@Access(AccessType.FIELD)
+
 public class User implements Serializable {
 
 
@@ -21,15 +15,15 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
     private long id;
-    @Column(name = "loginName",unique = true, nullable = false, length = 20)
+    @Column(name = "loginName", unique = true, nullable = false, length = 20)
     private String loginName;
     @Column(name = "password", nullable = false)
-    @NotNull
+
     private String password;
     @Column(name = "fio", nullable = false)
     private String fio;
     @Column(name = "email")
-    @Nullable
+
     private String email;
     @Column(name = "phonenumber")
     private String phoneNumber;
@@ -38,12 +32,9 @@ public class User implements Serializable {
     private boolean active;
 
 
-
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Trade.class)
 //    @JoinColumn(name = "id")
 //    private List<Trade> trades = new ArrayList<>();
-
-
 
 
     public User() {

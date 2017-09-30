@@ -11,6 +11,7 @@ public interface IssueDao {
     List<Issue> getAll();
 
     Issue getById(long id);
+
     Issue getByName(String name);
 
     void deleteById(long id);
@@ -19,9 +20,10 @@ public interface IssueDao {
 
     boolean isLoginNameUnique(String name);
 
-    void addIssueToUserId(long id);
     List<String> getAllActive();
+
     boolean isIssueActiveByName(String name);
+
     Issue updateIssue(Issue issue);
 
 

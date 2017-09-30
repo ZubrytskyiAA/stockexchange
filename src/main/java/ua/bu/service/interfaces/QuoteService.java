@@ -5,7 +5,7 @@ import ua.bu.entity.Quote;
 import java.util.List;
 
 public interface QuoteService {
-    Quote save(Quote quote);
+    void save(Quote quote);
 
     List<Quote> getAll();
 

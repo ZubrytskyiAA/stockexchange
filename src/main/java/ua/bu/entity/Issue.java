@@ -1,21 +1,20 @@
 package ua.bu.entity;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 @Entity
 @Table(name = "issue")
-public class Issue implements Serializable{
+public class Issue implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id" , nullable = false)
+    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name = "name", nullable = false, unique = true)
@@ -31,31 +30,9 @@ public class Issue implements Serializable{
     private Timestamp createMoment;
 
 
-    @Column(name = "user_id")
-    User userId;
-
-    @Column(name = "issue_id")
-    Issue issueId;
-
     public Issue() {
     }
 
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Issue getIssueId() {
-        return issueId;
-    }
-
-    public void setIssueId(Issue issueId) {
-        this.issueId = issueId;
-    }
 
     public boolean isActive() {
         return active;

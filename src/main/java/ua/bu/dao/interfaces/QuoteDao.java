@@ -11,7 +11,9 @@ public interface QuoteDao {
     void save(Quote quote);
 
     List<Quote> getAll();
+
     List<Quote> getAllQuoteByIssueId(long id);
+
     List<Quote> getAllQuoteByIssueName(String name);
 
     Quote getById(long id);

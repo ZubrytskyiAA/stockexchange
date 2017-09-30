@@ -11,11 +11,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Component
-@Transactional
 public class IssueDaoImpl implements IssueDao {
 
 
     @PersistenceContext
+
     protected EntityManager entityManager;
 
 
@@ -63,10 +63,6 @@ public class IssueDaoImpl implements IssueDao {
         } else return true;
     }
 
-    @Override
-    public void addIssueToUserId(long id) {
-
-    }
 
     @Override
     public List<String> getAllActive() {

@@ -52,5 +52,10 @@ public class IssueServiceImpl implements IssueService {
         return issueDao.updateIssue(issue);
     }
 
+    @Override
+    public Issue getByName(String name) {
+        return issueDao.getByName(name);
+    }
+
 
 }

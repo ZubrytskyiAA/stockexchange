@@ -15,8 +15,8 @@ public class QuoteServiceImpl implements QuoteService{
     private QuoteDao quoteDao;
 
     @Override
-    public Quote save(Quote quote) {
-        return null;
+    public void save(Quote quote) {
+         quoteDao.save(quote);
     }
 
     @Override
