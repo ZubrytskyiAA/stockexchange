@@ -19,7 +19,7 @@
             <li><a href="/users">Users</a></li>
             <li><a href="/quote">Quotes</a></li>
             <li><a href="/issue">Issues</a></li>
-            <li><a href="/reports">Reports</a></li>
+            <li><a href="/report">Reports</a></li>
             <li><a href="/asset">Assets</a></li>
             <li><a href="/trade/alltrades">Trades</a></li>
             <li><a href="/login">Login</a></li>

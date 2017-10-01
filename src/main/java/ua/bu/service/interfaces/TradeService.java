@@ -16,4 +16,6 @@ public interface TradeService {
 
     void delete(Trade trade);
 
+    List<Trade> getAllTradesByIssue(String name);
+
 }

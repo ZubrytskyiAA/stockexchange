@@ -1,6 +1,7 @@
 package ua.bu.dao.interfaces;
 
 import org.springframework.stereotype.Component;
+import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
 import ua.bu.entity.Trade;
 
@@ -20,4 +21,6 @@ public interface TradeDao {
 
 
     void doDealByQuote(List<Quote> listQuote, Quote quote);
+
+    List<Trade> getAllTradesByIssue(Issue issue);
 }

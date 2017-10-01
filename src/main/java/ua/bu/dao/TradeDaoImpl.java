@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.dao.interfaces.TradeDao;
+import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
 import ua.bu.entity.Trade;
 
@@ -128,5 +129,12 @@ public class TradeDaoImpl implements TradeDao {
 //
 //            }
 //        }
+    }
+
+    @Override
+    public List<Trade> getAllTradesByIssue(Issue issue) {
+        return entityManager.createQuery("select t from Trade t where t.issue=:issue", Trade.class)
+                .setParameter("issue", issue)
+                .getResultList();
     }
 }

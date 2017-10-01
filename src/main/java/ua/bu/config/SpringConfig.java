@@ -20,6 +20,16 @@ public class SpringConfig {
         return new UserDaoImpl();
     }
 
+    @Bean
+    public ReportService getReportService() {
+        return new ReportServiceImpl();
+    }
+
+    @Bean
+    public ReportDao getReportDao() {
+        return new ReportDaoImpl();
+    }
+
 
     @Bean
     public IssueService getIssueService() {
