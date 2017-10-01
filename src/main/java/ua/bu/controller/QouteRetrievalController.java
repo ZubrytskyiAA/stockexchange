@@ -33,19 +33,8 @@ public class QouteRetrievalController {
         }
 
 
-        //model.addAttribute("selectedIssueId", 1);
         return "quoteRetrieval";
     }
-
-//
-//    @GetMapping("")
-//    public String getAllQuotes(Model model) {
-//        model.addAttribute("quotes", quoteService.getAll());
-//        model.addAttribute("listIssue", issueService.getAll());
-//        model.addAttribute("selectedIssueName", "");
-//        model.addAttribute("selectedIssueId", 1);
-//        return "quoteRetrieval";
-//    }
 
 
     @GetMapping("/{issueName}")
@@ -55,14 +44,12 @@ public class QouteRetrievalController {
             model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(issueName));
             model.addAttribute("listIssue", issueService.getListNamesActiveIssue());
             return "quoteRetrieval";
-        }else{
+        } else {
 
             String error = "dsdadasad";
-            model.addAttribute("errorMsg",error);
+            model.addAttribute("errorMsg", error);
             return "redirect:/qouteRetrieval";
         }
-        // model.addAttribute("issueByName", issueService.getByName(name));
-
 
 
     }

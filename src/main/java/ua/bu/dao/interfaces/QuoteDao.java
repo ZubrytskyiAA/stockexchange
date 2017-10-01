@@ -18,9 +18,8 @@ public interface QuoteDao {
 
     Quote getById(long id);
 
-    Quote updateQuote(Quote quote);
 
     void delete(Quote quote);
-
+    void update(Quote quote);
 
 }

@@ -33,7 +33,7 @@ public class QuoteDaoImpl implements QuoteDao {
     @Override
     public List<Quote> getAllQuoteByIssueId(long id) {
 
-        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.id=:id order by q.price", Quote.class)
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId.id=:id order by q.price desc", Quote.class)
                 .setParameter("id", id)
                 .getResultList();
 
@@ -48,16 +48,20 @@ public class QuoteDaoImpl implements QuoteDao {
 
     @Override
     public Quote getById(long id) {
-        return null;
+
+        return entityManager.find(Quote.class, id);
     }
 
-    @Override
-    public Quote updateQuote(Quote quote) {
-        return null;
-    }
 
     @Override
+    @Transactional
     public void delete(Quote quote) {
 
+        entityManager.createQuery("delete FROM Quote u WHERE u.id=" + quote.getId()).executeUpdate();
+    }
+
+    @Override
+    public void update(Quote quote) {
+        entityManager.merge(quote);
     }
 }

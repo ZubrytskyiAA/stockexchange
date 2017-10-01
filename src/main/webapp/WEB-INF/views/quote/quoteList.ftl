@@ -17,13 +17,14 @@
             <th>Цена</th>
             <th>Количество</th>
             <th>Сумма</th>
+            <th>Действия</th>
 
         </tr>
 
 
-    <#list quotes as quote>
+    <#list quotes?sort_by("id") as quote>
         <tr>
-            <td>#${quote.id}</td>
+            <td>${quote.id}</td>
             <td>${quote.userId.loginName}</td>
             <td>${quote.issueId.name}</td>
 
@@ -31,6 +32,11 @@
             <td>${quote.price}</td>
             <td>${quote.qty}</td>
             <td>${quote.qty * quote.price}</td>
+            <td>
+                <a href="/quote/edit/${quote.id}">Edit</a>
+                <br>
+                <a href="/quote/delete/${quote.id}">Delete</a>
+            </td>
         </tr>
     </#list>
     </table>

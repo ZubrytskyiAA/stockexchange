@@ -89,6 +89,7 @@ public class IssueDaoImpl implements IssueDao {
     }
 
     @Override
+    @Transactional
     public Issue updateIssue(Issue issue) {
         entityManager.merge(issue);
         return issue;

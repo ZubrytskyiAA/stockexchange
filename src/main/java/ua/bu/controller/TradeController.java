@@ -24,8 +24,11 @@ public class TradeController {
     private TradeService tradeService;
 
 
+
+
+
     @GetMapping("/alltrades")
-    public String getAllUsers(Model model) {
+    public String getAlltrades(Model model) {
         model.addAttribute("trades", tradeService.getAll());
         System.out.println("=======================================================");
         System.out.println(tradeService.getAll());

@@ -19,4 +19,7 @@ public interface QuoteService {
 
     List<Quote> getAllQuoteByIssueName(String name);
 
+    void update(Quote quote);
+
+    void changeExistQuote(Quote quote);
 }
