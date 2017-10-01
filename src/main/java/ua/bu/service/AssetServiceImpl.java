@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.bu.dao.interfaces.AssetDao;
 import ua.bu.entity.Asset;
-import ua.bu.entity.User;
 import ua.bu.service.interfaces.AssetService;
 
 import java.util.List;
@@ -14,9 +13,11 @@ public class AssetServiceImpl implements AssetService {
 
     @Autowired
     private AssetDao assetDao;
+
     @Override
-    public Asset save(Asset issue) {
-        return null;
+    public void save(Asset asset) {
+
+        assetDao.save(asset);
     }
 
     @Override
@@ -48,4 +49,36 @@ public class AssetServiceImpl implements AssetService {
     public List<Asset> getListAssetsByUserName(String name) {
         return assetDao.getListAssetsByUserName(name);
     }
+
+    @Override
+    public Asset getExistAsset(Asset asset) {
+        return assetDao.getExistAsset(asset);
+    }
+
+    @Override
+    public void addNewAsset(Asset asset) {
+        Asset asset1 = assetDao.getExistAsset(asset);
+
+        if (asset1 == null) {
+            assetDao.save(asset);
+        } else {
+            asset1.addFree(asset.getFree());
+            assetDao.save(asset1);
+        }
+
+    }
+
+    @Override
+    public void withdrawAsset(Asset asset) {
+        Asset asset1 = assetDao.getExistAsset(asset);
+
+        if (asset1 == null) {
+            assetDao.save(asset);
+        } else {
+            asset1.withdrawAsset(asset.getFree());
+            assetDao.save(asset1);
+        }
+    }
+
+
 }

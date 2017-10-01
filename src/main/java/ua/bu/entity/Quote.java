@@ -1,11 +1,12 @@
 package ua.bu.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 @Entity
 @Table(name = "quote")
-public class Quote {
+public class Quote implements Serializable {
 
 
     @Id

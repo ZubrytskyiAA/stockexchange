@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 public interface AssetDao {
 
-    void save(Asset issue);
+    void save(Asset asset);
 
     List<Asset> getAll();
 
@@ -30,6 +30,8 @@ public interface AssetDao {
     // void changeBlock(double block);
 
     //int changeFree(double free);
+    Asset getExistAsset(Asset asset);
+
 
 
 }

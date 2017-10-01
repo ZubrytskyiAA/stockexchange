@@ -16,8 +16,10 @@ public class AssetDaoImpl implements AssetDao {
 
 
     @Override
-    public void save(Asset issue) {
-        entityManager.persist(issue);
+    @Transactional
+    public void save(Asset asset) {
+        entityManager.merge(asset);
+
     }
 
     @Override
@@ -49,10 +51,29 @@ public class AssetDaoImpl implements AssetDao {
                 .getResultList();
     }
 
+
     @Override
     public List<Asset> getListAssetsByUserName(String name) {
         return entityManager.createQuery("SELECT a FROM Asset a where a.userId.loginName=:loginName order by a.id", Asset.class)
                 .setParameter("loginName", name)
                 .getResultList();
+    }
+
+    @Override
+    public Asset getExistAsset(Asset asset) {
+
+
+        List<Asset> assetList = entityManager.createQuery("SELECT a FROM Asset a where a.issueId=:issueId and a.userId=:userId", Asset.class)
+                .setParameter("issueId", asset.getIssueId())
+                .setParameter("userId", asset.getUserId())
+                .getResultList();
+        if (assetList.isEmpty()) {
+            return null;
+
+        } else {
+            return assetList.get(0);
+        }
+
+
     }
 }

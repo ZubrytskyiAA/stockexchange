@@ -1,10 +1,11 @@
 package ua.bu.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "asset")
-public class Asset {
+public class Asset implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,19 @@ public class Asset {
 
 
     public Asset() {
+    }
+
+
+    public void addFree(double free) {
+        this.free += free;
+    }
+
+
+
+
+    public void withdrawAsset(double free) {
+        double f = this.free - free;
+        if (f >= 0) this.free = f;
     }
 
     public long getId() {
@@ -80,4 +94,6 @@ public class Asset {
                 ", issueId=" + issueId +
                 '}';
     }
+
+
 }

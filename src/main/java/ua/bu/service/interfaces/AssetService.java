@@ -5,7 +5,7 @@ import ua.bu.entity.Asset;
 import java.util.List;
 
 public interface AssetService {
-    Asset save(Asset issue);
+    void save(Asset issue);
 
     List<Asset> getAll();
 
@@ -19,4 +19,9 @@ public interface AssetService {
 
     List<Asset> getListAssetsByUserName(String name);
 
+    Asset getExistAsset(Asset asset);
+
+    void addNewAsset(Asset asset);
+
+    void withdrawAsset(Asset asset);
 }

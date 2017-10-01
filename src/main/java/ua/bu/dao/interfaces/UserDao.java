@@ -21,5 +21,7 @@ public interface UserDao {
     User updateUser(User user);
 
     List<String> getListNamesAllUsers();
+    User getByName(String loginName);
+
 
 }

@@ -3,15 +3,12 @@ package ua.bu.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.bu.entity.Asset;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -55,21 +52,49 @@ public class AssetController {
 
         List<Asset> assetList = assetService.getListAssetsByUserName(name);
         List<String> listIssueNamesActive = issueService.getListNamesActiveIssue();
-        if (!assetList.isEmpty()) {
-            model.addAttribute("listAssetsByUserName", assetList);
+        if (!listIssueNamesActive.isEmpty()) {
             model.addAttribute("listIssueNamesActive", listIssueNamesActive);
         }
-        List<String> activeList = issueService.getListNamesActiveIssue();
-        model.addAttribute("listIssue", activeList);
+        if (!assetList.isEmpty()) {
+            model.addAttribute("listAssetsByUserName", assetList);
+        }
         model.addAttribute("selectedIssueName", "");
-
-
         return "assetList";
-
-
     }
 
 
+    @PostMapping("/addAsset")
+    public String addAsset(@ModelAttribute("userName") String userName,
+                           @ModelAttribute("issueName") String issueName,
+                           @ModelAttribute("qtyAdd") double qtyAdd) {
+        if (userName.equals("") || userName.equals("") || qtyAdd <= 0) {
+            return "redirect:/asset/" + userName;
+        }
+
+        Asset asset = new Asset();
+        asset.setFree(Math.abs(qtyAdd));
+        asset.setIssueId(issueService.getByName(issueName));
+        asset.setUserId(userService.getByName(userName));
+        assetService.addNewAsset(asset);
+        return "redirect:/asset/" + userName;
+    }
+
+
+    @PostMapping("/withdrawAsset")
+    public String withdrawAsset(@ModelAttribute("userName") String userName,
+                           @ModelAttribute("issueName") String issueName,
+                           @ModelAttribute("qtyWithdraw") double qtyAdd) {
+        if (userName.equals("") || userName.equals("") || qtyAdd <= 0) {
+            return "redirect:/asset/" + userName;
+        }
+
+        Asset asset = new Asset();
+        asset.setFree(Math.abs(qtyAdd));
+        asset.setIssueId(issueService.getByName(issueName));
+        asset.setUserId(userService.getByName(userName));
+        assetService.withdrawAsset(asset);
+        return "redirect:/asset/" + userName;
+    }
 
 
 }

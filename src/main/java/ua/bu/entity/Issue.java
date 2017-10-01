@@ -1,8 +1,5 @@
 package ua.bu.entity;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;

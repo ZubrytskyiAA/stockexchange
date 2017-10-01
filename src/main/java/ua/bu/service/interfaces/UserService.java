@@ -17,4 +17,7 @@ public interface UserService {
     void update(User user);
 
     List<String> getListNamesAllUsers();
+
+    User getByName(String loginName);
+
 }
