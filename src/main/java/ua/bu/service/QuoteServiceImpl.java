@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
+import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Quote;
 import ua.bu.service.interfaces.QuoteService;
 
@@ -15,6 +16,10 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Autowired
     private QuoteDao quoteDao;
+
+    @Autowired
+    private TradeDao tradeDao;
+
 
     @Override
     public void save(Quote quote) {
@@ -70,7 +75,7 @@ public class QuoteServiceImpl implements QuoteService {
     @Transactional
     public void changeExistQuote(Quote quote) {
 
-        if(quote!=null) {
+        if (quote != null) {
             Quote oldQuote = getById(quote.getId());
 
             Quote tempQ = new Quote();
@@ -85,6 +90,25 @@ public class QuoteServiceImpl implements QuoteService {
             save(tempQ);
             delete(getById(quote.getId()));
 
+        }
+    }
+
+    @Override
+    @Transactional
+    public void addQuote(Quote quote) {
+        if (quote != null) {
+            if (quote.getType().equals("P")) {
+
+                List<Quote> listQuote = quoteDao.getAllQouteByIssueLessPrice(quote.getIssueId(), quote.getPrice());
+                tradeDao.doDeal(listQuote,quote);
+
+
+
+            } else {
+                List<Quote> listQuote = quoteDao.getAllQouteByIssueMorePrice(quote.getIssueId(), quote.getPrice());
+                tradeDao.doDeal(listQuote,quote);
+
+            }
         }
     }
 }

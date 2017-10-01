@@ -3,6 +3,7 @@ package ua.bu.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
+import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
 
 import javax.persistence.EntityManager;
@@ -64,4 +65,21 @@ public class QuoteDaoImpl implements QuoteDao {
     public void update(Quote quote) {
         entityManager.merge(quote);
     }
+
+    @Override
+    public List<Quote> getAllQouteByIssueLessPrice(Issue issue, double price) {
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId=:issue and q.type = 'S' and q.price <= :price order by q.price , q.createMoment", Quote.class)
+                .setParameter("issue", issue)
+                .setParameter("price", price)
+                .getResultList();
+    }
+
+
+    public List<Quote> getAllQouteByIssueMorePrice(Issue issue, double price) {
+        return entityManager.createQuery("SELECT q FROM Quote q where q.issueId=:issue and q.type = 'P' and q.price >= :price order by q.price desc , q.createMoment", Quote.class)
+                .setParameter("issue", issue)
+                .setParameter("price", price)
+                .getResultList();
+    }
+
 }

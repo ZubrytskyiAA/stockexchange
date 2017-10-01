@@ -39,7 +39,7 @@
             <label class="control-label col-sm-4" for="price"> Цена:</label>
             <div class="col-sm-5">
 
-                <input class="form-control" id="price" pattern="^[0-9]+$" step="0.1" type="number" name="price"
+                <input class="form-control" id="price" step="0.0001" type="number" name="price"
                        placeholder="" required/>
             </div>
         </div>

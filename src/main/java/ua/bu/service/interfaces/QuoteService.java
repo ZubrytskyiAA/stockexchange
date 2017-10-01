@@ -22,4 +22,6 @@ public interface QuoteService {
     void update(Quote quote);
 
     void changeExistQuote(Quote quote);
+
+    void addQuote(Quote quote);
 }

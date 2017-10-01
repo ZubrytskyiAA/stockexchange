@@ -11,6 +11,7 @@ public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
+    @SuppressWarnings(value = "unchecked")
     private long id;
 
     @Column(name = "type", nullable = false, length = 1)
@@ -38,15 +39,15 @@ public class Trade {
     private String confAction;
 
 
-
-
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Issue.class)
     @JoinColumn(name = "issue_id")
     private Issue issue;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE}
+            , targetEntity = User.class)
     @JoinColumn(name = "user_init_id")
     private User userInit;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE}
+            , targetEntity = User.class)
     @JoinColumn(name = "user_conf_id")
     private User userConf;
 

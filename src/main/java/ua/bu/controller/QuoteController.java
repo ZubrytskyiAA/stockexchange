@@ -39,7 +39,7 @@ public class QuoteController {
             quote.setPrice(price);
             quote.setType(type);
             quote.setUserId(userService.getById(userId));
-            quoteService.save(quote);
+            quoteService.addQuote(quote);
         }
 
         return "redirect:/qouteRetrieval/" + issueName;
@@ -48,7 +48,13 @@ public class QuoteController {
 
     @GetMapping("/edit/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
-        model.addAttribute("quote", quoteService.getById(id));
+        Quote quote =  quoteService.getById(id);
+        if(quote==null){
+        model.addAttribute("error","Нету котировки с таким ID");}
+        else{
+            model.addAttribute("quote",quote);
+        }
+
         return "editQuote";
 
     }

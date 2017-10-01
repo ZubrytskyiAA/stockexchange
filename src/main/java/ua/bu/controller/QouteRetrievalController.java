@@ -33,6 +33,7 @@ public class QouteRetrievalController {
         }
 
 
+        //model.addAttribute("selectedIssueId", 1);
         return "quoteRetrieval";
     }
 
@@ -50,6 +51,7 @@ public class QouteRetrievalController {
             model.addAttribute("errorMsg", error);
             return "redirect:/qouteRetrieval";
         }
+        // model.addAttribute("issueByName", issueService.getByName(name));
 
 
     }
