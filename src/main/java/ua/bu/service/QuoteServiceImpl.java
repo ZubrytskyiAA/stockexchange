@@ -98,15 +98,12 @@ public class QuoteServiceImpl implements QuoteService {
     public void addQuote(Quote quote) {
         if (quote != null) {
             if (quote.getType().equals("P")) {
-
                 List<Quote> listQuote = quoteDao.getAllQouteByIssueLessPrice(quote.getIssueId(), quote.getPrice());
-                tradeDao.doDeal(listQuote,quote);
-
-
+                tradeDao.doDealByQuote(listQuote, quote);
 
             } else {
                 List<Quote> listQuote = quoteDao.getAllQouteByIssueMorePrice(quote.getIssueId(), quote.getPrice());
-                tradeDao.doDeal(listQuote,quote);
+                tradeDao.doDealByQuote(listQuote, quote);
 
             }
         }

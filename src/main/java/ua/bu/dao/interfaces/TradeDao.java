@@ -19,5 +19,5 @@ public interface TradeDao {
     void delete(Trade trade);
 
 
-    void doDeal(List<Quote> listQuote, Quote quote);
+    void doDealByQuote(List<Quote> listQuote, Quote quote);
 }
