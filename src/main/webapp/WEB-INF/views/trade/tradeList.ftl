@@ -11,6 +11,7 @@
     <table class="table table-striped">
         <tr>
             <th>Номер сделки</th>
+            <th>Название бумаги</th>
             <th>Покупатель</th>
             <th>Продавец</th>
             <th>Цена</th>
@@ -27,6 +28,7 @@
         <tr>
 
             <td>#${trade.id?c}</td>
+            <td>${trade.issue.name}</td>
             <td>
                 <#switch  "${trade.initAction}" >
                     <#case "P">

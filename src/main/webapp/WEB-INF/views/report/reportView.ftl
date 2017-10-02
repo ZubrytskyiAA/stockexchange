@@ -73,7 +73,7 @@
                         $("#chart").shieldChart({
                             theme: "light",
                             primaryHeader: {
-                                text: "Обзор Сделок по Бумаге"
+                                text: "Обзор изменения цен за весь период"
                             },
                             exportOptions: {
                                 image: false,
@@ -91,7 +91,7 @@
                             },
                             dataSeries: [{
                                 seriesType: 'line',
-                                collectionAlias: "Цена в грн",
+                                collectionAlias: "${selectedIssueName}",
                                 data: [
                                     <#list trades as trade>
                                     ${trade.price?c}<#sep>,

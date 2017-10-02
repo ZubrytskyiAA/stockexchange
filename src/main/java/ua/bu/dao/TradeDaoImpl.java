@@ -66,7 +66,7 @@ public class TradeDaoImpl implements TradeDao {
         System.out.println(quote);
 
         long qty = quote.getQty();
-        while (qty > 0) {
+        while (qty > 0 && quote.getPrice()>0) {
             if (!listQuote.isEmpty()) {
                 Quote alreadyQuoted = listQuote.get(0);
                 if (alreadyQuoted.getQty() >= qty) {
