@@ -26,27 +26,27 @@
     <#list trades as trade>
         <tr>
 
-            <td>#${trade.id}</td>
-            <td><a href="/trade/user/${trade.id}">
+            <td>#${trade.id?c}</td>
+            <td>
                 <#switch  "${trade.initAction}" >
-                     <#case "P">
-                ${trade.userInit.loginName}
-                    <#break>
-                    <#default>
-                    ${trade.userConf.loginName}
-
-
-                </#switch>
-            </a></td>
-            <td><a href="/trade/user/${trade.id}">
-                <#switch "${trade.confAction}" >
+                    <#case "P">
+                        <a href="/users/${trade.userInit.id?c}">${trade.userInit.loginName}</a>
+                        <#break>
                     <#case "S">
-                ${trade.userConf.loginName}
-                    <#break>
-                    <#default>
-                    ${trade.userInit.loginName}
+                        <a href="/users/${trade.userConf.id?c}">${trade.userConf.loginName}</a>
+                        <#break>
                 </#switch>
-            </a></td>
+            </td>
+            <td>
+                <#switch "${trade.confAction}" >
+                    <#case "P">
+                        <a href="/users/${trade.userInit.id?c}">${trade.userInit.loginName}</a>
+                        <#break>
+                    <#case "S">
+                        <a href="/users/${trade.userConf.id?c}">${trade.userConf.loginName}</a>
+                        <#break>
+                </#switch>
+            </td>
             <td>${trade.price}</td>
             <td>${trade.qty}</td>
             <td>${trade.volume}</td>
@@ -58,7 +58,7 @@
                         <#break>
                     <#case "B">
                         Договорная
-                    <#break>
+                        <#break>
                     <#default>
                         Неопознанный Тип
                 </#switch>
@@ -72,7 +72,7 @@
                         <#break>
                     <#case "10">
                         Исполнена
-                    <#break>
+                        <#break>
                     <#default>
                         Неопознанный статус
                 </#switch>

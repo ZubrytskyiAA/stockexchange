@@ -33,9 +33,9 @@
             <td>${quote.qty}</td>
             <td>${quote.qty * quote.price}</td>
             <td>
-                <a href="/quote/edit/${quote.id}">Edit</a>
+                <a href="/quote/edit/${quote.id?c}">Edit</a>
                 <br>
-                <a href="/quote/delete/${quote.id}">Delete</a>
+                <a href="/quote/delete/${quote.id?c}">Delete</a>
             </td>
         </tr>
     </#list>

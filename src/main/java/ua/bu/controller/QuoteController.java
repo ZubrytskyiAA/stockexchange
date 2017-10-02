@@ -70,7 +70,9 @@ public class QuoteController {
     @PostMapping("/editQuote")
     public String editQuote(@ModelAttribute Quote quote, Model model) {
 
-        quoteService.changeExistQuote(quote);
+        quoteService.delete(quote);
+        quoteService.addQuote(quote);
+        //quoteService.changeExistQuote(quote);
 
         return "redirect:/quote";
     }
