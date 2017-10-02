@@ -7,12 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.bu.entity.Issue;
 import ua.bu.entity.Trade;
 import ua.bu.service.interfaces.ReportService;
 import ua.bu.service.interfaces.TradeService;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +31,7 @@ public class ReportController {
     public String trades(Model model) {
         List<Trade> trades = tradeService.getAll();
         Set<String> uniqNames = new HashSet<>();
-        for(Trade x : trades){
+        for (Trade x : trades) {
             uniqNames.add(x.getIssue().getName());
         }
 
@@ -55,7 +53,7 @@ public class ReportController {
     public String getAllUsers(@PathVariable("name") String name, Model model) {
         List<Trade> trades = tradeService.getAllTradesByIssue(name);
         Set<String> uniqNames = new HashSet<>();
-        for(Trade x : tradeService.getAll()){
+        for (Trade x : tradeService.getAll()) {
             uniqNames.add(x.getIssue().getName());
         }
 
@@ -66,8 +64,6 @@ public class ReportController {
 
         return "reportView";
     }
-
-
 
 
 }

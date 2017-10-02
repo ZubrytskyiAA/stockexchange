@@ -94,7 +94,7 @@
                                 collectionAlias: "Цена в грн",
                                 data: [
                                     <#list trades as trade>
-                                    ${trade.price}<#sep>,
+                                    ${trade.price?c}<#sep>,
                                     </#list>
 
 //                                    1, 320.86, 453, 234, 553, 665, 345, 123, 432, 545, 654, 345, 332, 456, 2340

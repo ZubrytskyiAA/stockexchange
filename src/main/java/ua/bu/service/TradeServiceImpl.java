@@ -4,14 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.dao.interfaces.TradeDao;
-import ua.bu.entity.Issue;
 import ua.bu.entity.Trade;
 import ua.bu.service.interfaces.TradeService;
 
 import java.util.List;
 
 @Service
-public class TradeServiceImpl implements TradeService{
+public class TradeServiceImpl implements TradeService {
 
     @Autowired
     private TradeDao tradeDao;
@@ -20,7 +19,7 @@ public class TradeServiceImpl implements TradeService{
 
     @Override
     public void save(Trade trade) {
-         tradeDao.save(trade);
+        tradeDao.save(trade);
     }
 
     @Override

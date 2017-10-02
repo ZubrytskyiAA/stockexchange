@@ -42,12 +42,6 @@ public class IssueController {
     }
 
 
-//    @PostMapping("/delete")
-//    public String deleteIssue(@ModelAttribute("id") int id) {
-//        issueService.deleteById(id);
-//        return "redirect:issues";
-//    }
-
     @GetMapping("/{name}")
     public String getIssueById(@PathVariable("name") String name, Model model) {
         model.addAttribute("issue", issueService.getByName(name));

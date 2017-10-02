@@ -9,7 +9,7 @@ import ua.bu.service.interfaces.ReportService;
 public class ReportServiceImpl  implements ReportService{
 
     @Autowired
-    private ReportDao tradeDao;
+    private ReportDao reportDao;
 
 
 }

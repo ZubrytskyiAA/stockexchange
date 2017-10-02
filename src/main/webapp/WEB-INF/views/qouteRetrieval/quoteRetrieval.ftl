@@ -20,6 +20,11 @@
 
         }
 
+        select {
+            width: 70px;
+        }
+
+
 
     </style>
 
@@ -35,13 +40,12 @@
 <#--<h1>${errorMsg}</h1>-->
 <#if "${selectedIssueName}"??>
 
-<div style="background: chartreuse;">
+<div>
     <div>
         <div></div>
-        <div style="text-align: right">
-            Название инструмента
+        <div class="col-sm-7 pull-right">
             <form name="choseIssue" method="post">
-                <select name="select1" onchange="document.location=this.options[this.selectedIndex].value">
+                <select  name="select1" onchange="document.location=this.options[this.selectedIndex].value">
 
                 <#--<#if "${selectedIssueName}"??>-->
                 <#--<option selected value=/qouteRetrieval/1></option>-->
@@ -60,12 +64,12 @@
         </div>
 
     </div>
-    <div style="text-align: center">
+    <div style="text-align: center;">
         <div>Покупка</div>
         <div>Продажа</div>
 
     </div>
-    <div style="height: 150pt">
+    <div>
         <#include "quoteRetrievalBuyPart.ftl">
         <#include "quoteRetrievalSellPart.ftl">
     </div>

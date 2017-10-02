@@ -27,19 +27,8 @@ public class AssetController {
 
     @GetMapping("")
     public String getAllAssets(Model model) {
-        //model.addAttribute("assets", assetService.getAll());
         model.addAttribute("selectUserName", "");
         model.addAttribute("listNamesAllUsers", userService.getListNamesAllUsers());
-
-//        List<String> activeList = issueService.getListNamesActiveIssue();
-//        if (!activeList.isEmpty()) {
-//            model.addAttribute("listIssue", activeList);
-//            model.addAttribute("selectedIssueName", activeList.get(0));
-//
-
-        // model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(activeList.get(0)));
-//        }
-
         return "assetList";
     }
 
@@ -82,8 +71,8 @@ public class AssetController {
 
     @PostMapping("/withdrawAsset")
     public String withdrawAsset(@ModelAttribute("userName") String userName,
-                           @ModelAttribute("issueName") String issueName,
-                           @ModelAttribute("qtyWithdraw") double qtyAdd) {
+                                @ModelAttribute("issueName") String issueName,
+                                @ModelAttribute("qtyWithdraw") double qtyAdd) {
         if (userName.equals("") || userName.equals("") || qtyAdd <= 0) {
             return "redirect:/asset/" + userName;
         }

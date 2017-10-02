@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -30,12 +29,6 @@ public class User implements Serializable {
 
     @Column(name = "active", nullable = false)
     private boolean active;
-
-
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = Trade.class)
-//    @JoinColumn(name = "id")
-//    private List<Trade> trades = new ArrayList<>();
-
 
     public User() {
     }

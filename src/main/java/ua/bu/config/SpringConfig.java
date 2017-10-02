@@ -8,6 +8,7 @@ import ua.bu.service.*;
 import ua.bu.service.interfaces.*;
 
 @Configuration
+
 public class SpringConfig {
 
     @Bean

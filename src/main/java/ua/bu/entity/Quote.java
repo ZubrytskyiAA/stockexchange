@@ -15,24 +15,24 @@ public class Quote implements Serializable {
     private long id;
 
 
-    @Column(name = "type", nullable = false , length = 1)
+    @Column(name = "type", nullable = false, length = 1)
     private String type;
 
     @Column(name = "create_moment", nullable = false)
     private Timestamp createMoment;
 
-    @Column(name = "price", nullable = false )
+    @Column(name = "price", nullable = false)
     private double price;
 
-    @Column(name = "qty", nullable = false )
+    @Column(name = "qty", nullable = false)
     private long qty;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "user_id" , nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Issue.class)
-    @JoinColumn(name = "issue_id" , nullable = false)
+    @JoinColumn(name = "issue_id", nullable = false)
     private Issue issueId;
 
 

@@ -16,8 +16,6 @@ public class UserDaoImpl implements UserDao {
     protected EntityManager entityManager;
 
 
-
-
     @Override
     @Transactional
     public List<User> getAll() {
@@ -36,7 +34,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void deleteById(long id) {
-             entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
+        entityManager.createQuery(" delete FROM User u WHERE u.id=" + id).executeUpdate();
     }
 
     @Override

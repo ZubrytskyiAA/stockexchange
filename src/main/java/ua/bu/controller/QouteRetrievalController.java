@@ -32,8 +32,6 @@ public class QouteRetrievalController {
             model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(activeList.get(0)));
         }
 
-
-        //model.addAttribute("selectedIssueId", 1);
         return "quoteRetrieval";
     }
 
@@ -51,7 +49,6 @@ public class QouteRetrievalController {
             model.addAttribute("errorMsg", error);
             return "redirect:/qouteRetrieval";
         }
-        // model.addAttribute("issueByName", issueService.getByName(name));
 
 
     }

@@ -48,11 +48,11 @@ public class QuoteController {
 
     @GetMapping("/edit/{id}")
     public String getById(@PathVariable("id") int id, Model model) {
-        Quote quote =  quoteService.getById(id);
-        if(quote==null){
-        model.addAttribute("error","Нету котировки с таким ID");}
-        else{
-            model.addAttribute("quote",quote);
+        Quote quote = quoteService.getById(id);
+        if (quote == null) {
+            model.addAttribute("error", "Нету котировки с таким ID");
+        } else {
+            model.addAttribute("quote", quote);
         }
 
         return "editQuote";
@@ -72,7 +72,7 @@ public class QuoteController {
 
         quoteService.delete(quote);
         quoteService.addQuote(quote);
-        //quoteService.changeExistQuote(quote);
+
 
         return "redirect:/quote";
     }
