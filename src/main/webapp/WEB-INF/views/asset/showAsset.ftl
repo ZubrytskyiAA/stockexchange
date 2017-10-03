@@ -1,30 +1,32 @@
-<div class="form-group">
+<div class="form-group col-sm-5">
+<#if  "${selectUserName}" = "">
 
-<#if listAssetsByUserName??>
-
-    <table class="table table-striped">
+<#elseif listAssetsByUserName??>
+    <table class="table table-striped col-sm-5">
+        <thead>
         <tr>
-
             <th>Название инструмента</th>
             <th>Доступные средства</th>
             <th>Заблокированные средства</th>
-
         </tr>
-
-        <#list listAssetsByUserName as assets>
+        </thead>
+        <tbody>
+            <#list listAssetsByUserName as assets>
             <tr>
                 <td><a href="/issue/${assets.issueId.name}">${assets.issueId.name}</a></td>
                 <td>${assets.free}</td>
                 <td>${assets.blocked}</td>
             </tr>
-
-        </#list>
-
+            </#list>
+        </tbody>
     </table>
 
 <#else >
 
+
+    <p>
     <h3>There isn't any assets</h3>
+    </p>
 </#if>
 
 </div>

@@ -34,7 +34,7 @@ public class IssueController {
     }
 
     @PostMapping("/setActivities")
-    public String editUser(@ModelAttribute Issue setActive, Model model) {
+    public String setActive(@ModelAttribute Issue setActive, Model model) {
         Issue issue = issueService.getById(setActive.getId());
         issue.setActive(setActive.isActive());
         issueService.updateIssue(issue);

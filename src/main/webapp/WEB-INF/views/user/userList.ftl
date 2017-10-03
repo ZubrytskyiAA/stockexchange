@@ -16,6 +16,7 @@
             <th>fio</th>
             <th>email</th>
             <th>Phonenumber</th>
+            <th>Activities</th>
             <th>Actions</th>
 
         </tr>
@@ -24,16 +25,16 @@
 
             <form action="/users/newUser" method="post" name="user" class="form-group">
 
-                <td><input title="loginname" type="text" name="loginName" required/></td>
+                <td><input class="controls-pane col-sm-8" title="loginname" type="text" name="loginName" required/></td>
 
-                <td><input title="password" type="password" name="password" required/></td>
+                <td><input class="controls-pane col-sm-8" title="password" type="password" name="password" required/></td>
 
-                <td><input title="fio" type="text" name="fio" required/></td>
+                <td><input class="controls-pane col-sm-8" title="fio" type="text" name="fio" required/></td>
 
-                <td><input title="email" type="text" name="email"/></td>
+                <td><input class="controls-pane col-sm-8" title="email" type="text" name="email"/></td>
 
-                <td><input title="phonenumber" type="text" name="phoneNumber"/></td>
-
+                <td><input class="controls-pane col-sm-8" title="phonenumber" type="text" name="phoneNumber"/></td>
+                <td></td>
                 <td><input type="submit" title="OK" value="Добавить"/></td>
             </form>
 
@@ -46,11 +47,13 @@
             <td>${user.fio}</td>
             <td>${user.email}</td>
             <td>${user.phoneNumber}</td>
+            <td>${user.active?then("Активна","Деактивированный")}</td>
             <td>
-                <form action="/users/deleteUserById" method="post" name="user" class="form-group">
-                    <input title="id" type="hidden" name="id" value="${user.id}"/>
-                    <input type="submit" title="OK" value="Delete"/>
-                </form>
+            <#include "changeActivitiesUserForm.ftl">
+                <#--<form action="/users/deleteUserById" method="post" name="user" class="form-group">-->
+                    <#--<input title="id" type="hidden" name="id" value="${user.id}"/>-->
+                    <#--<input type="submit" title="OK" value="Delete"/>-->
+                <#--</form>-->
             </td>
         </tr>
     </#list>

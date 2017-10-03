@@ -53,7 +53,7 @@
                     <option selected value=/qouteRetrieval/${selectedIssueName}>${selectedIssueName}</option>
                 <#--</#if>-->
 
-                    <#list listIssue as issueName>
+                    <#list listIssue?sort as issueName>
                         <#if "${selectedIssueName}"  != "${issueName}">
                             <option value=/qouteRetrieval/${issueName}>${issueName}</option>
                         </#if>

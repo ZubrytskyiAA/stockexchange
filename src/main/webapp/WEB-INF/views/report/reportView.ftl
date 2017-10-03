@@ -39,7 +39,7 @@
 <!-- Single button -->
 
 <#if "${selectedIssueName}"??>
-<select name="active" onchange="document.location=this.options[this.selectedIndex].value">
+<select  name="active" onchange="document.location=this.options[this.selectedIndex].value">
     <#if "${selectedIssueName}" = "" >
         <option selected disabled hidden value=></option>
     <#else >
@@ -73,7 +73,7 @@
                         $("#chart").shieldChart({
                             theme: "light",
                             primaryHeader: {
-                                text: "Обзор изменения цен за весь период"
+                                text: "Обзор изменения цен за весь период "
                             },
                             exportOptions: {
                                 image: false,

@@ -43,11 +43,11 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/delete")
-    public String deleteUser(@ModelAttribute("id") int id) {
-        userService.deleteById(id);
-        return "redirect:/users";
-    }
+//    @PostMapping("/delete")
+//    public String deleteUser(@ModelAttribute("id") int id) {
+//        userService.deleteById(id);
+//        return "redirect:/users";
+//    }
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") int id, Model model) {
@@ -76,6 +76,14 @@ public class UserController {
     public String addIssueToUser(@ModelAttribute("select1") int issueId, @ModelAttribute("userId") int userId) {
 
         return "redirect:showUser";
+    }
+
+    @PostMapping("/setActivities")
+    public String setActive(@ModelAttribute User setActive, Model model) {
+        User user = userService.getById(setActive.getId());
+        user.setActive(setActive.isActive());
+        userService.update(user);
+        return "redirect:/users";
     }
 
 

@@ -62,7 +62,7 @@
     </table>
 
 
-    <form class="table table-striped1" name="addIssue" action="/users/withdraw" method="post">
+    <form class="table table-striped1" name="addIssue" action="/asset/${user.loginName}" method="get">
         <input type="hidden" name="userId" value=${user.id}>
 
     <#if listIssue??>
@@ -73,7 +73,7 @@
             </#list>
         </select>
     </#if>
-        <input type="submit" title="add" value="ADD ISSUE"/>
+        <input type="submit" title="add" value="Change assets"/>
 
     </form>
 

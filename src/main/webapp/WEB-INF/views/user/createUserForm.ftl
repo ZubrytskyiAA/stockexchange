@@ -6,9 +6,9 @@
     <p>FIO</p>
     <input title="fio" type="text" name="fio"/>
     <p>Email</p>
-    <input title="email" type="text" name="email"/>
+    <input title="email" type="email" name="email"/>
     <p>Phonenumber</p>
-    <input title="phonenumber" type="text" name="phoneNumber"/>
+    <input title="phonenumber" type="text" name="phoneNumber" >
     <input type="submit" title="OK" value="OK!"/>
 </form>
 
