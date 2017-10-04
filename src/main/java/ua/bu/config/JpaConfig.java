@@ -1,6 +1,7 @@
 package ua.bu.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -17,6 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@ComponentScan(basePackages = "ua.bu.entity")
 public class JpaConfig {
 
     @Bean
@@ -52,9 +54,9 @@ public class JpaConfig {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }
+        public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+            return new PersistenceExceptionTranslationPostProcessor();
+        }
 
     Properties additionalProperties() {
         Properties properties = new Properties();

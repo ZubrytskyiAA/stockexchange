@@ -30,6 +30,8 @@ public class User implements Serializable {
     @Column(name = "active", nullable = false)
     private boolean active;
 
+
+
     public User() {
     }
 
