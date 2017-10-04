@@ -28,7 +28,10 @@ public class IssueController {
     }
 
     @PostMapping("/newIssue")
-    public String createIssue(@ModelAttribute Issue issue) {
+    public String createIssue(@ModelAttribute Issue issue ) {
+        System.out.println(issue);
+
+
         issueService.save(issue);
         return "redirect:/issue";
     }

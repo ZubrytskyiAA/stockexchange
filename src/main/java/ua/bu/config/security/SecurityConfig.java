@@ -20,6 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
@@ -28,21 +29,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //   .withUser("admin").password("password").roles("USER", "ADMIN");
                 .usersByUsernameQuery("SELECT loginName, password, active FROM user WHERE loginName = ?")
                 .authoritiesByUsernameQuery("SELECT loginName, role FROM roles WHERE loginName = ?")
+                // .rolePrefix("")
                 .dataSource(dataSource);
-         }
+    }
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                //.antMatchers("/goods/**").access("hasRole('USER') and hasRole('ADMIN')")
-                .antMatchers("/users").access("hasRole('ADMIN')")
+                .antMatchers("/**").authenticated()
+                .antMatchers("/users/**").access("hasRole('ADMIN')")
+                .antMatchers("/issue/newIssue").access("hasRole('ADMIN')")
+                .antMatchers("/report/**").access("hasAnyRole('ADMIN','TRADER')")
+                // .antMatchers("/qouteRetrieval/**").access("hasRole('TRADER')")
+                //.antMatchers("/quote/addNewQuote").access("hasRole('TRADER')")
+                .antMatchers("/asset").access("hasAnyRole('TRADER','ADMIN' , 'BOOKKEEPER')")
                 .and().formLogin()
                 .loginPage("/loginPage").permitAll()//.failureUrl("/error_page")
                 .usernameParameter("loginName")
                 .passwordParameter("password")
+                .and()
+                .logout().logoutSuccessUrl("/login?logout")
                 .and().exceptionHandling().accessDeniedPage("/error_page");
+
     }
 }

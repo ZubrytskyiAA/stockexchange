@@ -46,7 +46,7 @@ public class AssetDaoImpl implements AssetDao {
     @Override
     public List<Asset> getAssetsByUserId(long id) {
 
-        return entityManager.createQuery("SELECT a FROM Asset a where a.userId.id=:userId order by a.id", Asset.class)
+        return entityManager.createQuery("SELECT a FROM Asset a where a.userId.id=:userId and (a.free > 0 or a.blocked > 0) order by a.id", Asset.class)
                 .setParameter("userId", id)
                 .getResultList();
     }
@@ -54,7 +54,7 @@ public class AssetDaoImpl implements AssetDao {
 
     @Override
     public List<Asset> getListAssetsByUserName(String name) {
-        return entityManager.createQuery("SELECT a FROM Asset a where a.userId.loginName=:loginName order by a.id", Asset.class)
+        return entityManager.createQuery("SELECT a FROM Asset a where a.userId.loginName=:loginName and (a.free > 0 or a.blocked > 0) order by a.id", Asset.class)
                 .setParameter("loginName", name)
                 .getResultList();
     }

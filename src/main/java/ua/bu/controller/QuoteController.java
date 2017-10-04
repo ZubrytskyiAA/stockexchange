@@ -2,6 +2,7 @@ package ua.bu.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,8 @@ public class QuoteController {
             quote.setIssueId(issueService.getByName(issueName));
             quote.setPrice(price);
             quote.setType(type);
-            quote.setUserId(userService.getById(userId));
+            String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+            quote.setUserId(userService.getByName(currentUserName));
             quoteService.addQuote(quote);
         }
 

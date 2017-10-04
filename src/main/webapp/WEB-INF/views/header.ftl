@@ -8,7 +8,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -22,7 +21,7 @@
             <li><a href="/report">Reports</a></li>
             <li><a href="/asset">Assets</a></li>
             <li><a href="/trade/alltrades">Trades</a></li>
-            <li><a href="/login">Login</a></li>
+            <li><a href="/logout">Loguot</a></li>
 
         </ul>
     </div>

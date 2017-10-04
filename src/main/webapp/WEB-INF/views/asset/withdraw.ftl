@@ -1,7 +1,7 @@
 <#if listAssetsByUserName??>
 <form class="form-group" action="/asset/withdrawAsset" method="post" name="withdrawAssetForm">
     <input name="userName" type="hidden" value="${selectUserName}">
-    <label class="control-label" for="price"> Вывести актив </label>
+    <label class="control-label" > Вывести актив </label>
     <select class="form-control" name="issueName" required>
         <option selected></option>
         <#list listAssetsByUserName?sort as assets>

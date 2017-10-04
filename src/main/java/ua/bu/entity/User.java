@@ -28,7 +28,7 @@ public class User implements Serializable {
     private String phoneNumber;
 
     @Column(name = "active", nullable = false)
-    private boolean active;
+    private boolean active = true;
 
 
 
