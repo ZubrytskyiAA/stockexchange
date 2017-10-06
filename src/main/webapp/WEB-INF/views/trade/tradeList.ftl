@@ -28,7 +28,7 @@
         <tr>
 
             <td>#${trade.id?c}</td>
-            <td>${trade.issue.name}</td>
+            <td> <a href="/issue/${trade.issue.name}">${trade.issue.name}</a></td>
             <td>
                 <#switch  "${trade.initAction}" >
                     <#case "P">

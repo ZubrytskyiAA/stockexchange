@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -20,9 +22,14 @@ public class HomeController {
 
 
         if(auth.getAuthorities().toString().contains("TRADER")) {
+            Principal principal = auth;
             System.out.println("===========================++");
             System.out.println(name);
             System.out.println(auth.getAuthorities().toString());
+            System.out.println("====___=========");
+            System.out.println( principal.toString());
+            System.out.println("====___=========");
+
         }
         return "index";
     }

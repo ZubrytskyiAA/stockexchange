@@ -7,6 +7,13 @@
 </head>
 <body class="container">
 <#include "WEB-INF/views/header.ftl" >
-Валідол
+
+<@security.authorize access="isAuthenticated()">
+<p style="text-align: center">
+<h1>Hello, you are logged as <@security.authentication property="principal.username"/>.</h1>
+</p>
+</@security.authorize>
+
+
 </body class="container">
 </html>
