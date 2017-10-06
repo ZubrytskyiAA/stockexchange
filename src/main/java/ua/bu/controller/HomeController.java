@@ -18,10 +18,12 @@ public class HomeController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
 
-        System.out.println("===========================++");
-        System.out.println(name);
-        System.out.println( auth.getPrincipal().toString());
 
+        if(auth.getAuthorities().toString().contains("TRADER")) {
+            System.out.println("===========================++");
+            System.out.println(name);
+            System.out.println(auth.getAuthorities().toString());
+        }
         return "index";
     }
 

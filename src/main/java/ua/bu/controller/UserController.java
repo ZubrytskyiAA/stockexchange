@@ -1,6 +1,8 @@
 package ua.bu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -51,6 +54,8 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") int id, Model model) {
+
+
         model.addAttribute("user", userService.getById(id));
         List<Asset> assets = assetService.getAssetsByUserId(id);
         if (!assets.isEmpty()) {

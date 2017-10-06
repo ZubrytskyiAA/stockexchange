@@ -62,8 +62,6 @@ public class TradeDaoImpl implements TradeDao {
     @Override
     @Transactional
     public void doDealByQuote(List<Quote> listQuote, Quote quote) {
-        System.out.println("======================tradedao===========");
-        System.out.println(quote);
 
         long qty = quote.getQty();
         while (qty > 0 && quote.getPrice()>0) {

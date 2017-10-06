@@ -8,6 +8,5 @@
 <body class="container">
 <#include "WEB-INF/views/header.ftl" >
 Валідол
-
 </body class="container">
 </html>

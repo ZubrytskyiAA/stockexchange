@@ -21,7 +21,7 @@
             <li><a href="/report">Reports</a></li>
             <li><a href="/asset">Assets</a></li>
             <li><a href="/trade/alltrades">Trades</a></li>
-            <li><a href="/logout">Loguot</a></li>
+            <li><a href="/logout">Logout</a></li>
 
         </ul>
     </div>
