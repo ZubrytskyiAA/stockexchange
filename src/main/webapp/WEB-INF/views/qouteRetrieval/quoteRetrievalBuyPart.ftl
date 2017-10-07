@@ -12,7 +12,7 @@
         <#list quotes?sort_by("createMoment")?reverse?sort_by("price")?reverse as quote>
             <#if "${quote.type}" == "P">
             <tr>
-                <td>${quote.price}</td>
+                <td>${quote.price?c}</td>
                 <td>${quote.qty}</td>
             </tr>
             </#if>

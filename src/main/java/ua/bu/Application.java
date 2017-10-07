@@ -1,41 +1,37 @@
 package ua.bu;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ua.bu.config.SpringConfig;
-import ua.bu.entity.Asset;
-import ua.bu.entity.Trade;
-import ua.bu.entity.User;
-import ua.bu.service.interfaces.UserService;
-
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
 
-//        ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-//        System.out.println("dsada");
-//
-//        UserService service = context.getBean(UserService.class);
-//
-//        List<User> users = service.getAll();
 
-//        users.forEach(System.out::println);
+        List<Integer> integerList = new ArrayList<>();
 
+        for (int i = 0; i <= 125; i++) {
+            integerList.add(i);
+        }
 
-//        Asset trade = new Asset();
-//        trade.setId(1);
-//        trade.setPrice(1);
-//        trade.setTradeMoment(new Timestamp(System.currentTimeMillis()));
-//        trade.setId(1);
-//
-//        System.out.println(trade);
+        int id = 1;
+        int step = 20;
 
 
+        if (!integerList.isEmpty()) {
+            int size = integerList.size();
+            if (size < id * step) {
+                System.out.println(integerList.subList(integerList.size() / step * step, integerList.size() / step * step + integerList.size() % step).toString());
+
+            } else if (size > (id + 1) * step) {
+
+                System.out.println(integerList.subList(id * step, (id + 1) * step).toString());
+
+            } else {
+                System.out.println(integerList.subList(id * step, size).toString());
 
 
-
+            }
+        }
     }
 
 }

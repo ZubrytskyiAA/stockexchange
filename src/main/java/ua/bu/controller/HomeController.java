@@ -22,13 +22,13 @@ public class HomeController {
 
 
         if(auth.getAuthorities().toString().contains("TRADER")) {
-            Principal principal = auth;
-            System.out.println("===========================++");
-            System.out.println(name);
-            System.out.println(auth.getAuthorities().toString());
-            System.out.println("====___=========");
-            System.out.println( principal.toString());
-            System.out.println("====___=========");
+//            Principal principal = auth;
+//            System.out.println("===========================++");
+//            System.out.println(name);
+//            System.out.println(auth.getAuthorities().toString());
+//            System.out.println("====___=========");
+//            System.out.println( principal.toString());
+//            System.out.println("====___=========");
 
         }
         return "index";

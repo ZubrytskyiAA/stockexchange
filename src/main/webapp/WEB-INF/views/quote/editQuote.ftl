@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>QuoteData</title>
+    <title>QuoteDataEditor</title>
 </head>
 <body class="container">
 <#include "*/header.ftl">

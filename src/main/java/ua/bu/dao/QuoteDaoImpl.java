@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
+import ua.bu.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -81,5 +82,13 @@ public class QuoteDaoImpl implements QuoteDao {
                 .setParameter("price", price)
                 .getResultList();
     }
+
+    @Override
+    public List<Quote> getAllQuoteByUser(User user) {
+        return entityManager.createQuery("SELECT q FROM Quote q where q.userId=:user", Quote.class)
+                .setParameter("user", user)
+                .getResultList();
+    }
+
 
 }

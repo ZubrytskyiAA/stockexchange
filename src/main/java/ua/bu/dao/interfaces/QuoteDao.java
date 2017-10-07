@@ -3,6 +3,7 @@ package ua.bu.dao.interfaces;
 import org.springframework.stereotype.Component;
 import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
+import ua.bu.entity.User;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public interface QuoteDao {
 
     List<Quote> getAllQouteByIssueLessPrice(Issue issue, double price);
     List<Quote> getAllQouteByIssueMorePrice(Issue issue, double price);
+
+
+    List<Quote> getAllQuoteByUser(User user);
 
 
 }

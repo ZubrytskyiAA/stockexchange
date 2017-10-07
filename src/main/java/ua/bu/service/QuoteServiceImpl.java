@@ -7,6 +7,7 @@ import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Quote;
 import ua.bu.service.interfaces.QuoteService;
+import ua.bu.service.interfaces.UserService;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -19,6 +20,8 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Autowired
     private TradeDao tradeDao;
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -107,5 +110,10 @@ public class QuoteServiceImpl implements QuoteService {
 
             }
         }
+    }
+
+    @Override
+    public List<Quote> getAllQuoteByUserName(String loginName) {
+        return quoteDao.getAllQuoteByUser(userService.getByName(loginName));
     }
 }

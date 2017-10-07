@@ -2,6 +2,7 @@ package ua.bu.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,9 @@ import ua.bu.entity.Quote;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.QuoteService;
 import ua.bu.service.interfaces.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/quote")
@@ -23,10 +27,87 @@ public class QuoteController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("")
     public String getAllQuotes(Model model) {
-        model.addAttribute("quotes", quoteService.getAll());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
+        List<Quote> quoteList = new ArrayList<>();
+        List<Integer> intList = new ArrayList<>();
+        if (auth.getAuthorities().toString().contains("ADMIN")) {
+            quoteList = quoteService.getAll();
+        } else {
+            quoteList = quoteService.getAllQuoteByUserName(auth.getName());
+        }
+
+        if (!quoteList.isEmpty()) {
+            int size = quoteList.size();
+            int step = 10;
+
+
+
+            for (int i = 0; i <= (size-1) / step; i++) {
+                intList.add(i);
+            }
+            if (size >= step) {
+                model.addAttribute("quotes", quoteList.subList(0, step));
+            } else {
+                model.addAttribute("quotes", quoteList.subList(0, size));
+
+            }
+            model.addAttribute("listSize", size);
+            model.addAttribute("listLinks", intList);
+            model.addAttribute("currentPage", 0);
+        }
+
+
+
         return "quoteList";
+
+
+    }
+
+
+    @GetMapping("/{id}")
+    public String getListQuotes(@PathVariable("id") int id, Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        List<Quote> quoteList = new ArrayList<>();
+
+        if (auth.getAuthorities().toString().contains("ADMIN")) {
+            quoteList = quoteService.getAll();
+        } else {
+            quoteList = quoteService.getAllQuoteByUserName(auth.getName());
+        }
+
+        if (!quoteList.isEmpty()) {
+            int size = quoteList.size();
+            int step = 10;
+
+            List<Integer> intList = new ArrayList<>();
+            for (int i = 0; i <= (size-1) / step; i++) {
+                intList.add(i);
+            }
+            if (size < id * step) {
+                model.addAttribute("quotes", quoteList.subList(size / step * step, size / step * step + size % step));
+                model.addAttribute("currentPage", size / step);
+            } else if (size > (id + 1) * step) {
+                model.addAttribute("quotes", quoteList.subList(id * step, (id + 1) * step));
+                model.addAttribute("currentPage", 0);
+            } else {
+                model.addAttribute("quotes", quoteList.subList(id * step, size));
+                model.addAttribute("currentPage", id);
+            }
+            model.addAttribute("listSize", size);
+            model.addAttribute("listLinks", intList);
+
+        }
+
+        return "quoteList";
+
+
     }
 
 

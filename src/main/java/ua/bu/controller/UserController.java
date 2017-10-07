@@ -66,8 +66,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable("id") int id, Model model) {
-        System.out.println("id = " + id);
-        model.addAttribute("user", userService.getById(id));
+              model.addAttribute("user", userService.getById(id));
         return "editUser";
     }
 

@@ -31,7 +31,6 @@ public class User implements Serializable {
     private boolean active = true;
 
 
-
     public User() {
     }
 

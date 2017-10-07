@@ -39,12 +39,6 @@ public class ReportController {
         model.addAttribute("uniqNames", uniqNames);
         model.addAttribute("selectedIssueName", "");
 
-        System.out.println("===========================");
-        trades.forEach(System.out::println);
-        System.out.println("=============uniq==============");
-        uniqNames.forEach(System.out::println);
-
-
         return "reportView";
     }
 
