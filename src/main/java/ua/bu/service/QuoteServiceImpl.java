@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Quote;
+import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.QuoteService;
 import ua.bu.service.interfaces.UserService;
 
@@ -22,6 +23,8 @@ public class QuoteServiceImpl implements QuoteService {
     private TradeDao tradeDao;
     @Autowired
     private UserService userService;
+    @Autowired
+    private AssetService assetService;
 
 
     @Override
@@ -45,9 +48,11 @@ public class QuoteServiceImpl implements QuoteService {
         return null;
     }
 
+    @Transactional
     @Override
     public void delete(Quote quote) {
         quoteDao.delete(quote);
+        assetService.changeAssetWhenDeleteQuote(quote);
     }
 
     @Override

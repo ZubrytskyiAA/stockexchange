@@ -3,11 +3,14 @@ package ua.bu.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ua.bu.dao.interfaces.AssetDao;
+import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.dao.interfaces.QuoteDao;
 import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Issue;
 import ua.bu.entity.Quote;
 import ua.bu.entity.Trade;
+import ua.bu.service.interfaces.AssetService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,10 +23,14 @@ public class TradeDaoImpl implements TradeDao {
 
     @PersistenceContext
     protected EntityManager entityManager;
-
+    @Autowired
+    AssetService assetService;
     @Autowired
     private QuoteDao quoteDao;
-
+    @Autowired
+    private AssetDao assetDao;
+    @Autowired
+    private IssueDao issueDao;
 
     @Override
     @Transactional
@@ -64,7 +71,14 @@ public class TradeDaoImpl implements TradeDao {
     public void doDealByQuote(List<Quote> listQuote, Quote quote) {
 
         long qty = quote.getQty();
-        while (qty > 0 && quote.getPrice()>0) {
+
+        if (!assetService.checkAssetByQuoteForEnough(quote)) {
+            System.out.println("недостаточно активов");
+            return;
+        }
+
+
+        while (qty > 0 && quote.getPrice() > 0) {
             if (!listQuote.isEmpty()) {
                 Quote alreadyQuoted = listQuote.get(0);
                 if (alreadyQuoted.getQty() >= qty) {
@@ -81,6 +95,7 @@ public class TradeDaoImpl implements TradeDao {
                     trade.setUserConf(quote.getUserId());
                     trade.setUserInit(alreadyQuoted.getUserId());
                     entityManager.merge(trade);
+                    assetService.changeAssetAfterQuoteDeal(trade);
                     alreadyQuoted.setQty(alreadyQuoted.getQty() - qty);
 
                     if (alreadyQuoted.getQty() > 0) {
@@ -88,7 +103,6 @@ public class TradeDaoImpl implements TradeDao {
                     } else {
                         quoteDao.delete(alreadyQuoted);
                     }
-
 
                     break;
 
@@ -106,27 +120,25 @@ public class TradeDaoImpl implements TradeDao {
                     trade.setUserConf(quote.getUserId());
                     trade.setUserInit(alreadyQuoted.getUserId());
                     entityManager.merge(trade);
+                    assetService.changeAssetAfterQuoteDeal(trade);
                     qty -= alreadyQuoted.getQty();
 
                     quoteDao.delete(alreadyQuoted);
                     listQuote.remove(0);
+
                 }
             } else {
                 // выставить котировку
-
+                System.out.println("add quote");
                 quote.setQty(qty);
                 quoteDao.save(quote);
+                assetService.changeAssetWhenAddQuote(quote);
                 break;
             }
 
         }
 
 
-//        if(quote.getPrice()>0){
-//            if(!listQuote.isEmpty()){
-//
-//            }
-//        }
     }
 
     @Override

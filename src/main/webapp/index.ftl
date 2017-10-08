@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Stock Exchange</title>
-
 </head>
-<body class="container">
+<body class="container" onload="init();">
 <#include "WEB-INF/views/header.ftl" >
 
 <@security.authorize access="isAuthenticated()">
@@ -15,5 +14,5 @@
 </@security.authorize>
 
 
-</body class="container">
+</body>
 </html>

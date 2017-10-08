@@ -46,8 +46,7 @@ public class QuoteController {
             int step = 10;
 
 
-
-            for (int i = 0; i <= (size-1) / step; i++) {
+            for (int i = 0; i <= (size - 1) / step; i++) {
                 intList.add(i);
             }
             if (size >= step) {
@@ -60,7 +59,6 @@ public class QuoteController {
             model.addAttribute("listLinks", intList);
             model.addAttribute("currentPage", 0);
         }
-
 
 
         return "quoteList";
@@ -87,7 +85,7 @@ public class QuoteController {
             int step = 10;
 
             List<Integer> intList = new ArrayList<>();
-            for (int i = 0; i <= (size-1) / step; i++) {
+            for (int i = 0; i <= (size - 1) / step; i++) {
                 intList.add(i);
             }
             if (size < id * step) {
@@ -95,15 +93,15 @@ public class QuoteController {
                 model.addAttribute("currentPage", size / step);
             } else if (size > (id + 1) * step) {
                 model.addAttribute("quotes", quoteList.subList(id * step, (id + 1) * step));
-                model.addAttribute("currentPage", 0);
+                model.addAttribute("currentPage", id);
             } else {
                 model.addAttribute("quotes", quoteList.subList(id * step, size));
                 model.addAttribute("currentPage", id);
             }
             model.addAttribute("listSize", size);
             model.addAttribute("listLinks", intList);
-
         }
+
 
         return "quoteList";
 
@@ -146,6 +144,7 @@ public class QuoteController {
     @GetMapping("/delete/{id}")
     public String deleteQuote(@PathVariable("id") int id) {
         quoteService.delete(quoteService.getById(id));
+
         return "redirect:/quote";
     }
 

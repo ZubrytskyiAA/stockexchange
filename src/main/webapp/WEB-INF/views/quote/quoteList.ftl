@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Quotes</title>
+
 </head>
 <body class="container">
 <#include "*/header.ftl">
 <#if listSize??>
 
 <div class="table-responsive" style="background-color: antiquewhite">
-    <caption><p style="text-align: center">Всего ${listSize} заявок в списке.</p></caption>
+    <p style="text-align: center ;">Total: ${listSize} quotes.</p>
 
-    <table class="table table-striped">
+    <table class="table table-striped" style="text-align: center">
         <tr>
             <@security.authorize access="hasRole('ROLE_ADMIN')">
-                <th>Номер заявки</th>
-                <th>Клиент</th>
+                <th style="text-align: center">Номер заявки</th>
+                <th style="text-align: center">Клиент</th>
             </@security.authorize>
-            <th>Название актива</th>
-            <th>Дата создания</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Сумма</th>
-            <th>Действия</th>
+            <th style="text-align: center">Название актива</th>
+            <th style="text-align: center">Дата создания</th>
+            <th style="text-align: center">Цена</th>
+            <th style="text-align: center">Количество</th>
+            <th style="text-align: center">Сумма</th>
+            <th style="text-align: center">Действия</th>
         </tr>
 
         <#list quotes?sort_by("id") as quote>

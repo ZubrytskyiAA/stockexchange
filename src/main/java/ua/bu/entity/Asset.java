@@ -13,10 +13,10 @@ public class Asset implements Serializable {
     private long id;
 
     @Column(name = "free", nullable = false)
-    private double free;
+    private double free = 0;
 
     @Column(name = "blocked", nullable = false)
-    private double blocked;
+    private double blocked = 0;
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = User.class)

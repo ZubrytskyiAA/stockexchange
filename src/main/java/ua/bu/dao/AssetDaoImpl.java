@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.AssetDao;
 import ua.bu.entity.Asset;
+import ua.bu.entity.Issue;
+import ua.bu.entity.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -56,6 +58,14 @@ public class AssetDaoImpl implements AssetDao {
     public List<Asset> getListAssetsByUserName(String name) {
         return entityManager.createQuery("SELECT a FROM Asset a where a.userId.loginName=:loginName and (a.free > 0 or a.blocked > 0) order by a.id", Asset.class)
                 .setParameter("loginName", name)
+                .getResultList();
+    }
+
+    @Override
+    public  List<Asset> getAssetByUserAndByIssue(User user, Issue issue) {
+        return entityManager.createQuery("SELECT a FROM Asset a where a.userId=:userId and a.issueId=:issueId", Asset.class)
+                .setParameter("userId", user)
+                .setParameter("issueId", issue)
                 .getResultList();
     }
 
