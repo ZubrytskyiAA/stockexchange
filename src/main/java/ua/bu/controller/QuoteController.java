@@ -33,7 +33,7 @@ public class QuoteController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 
-        List<Quote> quoteList = new ArrayList<>();
+        List<Quote> quoteList ;
         List<Integer> intList = new ArrayList<>();
         if (auth.getAuthorities().toString().contains("ADMIN")) {
             quoteList = quoteService.getAll();

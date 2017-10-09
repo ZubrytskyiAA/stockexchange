@@ -144,6 +144,7 @@ public class AssetServiceImpl implements AssetService {
         double sum = 0;
         if (quote.getType().equals("S")) {
             assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), quote.getIssueId());
+            if (assetList.isEmpty()) return false;
             sum = quote.getQty();
         } else {
             assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), issueService.getByName("UAH"));

@@ -1,36 +1,22 @@
 package ua.bu.controller;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.security.Principal;
+import ua.bu.dao.interfaces.ReportDao;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
-
+    @Autowired
+    private ReportDao reportDao;
 
     @GetMapping("")
     public String index() {
+        reportDao.getAll();
+        reportDao.getTradeInformationByIssue();
 
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String name = auth.getName();
-
-
-        if(auth.getAuthorities().toString().contains("TRADER")) {
-//            Principal principal = auth;
-//            System.out.println("===========================++");
-//            System.out.println(name);
-//            System.out.println(auth.getAuthorities().toString());
-//            System.out.println("====___=========");
-//            System.out.println( principal.toString());
-//            System.out.println("====___=========");
-
-        }
         return "index";
     }
 

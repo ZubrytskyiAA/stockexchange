@@ -18,7 +18,7 @@
             <li><a href="/qouteRetrieval">Qoute Retrieval</a></li>
             <li><a href="/quote">Quotes</a></li>
             <li><a href="/report">Reports</a></li>
-            <li><a href="/trade/alltrades">Trades</a></li>
+            <li><a href="/trade">Trades</a></li>
         </@security.authorize>
         <@security.authorize access="hasRole('ROLE_ADMIN')">
             <li><a href="/users">Users</a></li>
