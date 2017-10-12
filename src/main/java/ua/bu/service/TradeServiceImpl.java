@@ -1,5 +1,6 @@
 package ua.bu.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +18,7 @@ import java.util.List;
 @Service
 public class TradeServiceImpl implements TradeService {
 
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
     @Autowired
     private TradeDao tradeDao;
     @Autowired
@@ -25,7 +27,6 @@ public class TradeServiceImpl implements TradeService {
     private AssetService assetService;
     @Autowired
     private QuoteService quoteService;
-
 
     @Override
     public void save(Trade trade) {
@@ -62,7 +63,9 @@ public class TradeServiceImpl implements TradeService {
     @Transactional
     public void doDealByQuote(List<Quote> listQuote, Quote quote) {
         if (!assetService.checkAssetByQuoteForEnough(quote)) {
-            System.out.println("недостаточно активов");
+
+            logger.error("У пользователя " + quote.getUserId().getLoginName() + " недостаточно активов, требуется: " +
+                    "" + (quote.getType().equals("S") ? quote.getQty() + " " + quote.getIssueId().getName() : quote.getQty() * quote.getPrice() + " UAH"));
             return;
         }
         long qty = quote.getQty();

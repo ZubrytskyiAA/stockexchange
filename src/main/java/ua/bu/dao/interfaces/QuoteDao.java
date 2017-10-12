@@ -26,8 +26,6 @@ public interface QuoteDao {
 
     List<Quote> getAllQouteByIssueLessPrice(Issue issue, double price);
     List<Quote> getAllQouteByIssueMorePrice(Issue issue, double price);
-
-
     List<Quote> getAllQuoteByUser(User user);
 
 

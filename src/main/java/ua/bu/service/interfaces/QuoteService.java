@@ -26,4 +26,7 @@ public interface QuoteService {
     void addQuote(Quote quote);
 
     List<Quote> getAllQuoteByUserName(String loginName);
+
+
+
 }

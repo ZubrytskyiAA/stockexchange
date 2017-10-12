@@ -1,10 +1,10 @@
 package ua.bu.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
-import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Quote;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.QuoteService;
@@ -17,9 +17,9 @@ import java.util.List;
 @Service
 public class QuoteServiceImpl implements QuoteService {
 
+    private static final Logger logger = Logger.getLogger(QuoteServiceImpl.class);
     @Autowired
     private QuoteDao quoteDao;
-
     @Autowired
     private TradeService tradeService;
     @Autowired
@@ -27,10 +27,14 @@ public class QuoteServiceImpl implements QuoteService {
     @Autowired
     private AssetService assetService;
 
-
     @Override
     public void save(Quote quote) {
-        quoteDao.save(quote);
+        try {
+            quoteDao.save(quote);
+            logger.info("Quote from " + quote.getUserId().getLoginName() + " added!");
+        } catch (Exception e) {
+            logger.error(quote.toString() + " " + e.getMessage());
+        }
     }
 
     @Override

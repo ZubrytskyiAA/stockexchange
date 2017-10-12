@@ -18,7 +18,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "ua.bu.entity")
+@ComponentScan(basePackages = {"ua.bu.entity","ua.bu.service","ua.bu.dao"})
 public class JpaConfig {
 
     @Bean
