@@ -30,7 +30,7 @@
             <tr>
                 <@security.authorize access="hasRole('ROLE_ADMIN')">
                     <td>${quote.id}</td>
-                    <td><a href="/users/${quote.userId.loginName}">${quote.userId.loginName}</a></td>
+                    <td><a href="/users/${quote.userId.id}">${quote.userId.loginName}</a></td>
                 </@security.authorize>
                 <td><a href="/issue/${quote.issueId.name}">${quote.issueId.name}</a></td>
                 <td>${quote.createMoment}</td>

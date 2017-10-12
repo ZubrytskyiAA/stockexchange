@@ -8,6 +8,7 @@ import ua.bu.dao.interfaces.TradeDao;
 import ua.bu.entity.Quote;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.QuoteService;
+import ua.bu.service.interfaces.TradeService;
 import ua.bu.service.interfaces.UserService;
 
 import java.sql.Timestamp;
@@ -20,7 +21,7 @@ public class QuoteServiceImpl implements QuoteService {
     private QuoteDao quoteDao;
 
     @Autowired
-    private TradeDao tradeDao;
+    private TradeService tradeService;
     @Autowired
     private UserService userService;
     @Autowired
@@ -107,11 +108,11 @@ public class QuoteServiceImpl implements QuoteService {
         if (quote != null) {
             if (quote.getType().equals("P")) {
                 List<Quote> listQuote = quoteDao.getAllQouteByIssueLessPrice(quote.getIssueId(), quote.getPrice());
-                tradeDao.doDealByQuote(listQuote, quote);
+                tradeService.doDealByQuote(listQuote, quote);
 
             } else {
                 List<Quote> listQuote = quoteDao.getAllQouteByIssueMorePrice(quote.getIssueId(), quote.getPrice());
-                tradeDao.doDealByQuote(listQuote, quote);
+                tradeService.doDealByQuote(listQuote, quote);
 
             }
         }

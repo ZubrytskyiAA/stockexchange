@@ -1,5 +1,6 @@
 package ua.bu.service.interfaces;
 
+import ua.bu.entity.Quote;
 import ua.bu.entity.Trade;
 
 import java.util.List;
@@ -17,5 +18,6 @@ public interface TradeService {
     void delete(Trade trade);
 
     List<Trade> getAllTradesByIssue(String name);
+    public void doDealByQuote(List<Quote> listQuote, Quote quote);///не забыть перенести в сервис
 
 }

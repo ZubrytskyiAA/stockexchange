@@ -12,7 +12,7 @@
         <#list quotes as quote>
             <#if "${quote.type}" == "S">
             <tr>
-                <td>${quote.price}</td>
+                <td>${quote.price?c}</td>
                 <td>${quote.qty}</td>
             </tr>
             </#if>

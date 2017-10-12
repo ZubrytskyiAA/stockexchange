@@ -19,7 +19,7 @@ public class ValuesController {
     @Autowired
     UserDao userDao;
 
-
+//В приложении не активен, раздупляюсь с ajax
     @GetMapping("/values")
     public String getAllQuotes() throws IOException {
 
