@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ReportDao {
 
-    List<Object> getAll();
-    List<Object> getTradeInformationByIssue();
+  //  List<Object> getAll();
+    //List<Object> getTradeInformationByIssue();
 
 }

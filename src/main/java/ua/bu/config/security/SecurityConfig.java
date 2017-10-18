@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+
         auth.jdbcAuthentication()
                 //   .inMemoryAuthentication()
                 //   .withUser("user").password("password").roles("USER").and()
@@ -42,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/**").access("hasRole('ADMIN')")
                 .antMatchers("/issue/newIssue").access("hasRole('ADMIN')")
                 .antMatchers("/report/**").access("hasAnyRole('ADMIN','TRADER')")
-                .antMatchers("/qouteRetrieval/**").access("hasRole('TRADER')")
+                .antMatchers("/qouteRetrieval/**").access("hasAnyRole('ADMIN','TRADER')")
                 .antMatchers("/quote/addNewQuote").access("hasRole('TRADER')")
                 .antMatchers("/asset").access("hasAnyRole('TRADER','ADMIN' , 'BOOKKEEPER')")
                 .and().formLogin()

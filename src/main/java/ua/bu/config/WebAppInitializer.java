@@ -18,8 +18,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
         context.register(WebAppConfig.class, JpaConfig.class, SpringConfig.class, SecurityConfig.class);
         context.setServletContext(servletContext);
 
+
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
+
+
     }
 }

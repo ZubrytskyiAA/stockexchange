@@ -74,8 +74,9 @@
         <#include "quoteRetrievalSellPart.ftl">
     </div>
 </div>
-
+    <@security.authorize access="hasRole('ROLE_TRADER')">
     <#include "tradeForm1.ftl">
+    </@security.authorize>
 <#else>
 <h1>Нету не одной активной бумаги в торгах</h1>
 </#if>
