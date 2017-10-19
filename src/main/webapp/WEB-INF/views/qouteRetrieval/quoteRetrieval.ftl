@@ -25,19 +25,17 @@
         }
 
 
-
     </style>
 
 </head>
 <body class="container">
 <#include "*/header.ftl">
 
-<caption>QuoteRetrieval sheet</caption>
+
 <br>
 <br>
 
-<#--<#if "${errorMsg}"??>-->
-<#--<h1>${errorMsg}</h1>-->
+
 <#if "${selectedIssueName}"??>
 
 <div>
@@ -45,19 +43,12 @@
         <div></div>
         <div class="col-sm-7 pull-right">
             <form name="choseIssue" method="post">
-                <select  name="select1" onchange="document.location=this.options[this.selectedIndex].value">
-
-                <#--<#if "${selectedIssueName}"??>-->
-                <#--<option selected value=/qouteRetrieval/1></option>-->
-                <#--<#else >-->
+                <select name="select1" onchange="document.location=this.options[this.selectedIndex].value">
                     <option selected value=/qouteRetrieval/${selectedIssueName}>${selectedIssueName}</option>
-                <#--</#if>-->
-
                     <#list listIssue?sort as issueName>
                         <#if "${selectedIssueName}"  != "${issueName}">
                             <option value=/qouteRetrieval/${issueName}>${issueName}</option>
                         </#if>
-
                     </#list>
                 </select>
             </form>
@@ -65,8 +56,8 @@
 
     </div>
     <div style="text-align: center;">
-        <div>Покупка</div>
-        <div>Продажа</div>
+        <div><@spring.message "Purchase"/></div>
+        <div><@spring.message "Sell"/></div>
 
     </div>
     <div>
@@ -75,7 +66,7 @@
     </div>
 </div>
     <@security.authorize access="hasRole('ROLE_TRADER')">
-    <#include "tradeForm1.ftl">
+        <#include "tradeForm1.ftl">
     </@security.authorize>
 <#else>
 <h1>Нету не одной активной бумаги в торгах</h1>

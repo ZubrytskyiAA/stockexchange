@@ -9,8 +9,7 @@
 
 <@security.authorize access="isAuthenticated()">
 <p style="text-align: center">
-<h1>Hello, you are logged as <@security.authentication property="principal.username"/>.</h1>
-<a href="/?mylocale=en">English </a> | <a href="/?mylocale=ua">Ukraine </a>| <a href="/?mylocale=ru">Russion </a>
+Hello, you are logged as <@security.authentication property="principal.username"/>.
 </p>
 </@security.authorize>
 
