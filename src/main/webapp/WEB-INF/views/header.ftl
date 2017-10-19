@@ -17,17 +17,17 @@
             ">
             <li>
                 <a href="/?mylocale=ua" title="UKRAINE">
-                    <img src="/ua.gif" alt="UA" height="12" width="20" border="0">
+                    <img src="/ua.gif" alt="UA" height="12" width="20" border="0"> - Українська
                 </a>
             </li>
             <li>
                 <a href="/?mylocale=ru" title="RUSSIAN">
-                    <img src="/resources/images/flags/ru.gif" alt="RU" height="12" width="20" border="0">
+                    <img src="/resources/images/flags/ru.gif" alt="RU" height="12" width="20" border="0"> - Русский
                 </a>
             </li>
             <li>
                 <a href="/?mylocale=en" title="ENGLISH">
-                    <img src="/resources/images/flags/en.gif" alt="EN" height="12" width="20" border="0">
+                    <img src="/resources/images/flags/en.gif" alt="EN" height="12" width="20" border="0"> - English
                 </a>
             </li>
             </ul>
