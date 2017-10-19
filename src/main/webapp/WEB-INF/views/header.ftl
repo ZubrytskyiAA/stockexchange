@@ -6,6 +6,38 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="http://bootstraptema.ru/plugins/jquery/jquery-1.11.3.min.js"></script>
 <script src="http://bootstraptema.ru/plugins/2016/shieldui/script.js"></script>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-2  col-md-2" style="border: none;">
+            <button class="btn" type="button" style="background-color: rgba(245, 245, 245, 0);"
+                    data-toggle="dropdown"><@spring.message "header.language"/>
+                <span class="caret"></span></button>
+            <ul class="dropdown-menu"
+            ">
+            <li>
+                <a href="/?mylocale=ua" title="UKRAINE">
+                    <img src="/ua.gif" alt="UA" height="12" width="20" border="0">
+                </a>
+            </li>
+            <li>
+                <a href="/?mylocale=ru" title="RUSSIAN">
+                    <img src="/resources/images/flags/ru.gif" alt="RU" height="12" width="20" border="0">
+                </a>
+            </li>
+            <li>
+                <a href="/?mylocale=en" title="ENGLISH">
+                    <img src="/resources/images/flags/en.gif" alt="EN" height="12" width="20" border="0">
+                </a>
+            </li>
+            </ul>
+        <@security.authentication property="principal.username"/>
+
+
+        </div>
+    </div>
+
+</div>
 
 
 <nav class="navbar navbar-default">
@@ -28,35 +60,10 @@
             <li><a href="/asset"><@spring.message "header.assets"/></a></li>
         </@security.authorize>
         <@security.authorize access="isAuthenticated()">
-            <li><a href="/options"><@spring.message "header.options"/>
-            <li><a href="/logout"><@spring.message "header.logout"/>
-                [<@security.authentication property="principal.username"/>]</a></li>
+            <li><a href="/options"><@spring.message "header.options"/></a></li>
+            <li><a href="/logout"><@spring.message "header.logout"/> </a></li>
         </@security.authorize>
-            <li>
-                <div class="dropdown right" style="border: none; text-align: right">
-                    <button class="btn" type="button" style="background-color: rgba(245, 245, 245, 0);"
-                            data-toggle="dropdown"><@spring.message "header.language"/>
-                        <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="/?mylocale=ua" title="UKRAINE">
-                                <img src="/ua.gif" alt="UA" height="12" width="20" border="0">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/?mylocale=ru" title="RUSSIAN">
-                                <img src="/resources/images/flags/ru.gif" alt="RU" height="12" width="20" border="0">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/?mylocale=en" title="ENGLISH">
-                                <img src="/resources/images/flags/en.gif" alt="EN" height="12" width="20" border="0">
-                            </a>
-                        </li>
-                    </ul>
-                </div>
 
-            </li>
         </ul>
     </div>
 </nav>
