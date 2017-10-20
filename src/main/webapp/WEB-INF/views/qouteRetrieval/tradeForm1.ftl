@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-5">
-                <button type="submit" class="btn btn-default"><@spring.message "Send"/></button>
+                <button type="submit" class="btn btn-success"><@spring.message "Send"/></button>
             </div>
         </div>
     </form>

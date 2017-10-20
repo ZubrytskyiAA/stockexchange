@@ -20,4 +20,5 @@ public interface UserService {
 
     User getByName(String loginName);
 
+     boolean save(String login, String password, String email ,String fname , String lname);
 }

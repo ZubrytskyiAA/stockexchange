@@ -9,7 +9,7 @@
 
 <@security.authorize access="isAuthenticated()">
 <p style="text-align: center">
-Hello, you are logged as <@security.authentication property="principal.username"/>.
+    <@spring.message "WelcomeMsg"/><@security.authentication property="principal.username"/>.
 </p>
 </@security.authorize>
 

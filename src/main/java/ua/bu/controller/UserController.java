@@ -46,6 +46,16 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @GetMapping("/create")
+    public String createPage(@RequestParam(value = "message", required = false) String message,
+                             Model model) {
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
+        return "createUserForm";
+    }
+
+
 //    @PostMapping("/delete")
 //    public String deleteUser(@ModelAttribute("id") int id) {
 //        userService.deleteById(id);

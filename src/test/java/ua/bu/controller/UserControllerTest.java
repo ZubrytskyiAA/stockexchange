@@ -63,9 +63,10 @@ public class UserControllerTest {
         User user = new User();
         user.setLoginName("userFromControl");
         user.setEmail("email");
-        user.setPhoneNumber("123");
+        user.setFirstName("Saniya");
+        user.setLastName("Zuz");
         user.setActive(true);
-        user.setFio("dsdasd");
+      //  user.setFio("dsdasd");
         user.setPassword("dsdasd");
         userService.save(user);
         //doReturn(user).when(userService.getById(anyInt()));
