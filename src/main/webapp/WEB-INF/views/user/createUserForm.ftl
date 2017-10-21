@@ -233,23 +233,7 @@ EROOR:
 
 
 
-
-<#--<form action="/users/newUser" method="post" name="user" class="form-group">-->
-<#--loginName-->
-<#--<input title="loginName" type="text" name="loginName" required/>-->
-<#--password-->
-<#--<input title="password" type="password" name="password" required/>-->
-<#--fio-->
-<#--<input title="fio" type="text" name="fio" required/>-->
-<#--email-->
-<#--<input title="email" type="email" name="email" required/>-->
-<#--phoneNumber-->
-<#--<input title="phoneNumber" type="text" name="phoneNumber" required/>-->
-<#--<input type="submit" value="Create" title="Create"/>-->
-<#--</form>-->
-
-
-<a type="button" href="/users" class="button"><@spring.message "Back"/></a>
+<#--<a type="button" href="/users" class="button"><@spring.message "Back"/></a>-->
 </body>
 </html>
 

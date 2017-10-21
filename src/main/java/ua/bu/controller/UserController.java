@@ -1,10 +1,10 @@
 package ua.bu.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import ua.bu.entity.Asset;
 import ua.bu.entity.User;
@@ -12,7 +12,9 @@ import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
-import java.security.Principal;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -28,9 +30,57 @@ public class UserController {
 
 
     @GetMapping("")
-    public String getAllUsers(Model model) {
-        model.addAttribute("users", userService.getAll());
+    public String getAllUsers(Model model,
+                              @RequestParam(value = "page", required = false) Integer page,
+                              @RequestParam(value = "size", required = false) Integer size,
+                              @RequestParam(value = "order", required = false) String order,
+                              @RequestParam(value = "prevOrder", required = false) String prevOrder,
+                              @RequestParam(value = "orderType", required = false) String orderType,
+                              @RequestParam(value = "prevOrderType", required = false) String prevOrderType) {
+        int totalPages = 0;
+
+        String sortType;
+
+
+        if(StringUtils.isEmpty(order)){
+            sortType = "desc";
+            model.addAttribute("prevOrderType", "");
+            model.addAttribute("prevOrder", "");
+        }
+       else if(order.equalsIgnoreCase(prevOrder) && prevOrderType.equalsIgnoreCase("asc")){
+           sortType = "desc";
+           model.addAttribute("prevOrderType", "desc");
+           model.addAttribute("prevOrder", order);
+       }else{
+           sortType = "asc";
+           model.addAttribute("prevOrderType", "asc");
+           model.addAttribute("prevOrder", order);
+       }
+
+
+        if (page != null) {
+
+            Page<User> pages = userService.getAll(page, Integer.MAX_VALUE, order, sortType);
+            totalPages = pages.getTotalPages();
+            model.addAttribute("total", totalPages);
+            model.addAttribute("users", pages.getContent());
+        } else if (!StringUtils.isEmpty(order)) {
+            model.addAttribute("users", userService.getAll(0, Integer.MAX_VALUE, order, sortType).getContent());
+        } else {
+            Collection<User> all = userService.getAll();
+            model.addAttribute("users", all);
+            totalPages = all.size() ;
+        }
+        List<Integer> pagesCount = new ArrayList<>();
+        for (int i = 0; i < totalPages; i++) {
+            pagesCount.add(i);
+        }
+        model.addAttribute("pages", pagesCount);
         return "userList";
+
+
+//        model.addAttribute("users", userService.getAll());
+//        return "userList";
     }
 
     @PostMapping("/deleteUserById")
@@ -40,10 +90,11 @@ public class UserController {
     }
 
     @PostMapping("/newUser")
-    public String createUser(@ModelAttribute User user) {
+    public String createUser(@ModelAttribute User user,
+                             HttpServletRequest request) {
 
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/" +request.getHeader("Referer");
     }
 
     @GetMapping("/create")
@@ -76,7 +127,7 @@ public class UserController {
 
     @GetMapping("/edit/{id}")
     public String editPage(@PathVariable("id") int id, Model model) {
-              model.addAttribute("user", userService.getById(id));
+        model.addAttribute("user", userService.getById(id));
         return "editUser";
     }
 

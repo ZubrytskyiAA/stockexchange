@@ -28,9 +28,19 @@ public class IssueController {
     }
 
     @PostMapping("/newIssue")
-    public String createIssue(@ModelAttribute Issue issue ) {
-               issueService.save(issue);
+    public String createIssue(@ModelAttribute Issue issue) {
+        issueService.save(issue);
         return "redirect:/issue";
+    }
+
+
+    @GetMapping("/create")
+    public String createPage(@RequestParam(value = "message", required = false) String message,
+                             Model model) {
+        if (message != null) {
+            model.addAttribute("message", message);
+        }
+        return "createIssueForm";
     }
 
     @PostMapping("/setActivities")
@@ -44,8 +54,16 @@ public class IssueController {
 
     @GetMapping("/{name}")
     public String getIssueById(@PathVariable("name") String name, Model model) {
-        model.addAttribute("issue", issueService.getByName(name));
-        return "showIssue";
+        try {
+            model.addAttribute("issue", issueService.getByName(name));
+            return "showIssue";
+        } catch (Exception e) {
+            model.addAttribute("message", "Бумаги с названием " + name + " не существует");
+            model.addAttribute("issues", issueService.getAll());
+            return "issueList";
+        }
+
+
     }
 
 }

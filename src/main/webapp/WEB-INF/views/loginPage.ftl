@@ -84,12 +84,12 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="3"
+                                            <input style="background-color:#46b8da" type="submit" name="login-submit" id="login-submit" tabindex="3"
                                                    class="form-control btn btn-primary"
                                                    value="<@spring.message "Login"/>">
                                         </div>
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <p><a href="/users/create"  class="btn btn-info btn-block">Yes please, register now!</a></p>
+                                            <p><a href="/users/create" style=" background-color: #2e6da4"  class="btn btn-info btn-block">Yes please, register now!</a></p>
                                         </div>
                                     </div>
                                 </div>

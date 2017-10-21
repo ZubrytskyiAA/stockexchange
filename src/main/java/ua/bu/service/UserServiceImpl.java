@@ -1,9 +1,18 @@
 package ua.bu.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import ua.bu.dao.interfaces.UserDao;
+import ua.bu.dao.interfaces.UserDao2;
+import ua.bu.entity.Role;
 import ua.bu.entity.User;
+import ua.bu.service.interfaces.RoleService;
 import ua.bu.service.interfaces.UserService;
 
 import java.util.List;
@@ -14,6 +23,13 @@ public class UserServiceImpl implements UserService {
     User user;
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserDao2 userDao2;
+
+    @Autowired
+    private RoleService roleService;
+
 
     @Override
     public List<User> getAll() {
@@ -34,7 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean save(String login, String password, String email , String fname, String lname) {
+    @Transactional
+    public boolean save(String login, String password, String email, String fname, String lname) {
 
         System.out.println("begin");
         if (login == null || password == null || email == null) {
@@ -63,44 +80,71 @@ public class UserServiceImpl implements UserService {
             return false;
         } else if ((email.indexOf(".") > 2) && (email.indexOf("@") > 0)) {
 
-           User user = new User();
-           user.setPassword(password);
-           user.setLoginName(login);
-           user.setEmail(email);
-           user.setFirstName(fname);
-           user.setLastName(lname);
+            User user = new User();
+            Role role = new Role();
+            user.setPassword(password);
+            user.setLoginName(login);
+            user.setEmail(email);
+            user.setFirstName(fname);
+            user.setLastName(lname);
 
-           save(user);
+            role.setLoginName(login);
+            role.setRole("ROLE_TRADER");
 
+            save(user);
+            roleService.save(role);
 
             System.out.println(9);
             System.out.println(true);
             return true;
-        }else {
+        } else {
             System.out.println(10);
             System.out.println(false);
             return false;
         }
     }
 
-        @Override
-        public User getById ( long id){
-            return userDao.getById(id);
-        }
+    @Override
+    public Page<User> getAll(Integer page, Integer size, String order, String typeSort) {
+        Sort sort;
 
-        @Override
-        public void update (User user){
-            userDao.updateUser(user);
+        if (StringUtils.isEmpty(order)) {
+            order = "id";
+            sort = new Sort(new Sort.Order(Sort.Direction.DESC, order));
+        } else if (!StringUtils.isEmpty(typeSort) && typeSort.equalsIgnoreCase("desc")) {
+            sort = new Sort(new Sort.Order(Sort.Direction.DESC, order));
+        } else {
+            sort = new Sort(new Sort.Order(Sort.Direction.ASC, order));
         }
+        Pageable pageable = new PageRequest(page, size, sort);
 
-        @Override
-        public List<String> getListNamesAllUsers () {
-            return userDao.getListNamesAllUsers();
-        }
-
-        @Override
-        public User getByName (String loginName){
-            return userDao.getByName(loginName);
+        try {
+            return userDao2.findAll(pageable);
+        } catch (Exception e) {
+            return userDao2.findAll(new PageRequest(page, size, new Sort(new Sort.Order(Sort.Direction.ASC, "id"))));
         }
 
     }
+
+
+    @Override
+    public User getById(long id) {
+        return userDao.getById(id);
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.updateUser(user);
+    }
+
+    @Override
+    public List<String> getListNamesAllUsers() {
+        return userDao.getListNamesAllUsers();
+    }
+
+    @Override
+    public User getByName(String loginName) {
+        return userDao.getByName(loginName);
+    }
+
+}

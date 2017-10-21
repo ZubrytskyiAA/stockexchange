@@ -36,20 +36,20 @@
             <td>
                 <#switch  "${trade.initAction}" >
                     <#case "P">
-                        <a href="/users/${trade.userInit.id?c}">${trade.userInit.loginName}</a>
-                        <#break>
+                ${trade.userInit.loginName}
+                    <#break>
                     <#case "S">
-                        <a href="/users/${trade.userConf.id?c}">${trade.userConf.loginName}</a>
+                    ${trade.userConf.loginName}
                         <#break>
                 </#switch>
             </td>
             <td>
                 <#switch "${trade.confAction}" >
                     <#case "P">
-                        <a href="/users/${trade.userInit.id?c}">${trade.userInit.loginName}</a>
-                        <#break>
+                ${trade.userInit.loginName}
+                    <#break>
                     <#case "S">
-                        <a href="/users/${trade.userConf.id?c}">${trade.userConf.loginName}</a>
+                    ${trade.userConf.loginName}
                         <#break>
                 </#switch>
             </td>

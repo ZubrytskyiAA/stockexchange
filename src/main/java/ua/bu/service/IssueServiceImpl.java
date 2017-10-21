@@ -14,6 +14,7 @@ public class IssueServiceImpl implements IssueService {
     @Autowired
     private IssueDao issueDao;
 
+
     @Override
     public List<Issue> getAll() {
         return issueDao.getAll();
@@ -36,6 +37,10 @@ public class IssueServiceImpl implements IssueService {
         return issueDao.getById(id);
 
     }
+
+
+
+
 
     @Override
     public List<String> getListNamesActiveIssue() {

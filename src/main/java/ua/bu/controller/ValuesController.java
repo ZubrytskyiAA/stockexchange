@@ -41,17 +41,10 @@ public class ValuesController {
                              @RequestParam(value = "email", required = false) String email,
                              Model model) {
         String dd = "false";
-        System.out.println("==========================");
-        System.out.println(login + " " + password + " " + fname + " " + lname + " " + email);
-
-
         if (login != null) {
-
             List<String> list = userService.getListNamesAllUsers();
-
             if (list.contains(login)) dd = "true";
             userService.save(login, password, email, fname, lname);
-            System.out.println(dd);
             return dd;
 
         } else {

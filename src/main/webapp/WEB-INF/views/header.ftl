@@ -52,16 +52,17 @@
             <li><a href="/quote"><@spring.message "header.quote"/></a></li>
             <li><a href="/report"><@spring.message "header.reports"/></a></li>
             <li><a href="/trade"><@spring.message "header.trades"/></a></li>
+            <li><a href="/issue"><@spring.message "header.issues"/></a></li>
         </@security.authorize>
         <@security.authorize access="hasRole('ROLE_ADMIN')">
             <li><a href="/users"><@spring.message "header.users"/></a></li>
-            <li><a href="/issue"><@spring.message "header.issues"/></a></li>
+
         </@security.authorize>
         <@security.authorize access="hasAnyRole('ROLE_BOOKKEEPER','ROLE_TRADER')">
             <li><a href="/asset"><@spring.message "header.assets"/></a></li>
         </@security.authorize>
         <@security.authorize access="isAuthenticated()">
-            <#--<li><a href="/options"><@spring.message "header.options"/></a></li>-->
+        <#--<li><a href="/options"><@spring.message "header.options"/></a></li>-->
             <li><a href="/logout"><@spring.message "header.logout"/> </a></li>
         </@security.authorize>
 

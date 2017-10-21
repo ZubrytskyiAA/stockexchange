@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UserData</title>
+    <title>My Account</title>
 </head>
 <body class="container">
 <#include "*/header.ftl">
 <div class="table-responsive">
     <caption align="center">User info</caption>
-    <table class="table table-striped">
+    <table class="table-striped" width="400px">
         <tr>
             <td>Id</td>
-            <td>${user.id}</a></td>
+            <td>${user.id}</td>
         </tr>
         <tr>
             <td>loginName</td>
@@ -22,11 +22,17 @@
             <td>${user.password}</td>
         </tr>
         <tr>
-            <td>fio</td>
-            <td>${user.fio}</td>
+            <td>First name</td>
+            <td>${user.firstName}</td>
         </tr>
-        <td>phoneNumber</td>
-        <td>${user.phoneNumber}</td>
+        <tr>
+            <td>Last name</td>
+            <td>${user.lastName}</td>
+        </tr>
+        <tr>
+
+            <td>Email</td>
+            <td>${user.email}</td>
         </tr>
     </table>
 </div>
@@ -65,15 +71,15 @@
     <form class="table table-striped1" name="addIssue" action="/asset/${user.loginName}" method="get">
         <input type="hidden" name="userId" value=${user.id}>
 
-    <#if listIssue??>
-        <select name="select1">
-            <#list listIssue as issues1>
-                <option value=${issues1.id}>${issues1.name}</option>
+        <#if listIssue??>
+            <select name="select1">
+                <#list listIssue as issues1>
+                    <option value=${issues1.id}>${issues1.name}</option>
 
-            </#list>
-        </select>
-    </#if>
-        <input type="submit" title="add" value="Change assets"/>
+                </#list>
+            </select>
+        </#if>
+        <input type="submit" title="Change assets" value="Change assets"/>
 
     </form>
 
