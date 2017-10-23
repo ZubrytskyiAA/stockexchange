@@ -1,6 +1,8 @@
 package ua.bu.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import ua.bu.dao.interfaces.AssetDao;
 import ua.bu.entity.Asset;
@@ -9,24 +11,32 @@ import ua.bu.entity.Trade;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public class AssetServiceImpl implements AssetService {
+
+
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 
     @Autowired
     private AssetDao assetDao;
     @Autowired
     private IssueService issueService;
 
-    {
-
-    }
 
     @Override
     public void save(Asset asset) {
 
-        assetDao.save(asset);
+        try {
+            assetDao.save(asset);
+            logger.info(" asset saved by " + SecurityContextHolder.getContext().getAuthentication().getName() + ", " + asset);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
+
     }
 
     @Override
@@ -66,26 +76,45 @@ public class AssetServiceImpl implements AssetService {
 
     @Override
     public void addNewAsset(Asset asset) {
-        Asset asset1 = assetDao.getExistAsset(asset);
+        Asset existAsset = null;
+        try {
+            existAsset = assetDao.getExistAsset(asset);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
 
-        if (asset1 == null) {
-            assetDao.save(asset);
+
+        if (existAsset != null) {
+            BigDecimal bdExistAsset = BigDecimal.valueOf(existAsset.getFree());
+            BigDecimal bdEntredAsset = BigDecimal.valueOf(asset.getFree());
+            existAsset.setFree(bdExistAsset.add(bdEntredAsset).doubleValue());
+
+            save(existAsset);
+
         } else {
-            asset1.addFree(asset.getFree());
-            assetDao.save(asset1);
+            save(asset);
         }
 
     }
 
     @Override
     public void withdrawAsset(Asset asset) {
-        Asset asset1 = assetDao.getExistAsset(asset);
+        Asset existsAsset = null;
+        try {
+            existsAsset = assetDao.getExistAsset(asset);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        if (existsAsset != null) {
+            BigDecimal bdsAsset = BigDecimal.valueOf(asset.getFree());
+            BigDecimal bdEntredAsset = BigDecimal.valueOf(existsAsset.getFree());
 
-        if (asset1 == null) {
-            assetDao.save(asset);
-        } else {
-            asset1.withdrawAsset(asset.getFree());
-            assetDao.save(asset1);
+            if (bdEntredAsset.compareTo(bdsAsset) >= 0) {
+                existsAsset.setFree(bdEntredAsset.subtract(bdsAsset).doubleValue());
+                save(existsAsset);
+            }
+
+
         }
     }
 

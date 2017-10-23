@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/report/**").access("hasAnyRole('ADMIN','TRADER')")
                 .antMatchers("/qouteRetrieval/**").access("hasAnyRole('ADMIN','TRADER')")
                 .antMatchers("/quote/addNewQuote").access("hasRole('TRADER')")
-                .antMatchers("/asset").access("hasAnyRole('TRADER','ADMIN' , 'BOOKKEEPER')")
+                .antMatchers("/asset/**").access("hasAnyRole( 'BOOKKEEPER')")
                 .and().formLogin()
                 .loginPage("/loginPage").permitAll()//.failureUrl("/error_page")
                 .usernameParameter("loginName")

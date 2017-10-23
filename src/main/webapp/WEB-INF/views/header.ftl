@@ -58,12 +58,16 @@
             <li><a href="/users"><@spring.message "header.users"/></a></li>
 
         </@security.authorize>
-        <@security.authorize access="hasAnyRole('ROLE_BOOKKEEPER','ROLE_TRADER')">
+        <@security.authorize access="hasAnyRole('ROLE_BOOKKEEPER')">
             <li><a href="/asset"><@spring.message "header.assets"/></a></li>
         </@security.authorize>
         <@security.authorize access="isAuthenticated()">
         <#--<li><a href="/options"><@spring.message "header.options"/></a></li>-->
             <li><a href="/logout"><@spring.message "header.logout"/> </a></li>
+        </@security.authorize>
+        <@security.authorize access="isAnonymous()">
+        <#--<li><a href="/options"><@spring.message "header.options"/></a></li>-->
+            <li><a href="/login"><@spring.message "header.login"/> </a></li>
         </@security.authorize>
 
         </ul>

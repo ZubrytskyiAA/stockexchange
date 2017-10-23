@@ -32,7 +32,7 @@
 <br>
 
 
-<#if "${selectedIssueName}"??>
+<#if selectedIssueName??>
 
 
 <table border="1" width="400">

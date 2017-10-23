@@ -38,7 +38,7 @@
 
 </@security.authorize>
 
-
+<#if issues??>
 
 
     <div class="form-group">
@@ -85,5 +85,9 @@
             </tbody>
         </table>
     </div>
+<#else >
+Нету не одной заведенной бумаги
+
+</#if>
 </body>
 </html>

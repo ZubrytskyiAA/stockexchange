@@ -32,15 +32,15 @@ public class Asset implements Serializable {
     }
 
 
-    public void addFree(double free) {
-        this.free += free;
-    }
-
-
-    public void withdrawAsset(double free) {
-        double f = this.free - free;
-        if (f >= 0) this.free = f;
-    }
+//    public void addFree(double free) {
+//        this.free += free;
+//    }
+//
+//
+//    public void withdrawAsset(double free) {
+//        double f = this.free - free;
+//        if (f >= 0) this.free = f;
+//    }
 
     public long getId() {
         return id;

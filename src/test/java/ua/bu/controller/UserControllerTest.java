@@ -69,6 +69,7 @@ public class UserControllerTest {
       //  user.setFio("dsdasd");
         user.setPassword("dsdasd");
         userService.save(user);
+        System.out.println("===========================");
         //doReturn(user).when(userService.getById(anyInt()));
         //when(userService.getById(anyInt())).thenReturn(user);
 

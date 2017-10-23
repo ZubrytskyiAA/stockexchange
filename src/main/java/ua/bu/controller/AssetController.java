@@ -9,6 +9,7 @@ import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
 import ua.bu.service.interfaces.UserService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -39,14 +40,41 @@ public class AssetController {
         model.addAttribute("selectUserName", name);
         model.addAttribute("listNamesAllUsers", userService.getListNamesAllUsers());
 
-        List<Asset> assetList = assetService.getListAssetsByUserName(name);
         List<String> listIssueNamesActive = issueService.getListNamesActiveIssue();
+
         if (!listIssueNamesActive.isEmpty()) {
             model.addAttribute("listIssueNamesActive", listIssueNamesActive);
         }
-        if (!assetList.isEmpty()) {
-            model.addAttribute("listAssetsByUserName", assetList);
+
+
+        List<Asset> assetList = assetService.getListAssetsByUserName(name);
+        if (assetList.isEmpty()) {
+
+            return "assetList";
         }
+
+
+        List<Asset> listQuantityMoney = new ArrayList<>();
+        List<Asset> listQuantityIssues = new ArrayList<>();
+
+        for (Asset asset : assetList) {
+            if (asset.getIssueId().getName().equalsIgnoreCase("UAH")) {
+                listQuantityMoney.add(asset);
+            } else {
+                listQuantityIssues.add(asset);
+            }
+        }
+        if (!listQuantityMoney.isEmpty()) {
+            model.addAttribute("listQuantityMoney", listQuantityMoney);
+        }
+        if (!listQuantityIssues.isEmpty()) {
+            model.addAttribute("listQuantityIssues", listQuantityIssues);
+        }
+
+
+        // model.addAttribute("listAssetsByUserName", assetList);
+
+
         model.addAttribute("selectedIssueName", "");
         return "assetList";
     }
@@ -73,7 +101,7 @@ public class AssetController {
     public String withdrawAsset(@ModelAttribute("userName") String userName,
                                 @ModelAttribute("issueName") String issueName,
                                 @ModelAttribute("qtyWithdraw") double qtyAdd) {
-        if (userName.equals("") || userName.equals("") || qtyAdd <= 0) {
+        if (userName.equals("") || issueName.equals("") || qtyAdd <= 0) {
             return "redirect:/asset/" + userName;
         }
 
@@ -82,6 +110,8 @@ public class AssetController {
         asset.setIssueId(issueService.getByName(issueName));
         asset.setUserId(userService.getByName(userName));
         assetService.withdrawAsset(asset);
+
+
         return "redirect:/asset/" + userName;
     }
 

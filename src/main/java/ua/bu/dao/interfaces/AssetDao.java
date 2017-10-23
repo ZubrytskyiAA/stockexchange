@@ -18,11 +18,13 @@ public interface AssetDao {
 
     Asset getById(long id);
 
-    Asset updateUser(Asset asset);
+//    Asset updateAsset(Asset asset);
 
     void delete(Asset asset);
 
     List<Asset> getAssetsByUserId(long id);
+
+    List<Asset> getAssetsByUser(User user);
 
     List<Asset>  getListAssetsByUserName(String name);
 

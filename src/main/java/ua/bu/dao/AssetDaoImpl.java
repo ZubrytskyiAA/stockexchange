@@ -32,17 +32,20 @@ public class AssetDaoImpl implements AssetDao {
 
     @Override
     public Asset getById(long id) {
-        return null;
+        return entityManager.createQuery("SELECT a FROM Asset a where a.id=:id", Asset.class)
+                .setParameter("id", id)
+                .getSingleResult();
+
     }
 
-    @Override
-    public Asset updateUser(Asset asset) {
-        return null;
-    }
+//    @Override
+//    public Asset updateAsset(Asset asset) {
+//        return entityManager.merge(asset);
+//    }
 
     @Override
     public void delete(Asset asset) {
-
+        entityManager.remove(asset);
     }
 
     @Override
@@ -50,6 +53,13 @@ public class AssetDaoImpl implements AssetDao {
 
         return entityManager.createQuery("SELECT a FROM Asset a where a.userId.id=:userId and (a.free > 0 or a.blocked > 0) order by a.id", Asset.class)
                 .setParameter("userId", id)
+                .getResultList();
+    }
+
+    @Override
+    public List<Asset> getAssetsByUser(User user) {
+        return entityManager.createQuery("SELECT a FROM Asset a where a.userId=:userId and (a.free > 0 or a.blocked > 0) order by a.id", Asset.class)
+                .setParameter("userId", user)
                 .getResultList();
     }
 
@@ -62,7 +72,7 @@ public class AssetDaoImpl implements AssetDao {
     }
 
     @Override
-    public  List<Asset> getAssetByUserAndByIssue(User user, Issue issue) {
+    public List<Asset> getAssetByUserAndByIssue(User user, Issue issue) {
         return entityManager.createQuery("SELECT a FROM Asset a where a.userId=:userId and a.issueId=:issueId", Asset.class)
                 .setParameter("userId", user)
                 .setParameter("issueId", issue)
@@ -71,7 +81,6 @@ public class AssetDaoImpl implements AssetDao {
 
     @Override
     public Asset getExistAsset(Asset asset) {
-
 
         List<Asset> assetList = entityManager.createQuery("SELECT a FROM Asset a where a.issueId=:issueId and a.userId=:userId", Asset.class)
                 .setParameter("issueId", asset.getIssueId())

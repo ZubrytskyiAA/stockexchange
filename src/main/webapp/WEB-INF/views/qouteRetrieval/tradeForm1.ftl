@@ -19,7 +19,7 @@
             <label class="control-label col-sm-4" for="price"> <@spring.message "Price"/>:</label>
             <div class="col-sm-5">
 
-                <input class="form-control" id="price" step="0.0001" type="number" name="price"
+                <input class="form-control" id="price" step="0.01" type="number" name="price"
                        placeholder="" required/>
             </div>
         </div>
