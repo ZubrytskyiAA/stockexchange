@@ -2,6 +2,7 @@ package ua.bu.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.bu.dao.interfaces.QuoteDao;
@@ -29,9 +30,11 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public void save(Quote quote) {
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+
         try {
             quoteDao.save(quote);
-            logger.info("Quote from " + quote.getUserId().getLoginName() + " added!");
+            logger.info(" quote saved by " + user + ", " + quote);
         } catch (Exception e) {
             logger.error(quote.toString() + " " + e.getMessage());
         }
@@ -44,20 +47,21 @@ public class QuoteServiceImpl implements QuoteService {
 
     @Override
     public Quote getById(long id) {
-
         return quoteDao.getById(id);
     }
 
-    @Override
-    public Quote updateQuote(Quote quote) {
-        return null;
-    }
 
     @Transactional
     @Override
     public void delete(Quote quote) {
-        quoteDao.delete(quote);
-        assetService.changeAssetWhenDeleteQuote(quote);
+        try {
+            quoteDao.delete(quote);
+            logger.info(" quote deleted :" + quote);
+            assetService.changeAssetWhenDeleteQuote(quote);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+
     }
 
     @Override
@@ -71,16 +75,22 @@ public class QuoteServiceImpl implements QuoteService {
     }
 
     @Override
-    public void update(Quote quote) {
+    public Quote update(Quote quote) {
         Quote tempQuote = quoteDao.getById(quote.getId());
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        if (tempQuote != null) {
-            if (quote.getCreateMoment() == null) quote.setCreateMoment(new Timestamp(System.currentTimeMillis()));
-
-            quoteDao.update(quote);
-
+        if (quote.getCreateMoment() == null) quote.setCreateMoment(new Timestamp(System.currentTimeMillis()));
+        try {
+            Quote updatedQuote = quoteDao.update(quote);
+            logger.info(" quote updated by " + user + ", " + updatedQuote);
+            quote = updatedQuote;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            quote = null;
         }
 
+
+        return quote;
 
     }
 

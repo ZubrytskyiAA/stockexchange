@@ -7,26 +7,26 @@
 <body class="container">
 <#include "*/header.ftl">
 <div class="table-responsive">
-    <caption>Issue info</caption>
+    <caption><@spring.message "issueInfo"/></caption>
     <table class="table table-striped">
         <tr>
-            <td>Идентификатор</td>
+            <td><@spring.message "quote.number"/></td>
             <td>#${issue.id}</a></td>
         </tr>
         <tr>
-            <td>Имя</td>
+            <td><@spring.message "issueName"/></td>
             <td>${issue.name}</td>
         </tr>
         <tr>
-            <td>Полное имя</td>
+            <td><@spring.message "fullName"/></td>
             <td>${issue.fullName}</td>
         </tr>
         <tr>
-            <td>Активность</td>
-            <td>${issue.active?then("Активна","Деактивированный")}</td>
+            <td><@spring.message "activities"/></td>
+            <td>${issue.active?then("On","Off")}</td>
         </tr>
         <tr>
-            <td>Дата создания</td>
+            <td><@spring.message "createMoment"/></td>
             <td>${issue.createMoment}</td>
         </tr>
    

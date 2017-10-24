@@ -9,21 +9,21 @@
 <#include "*/header.ftl">
 <#if listSize??>
 
-<div class="table-responsive" style="background-color: antiquewhite">
-    <p style="text-align: center ;">Total: ${listSize} quotes.</p>
+<div class="table-responsive">
+    <p style="text-align: center ;"><@spring.message "Total"/>: ${listSize} <@spring.message "header.quote"/>.</p>
 
     <table class="table table-striped" style="text-align: center">
         <tr>
             <@security.authorize access="hasRole('ROLE_ADMIN')">
-                <th style="text-align: center">Номер заявки</th>
-                <th style="text-align: center">Клиент</th>
+                <th style="text-align: center"><@spring.message "quote.number"/></th>
+                <th style="text-align: center"><@spring.message "quote.client"/></th>
             </@security.authorize>
-            <th style="text-align: center">Название актива</th>
-            <th style="text-align: center">Дата создания</th>
-            <th style="text-align: center">Цена</th>
-            <th style="text-align: center">Количество</th>
-            <th style="text-align: center">Сумма</th>
-            <th style="text-align: center">Действия</th>
+            <th style="text-align: center"><@spring.message "quote.issueName"/></th>
+            <th style="text-align: center"><@spring.message "createMoment"/></th>
+            <th style="text-align: center"><@spring.message "Price"/></th>
+            <th style="text-align: center"><@spring.message "Quantity"/></th>
+            <th style="text-align: center"><@spring.message "Volume"/></th>
+            <th style="text-align: center"><@spring.message "actions"/></th>
         </tr>
 
         <#list quotes?sort_by("id") as quote>
@@ -38,9 +38,9 @@
                 <td>${quote.qty}</td>
                 <td>${quote.qty * quote.price}</td>
                 <td>
-                    <a href="/quote/edit/${quote.id?c}">Edit</a>
+                    <a href="/quote/edit/${quote.id?c}"><@spring.message "Edit"/></a>
                     <br>
-                    <a href="/quote/delete/${quote.id?c}">Delete</a>
+                    <a href="/quote/delete/${quote.id?c}"><@spring.message "Delete"/></a>
                 </td>
             </tr>
         </#list>

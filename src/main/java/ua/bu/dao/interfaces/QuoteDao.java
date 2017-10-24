@@ -22,7 +22,7 @@ public interface QuoteDao {
 
 
     void delete(Quote quote);
-    void update(Quote quote);
+    Quote update(Quote quote);
 
     List<Quote> getAllQouteByIssueLessPrice(Issue issue, double price);
     List<Quote> getAllQouteByIssueMorePrice(Issue issue, double price);

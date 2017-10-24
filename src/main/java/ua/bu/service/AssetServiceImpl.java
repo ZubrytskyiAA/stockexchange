@@ -122,49 +122,59 @@ public class AssetServiceImpl implements AssetService {
     @Override
     public void changeAssetWhenAddQuote(Quote quote) {
         List<Asset> assetList;
-        double free = 0;
-        double block = 0;
+        BigDecimal free;
+        BigDecimal block;
         Asset asset;
+        try {
+            if (quote.getType().equals("S")) {
+                assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), quote.getIssueId());
+                asset = assetList.get(0);
+                free = BigDecimal.valueOf(asset.getFree()).subtract(BigDecimal.valueOf(quote.getQty()));
+                block = BigDecimal.valueOf(asset.getBlocked()).add(BigDecimal.valueOf(quote.getQty()));
+            } else {
+                assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), issueService.getByName("UAH"));
+                asset = assetList.get(0);
+                free = BigDecimal.valueOf(asset.getFree()).subtract(BigDecimal.valueOf(quote.getPrice()).multiply(BigDecimal.valueOf(quote.getQty())));
+                block = BigDecimal.valueOf(asset.getBlocked()).add(BigDecimal.valueOf(quote.getPrice()).multiply(BigDecimal.valueOf(quote.getQty())));
+            }
 
-        if (quote.getType().equals("S")) {
-            assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), quote.getIssueId());
-            asset = assetList.get(0);
-            free = asset.getFree() - quote.getQty();
-            block = asset.getBlocked() + quote.getQty();
-        } else {
-            assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), issueService.getByName("UAH"));
-            asset = assetList.get(0);
-            free = asset.getFree() - quote.getPrice() * quote.getQty();
-            block = asset.getBlocked() + quote.getPrice() * quote.getQty();
+            asset.setFree(free.doubleValue());
+            asset.setBlocked(block.doubleValue());
+
+            save(asset);
+            logger.info(" asset changed after adding quote :" + asset);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
 
-        asset.setFree(free);
-        asset.setBlocked(block);
-        save(asset);
 
     }
 
     @Override
     public void changeAssetWhenDeleteQuote(Quote quote) {
         List<Asset> assetList;
-        double free = 0;
-        double block = 0;
+        BigDecimal free;
+        BigDecimal block;
         Asset asset;
-
-        if (quote.getType().equals("S")) {
-            assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), quote.getIssueId());
-            asset = assetList.get(0);
-            free = asset.getFree() + quote.getQty();
-            block = asset.getBlocked() - quote.getQty();
-        } else {
-            assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), issueService.getByName("UAH"));
-            asset = assetList.get(0);
-            free = asset.getFree() + quote.getPrice() * quote.getQty();
-            block = asset.getBlocked() - quote.getPrice() * quote.getQty();
+        try {
+            if (quote.getType().equals("S")) {
+                assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), quote.getIssueId());
+                asset = assetList.get(0);
+                free = BigDecimal.valueOf(asset.getFree()).add(BigDecimal.valueOf(quote.getQty()));
+                block = BigDecimal.valueOf(asset.getBlocked()).subtract(BigDecimal.valueOf(quote.getQty()));
+            } else {
+                assetList = assetDao.getAssetByUserAndByIssue(quote.getUserId(), issueService.getByName("UAH"));
+                asset = assetList.get(0);
+                free = BigDecimal.valueOf(asset.getFree()).add(BigDecimal.valueOf(quote.getPrice()).multiply(BigDecimal.valueOf(quote.getQty())));
+                block = BigDecimal.valueOf(asset.getBlocked()).subtract(BigDecimal.valueOf(quote.getPrice()).multiply(BigDecimal.valueOf(quote.getQty())));
+            }
+            asset.setFree(free.doubleValue());
+            asset.setBlocked(block.doubleValue());
+            save(asset);
+            logger.info(" asset changed after deleting quote :" + asset);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
         }
-        asset.setFree(free);
-        asset.setBlocked(block);
-        save(asset);
     }
 
     @Override
@@ -204,7 +214,7 @@ public class AssetServiceImpl implements AssetService {
             //списываем с продавца бумаги
             assetListInitUserIssue = assetDao.getAssetByUserAndByIssue(trade.getUserInit(), trade.getIssue());
             assetInitUserIssue = assetListInitUserIssue.get(0);
-            assetInitUserIssue.setBlocked(assetInitUserIssue.getBlocked() - trade.getQty());
+            assetInitUserIssue.setBlocked(BigDecimal.valueOf(assetInitUserIssue.getBlocked()).subtract(BigDecimal.valueOf(trade.getQty())).doubleValue());
             // добавляем продавцу деньги
             assetListInitUserMoney = assetDao.getAssetByUserAndByIssue(trade.getUserInit(), issueService.getByName("UAH"));
             if (assetListInitUserMoney.isEmpty()) {
@@ -214,11 +224,11 @@ public class AssetServiceImpl implements AssetService {
             } else {
                 assetInitUserMoney = assetListInitUserMoney.get(0);
             }
-            assetInitUserMoney.setFree(assetInitUserMoney.getFree() + trade.getVolume());
+            assetInitUserMoney.setFree(BigDecimal.valueOf(assetInitUserMoney.getFree()).add(BigDecimal.valueOf(trade.getVolume())).doubleValue());
             //списываем с покупателя деньги
             assetListConfUserIssue = assetDao.getAssetByUserAndByIssue(trade.getUserConf(), issueService.getByName("UAH"));
             assetConfUserIssue = assetListConfUserIssue.get(0);
-            assetConfUserIssue.setFree(assetConfUserIssue.getFree() - trade.getVolume());
+            assetConfUserIssue.setFree(BigDecimal.valueOf(assetConfUserIssue.getFree()).subtract(BigDecimal.valueOf(trade.getVolume())).doubleValue());
             //добавляем покупателю бумаги
             assetListConfUserMoney = assetDao.getAssetByUserAndByIssue(trade.getUserConf(), trade.getIssue());
             if (assetListConfUserMoney.isEmpty()) {
@@ -228,7 +238,7 @@ public class AssetServiceImpl implements AssetService {
             } else {
                 assetConfUserMoney = assetListConfUserMoney.get(0);
             }
-            assetConfUserMoney.setFree(assetConfUserMoney.getFree() + trade.getQty());
+            assetConfUserMoney.setFree(BigDecimal.valueOf(assetConfUserMoney.getFree()).add(BigDecimal.valueOf(trade.getQty())).doubleValue());
 
 
         } else {
@@ -237,7 +247,7 @@ public class AssetServiceImpl implements AssetService {
             //списываем с покупателя деньги
             assetListInitUserMoney = assetDao.getAssetByUserAndByIssue(trade.getUserInit(), issueService.getByName("UAH"));
             assetInitUserMoney = assetListInitUserMoney.get(0);
-            assetInitUserMoney.setBlocked(assetInitUserMoney.getBlocked() - trade.getVolume());
+            assetInitUserMoney.setBlocked(BigDecimal.valueOf(assetInitUserMoney.getBlocked()).subtract(BigDecimal.valueOf(trade.getVolume())).doubleValue());
             // добавляем покупателю бумаги
             assetListInitUserIssue = assetDao.getAssetByUserAndByIssue(trade.getUserInit(), trade.getIssue());
             if (assetListInitUserIssue.isEmpty()) {
@@ -248,11 +258,11 @@ public class AssetServiceImpl implements AssetService {
             } else {
                 assetInitUserIssue = assetListInitUserIssue.get(0);
             }
-            assetInitUserIssue.setFree(assetInitUserIssue.getFree() + trade.getQty()); //++
+            assetInitUserIssue.setFree(BigDecimal.valueOf(assetInitUserIssue.getFree()).add(BigDecimal.valueOf(trade.getQty())).doubleValue()); //++
             //списываем с продавца бумаги
             assetListConfUserIssue = assetDao.getAssetByUserAndByIssue(trade.getUserConf(), trade.getIssue());
             assetConfUserIssue = assetListConfUserIssue.get(0);
-            assetConfUserIssue.setFree(assetConfUserIssue.getFree() - trade.getQty());
+            assetConfUserIssue.setFree(BigDecimal.valueOf(assetConfUserIssue.getFree()).subtract(BigDecimal.valueOf(trade.getQty())).doubleValue());
             //добавляем продавцу деньги
             assetListConfUserMoney = assetDao.getAssetByUserAndByIssue(trade.getUserConf(), issueService.getByName("UAH"));
             if (assetListConfUserMoney.isEmpty()) {
@@ -262,7 +272,7 @@ public class AssetServiceImpl implements AssetService {
             } else {
                 assetConfUserMoney = assetListConfUserMoney.get(0);
             }
-            assetConfUserMoney.setFree(assetConfUserMoney.getFree() + trade.getVolume());
+            assetConfUserMoney.setFree(BigDecimal.valueOf(assetConfUserMoney.getFree()).add(BigDecimal.valueOf(trade.getVolume())).doubleValue());
         }
 
         save(assetInitUserIssue);

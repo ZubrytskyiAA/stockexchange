@@ -21,7 +21,7 @@ public class Issue implements Serializable {
     private String fullName;
 
     @Column(name = "active", nullable = false)
-    private boolean active;
+    private boolean active = true;
 
     @Column(name = "create_moment", nullable = false)
     private Timestamp createMoment;

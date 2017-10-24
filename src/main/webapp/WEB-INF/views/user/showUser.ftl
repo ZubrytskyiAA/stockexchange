@@ -7,31 +7,31 @@
 <body class="container">
 <#include "*/header.ftl">
 <div class="table-responsive">
-    <caption align="center">User info</caption>
+    <caption align="center"><@spring.message "userInfo"/></caption>
     <table class="table-striped" width="400px">
         <tr>
-            <td>Id</td>
+            <td>ID</td>
             <td>${user.id}</td>
         </tr>
         <tr>
-            <td>loginName</td>
+            <td><@spring.message "Username"/></td>
             <td>${user.loginName}</td>
         </tr>
         <tr>
-            <td>password</td>
+            <td><@spring.message "Password"/></td>
             <td>${user.password}</td>
         </tr>
         <tr>
-            <td>First name</td>
+            <td><@spring.message "registerForm.firstName"/></td>
             <td>${user.firstName}</td>
         </tr>
         <tr>
-            <td>Last name</td>
+            <td><@spring.message "registerForm.lastName"/></td>
             <td>${user.lastName}</td>
         </tr>
         <tr>
 
-            <td>Email</td>
+            <td><@spring.message "registerForm.email"/></td>
             <td>${user.email}</td>
         </tr>
     </table>
@@ -45,14 +45,14 @@
     <br>
     <br>
     <br>
-    <caption>User's assets</caption>
+    <caption><@spring.message "usersAsset"/></caption>
     <table class="table table-striped1">
 
 
         <tr>
-            <td>Название Актива</td>
-            <td>Свободно средств</a></td>
-            <td>Заблокировано средств</a></td>
+            <td><@spring.message "issueName"/></td>
+            <td><@spring.message "freeAssets"/></td>
+            <td><@spring.message "blockAssets"/></td>
 
         </tr>
         <#list listAssets as assets>
@@ -79,7 +79,7 @@
                 </#list>
             </select>
         </#if>
-        <input type="submit" title="Change assets" value="Change assets"/>
+        <input type="submit" title=<@spring.message "changeAssets"/> value=<@spring.message "changeAssets"/>>
 
     </form>
 
@@ -90,10 +90,10 @@
     <br>
     <br>
     <br>
-    <h3>There isn't any assets</h3>
+    <h3><@spring.message "noAssets"/></h3>
 </#if>
 
 </div>
-<a type="button" href="/users" class="button">Back</a>
+<a type="button" href="/users" class="button"><@spring.message "Back"/></a>
 </body>
 </html>

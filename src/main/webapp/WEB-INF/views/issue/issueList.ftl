@@ -45,7 +45,7 @@
         <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
         <div class="col-sm-1 col-md-3 col-lg-2 col-xs-10 mobileLabel"
              style=" padding-top: 7px; ">
-            Quickly search:
+            <@spring.message "quicklySearch"/>:
         </div>
 
         <div class="col-sm-7 col-md-7 col-lg-6 col-xs-9 input-group mobilePad"
@@ -62,31 +62,35 @@
 
         <table class="table table-striped">
             <tr>
-                <th>Тикер</th>
-                <th>Полное название</th>
-                <th>Состояние</th>
-                <th>Дата создания</th>
-                <th>Действия</th>
+                <th> <@spring.message "tiker"/></th>
+                <th> <@spring.message "fullName"/></th>
+                <th> <@spring.message "createMoment"/></th>
+                <th> <@spring.message "activities"/></th>
+                <@security.authorize access="hasRole('ROLE_ADMIN')">
+                    <th> <@spring.message "actions"/></th>
+                </@security.authorize>
             </tr>
             <tr>
 
             </tr>
 
             <tbody id="myTable">
-            <#list issues as issue>
-            <tr>
-                <td><a href="/issue/${issue.name}">${issue.name}</a></td>
-                <td>${issue.fullName}</td>
-                <td>${issue.active?then("Активна","Деактивированный")}</td>
-                <td>${issue.createMoment}</td>
-                <td><#include "changeActivitiesForm.ftl"></td>
-            </tr>
-            </#list>
+                <#list issues as issue>
+                <tr>
+                    <td><a href="/issue/${issue.name}">${issue.name}</a></td>
+                    <td>${issue.fullName}</td>
+                    <td>${issue.createMoment}</td>
+                    <td>${issue.active?then("On","Off")}</td>
+                    <@security.authorize access="hasRole('ROLE_ADMIN')">
+                        <td><#include "changeActivitiesForm.ftl"></td>
+                    </@security.authorize>
+                </tr>
+                </#list>
             </tbody>
         </table>
     </div>
 <#else >
-Нету не одной заведенной бумаги
+    <@spring.message "noIssue"/>
 
 </#if>
 </body>

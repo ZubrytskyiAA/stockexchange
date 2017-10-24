@@ -10,27 +10,9 @@
 <#if errors??>
 EROOR:
     <#list errors as error>
-    <h1>error</h1><br>
+    <h1>${error}</h1><br>
     </#list>
 </#if>
-
-
-<form action="/issue/newIssue" method="post" name="issue" class="form-group">
-
-    <td><input title="name" type="text" name="name" required></td>
-
-    <td><input title="full_name" type="text" name="fullName" required></td>
-    <td>
-        <select name="active">
-            <option value=1>Активный</option>
-            <option value=0>Деактивированый</option>
-        </select>
-
-    </td>
-    <td></td>
-    <td><input type="submit" title="submit" value="Добавить"/></td>
-</form>
-
 
 <div class="container">
     <div class="row">
@@ -42,7 +24,7 @@ EROOR:
                     <fieldset class="landscape_nomargin"
                               style="min-width: 0;padding:    .35em .625em .75em!important;margin:0 2px;border: 2px solid silver!important;margin-bottom: 10em;">
                         <legend style="border-bottom: none;width: inherit;!important;padding:inherit;" class="legend">
-                        <@spring.message "registerForm.Registration"/>
+                        <@spring.message "issueRegisterForm.Registration"/>
                         </legend>
 
 
@@ -50,14 +32,14 @@ EROOR:
                             <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
                             <div class="col-sm-3 col-md-3 col-lg-4 col-xs-10 mobileLabel"
                                  style=" padding-top: 7px; text-align: right;">
-                            <@spring.message "registerForm.firstName"/>  :
+                            <@spring.message "tiker"/>  :
                             </div>
 
                             <div class="col-sm-7 col-md-7 col-lg-6 col-xs-9 input-group mobilePad"
                                  style="font-weight:600;">
 
                                 <input style="border-radius: 4px!important;" type="text" class="form-control"
-                                       name="name" id="name" placeholder="AZST">
+                                       name="name" id="name" placeholder="AZST" required>
 
                             </div>
                             <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
@@ -68,14 +50,14 @@ EROOR:
                             <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
                             <div class="col-sm-3 col-md-3 col-lg-4 col-xs-10 mobileLabel"
                                  style=" padding-top: 7px; text-align: right;">
-                            <@spring.message "registerForm.lastName"/> :
+                            <@spring.message "fullName"/> :
                             </div>
 
                             <div class="col-sm-7 col-md-7 col-lg-6 col-xs-9 input-group mobilePad"
                                  style="font-weight:600;">
 
                                 <input style="border-radius: 4px!important;" type="text" class="form-control"
-                                       name="fullName" id="fullName" placeholder="Azov Stal LTD">
+                                       name="fullName" id="fullName" placeholder="Azov Stal LTD" required>
 
                             </div>
                             <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>

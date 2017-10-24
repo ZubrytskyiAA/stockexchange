@@ -73,16 +73,10 @@ public class IssueDaoImpl implements IssueDao {
 
     @Override
     public boolean isIssueActiveByName(String name) {
-
-
         List<String> nameIssue;
-
-
         nameIssue = entityManager.createQuery("select i.name from Issue i where i.active = 1 and i.name =:name", String.class)
                 .setParameter("name", name)
                 .getResultList();
-
-
         if (nameIssue.isEmpty()) {
             return false;
         } else return true;

@@ -11,7 +11,6 @@ public interface QuoteService {
 
     Quote getById(long id);
 
-    Quote updateQuote(Quote quote);
 
     void delete(Quote quote);
 
@@ -19,7 +18,7 @@ public interface QuoteService {
 
     List<Quote> getAllQuoteByIssueName(String name);
 
-    void update(Quote quote);
+    Quote update(Quote quote);
 
     void changeExistQuote(Quote quote);
 

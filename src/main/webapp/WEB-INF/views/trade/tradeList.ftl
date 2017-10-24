@@ -2,29 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UserData</title>
+
 </head>
 <body class="container">
 <#include "*/header.ftl">
-<div class="table-responsive" style="background-color: antiquewhite">
-    <caption>Trades list</caption>
+<div class="table-responsive">
+    <caption><@spring.message "tradesList"/></caption>
 
 <#if trades??>
     <table class="table table-striped" style="text-align: center">
         <tr>
 
             <@security.authorize access="hasRole('ROLE_ADMIN')">
-                <th>Номер сделки</th>
+                <th style="text-align:center"><@spring.message "dealNumber"/></th>
             </@security.authorize>
-            <th>Название бумаги</th>
-            <th>Покупатель</th>
-            <th>Продавец</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Объем</th>
-            <th>Тип</th>
-            <th>Состояние</th>
-            <th>Дата заключения</th>
+            <th style="text-align:center"><@spring.message "issueName"/></th>
+            <th style="text-align:center"><@spring.message "buyer"/></th>
+            <th style="text-align:center"><@spring.message "seller"/></th>
+            <th style="text-align:center"><@spring.message "Price"/></th>
+            <th style="text-align:center"><@spring.message "Quantity"/></th>
+            <th style="text-align:center"><@spring.message "Volume"/></th>
+            <th style="text-align:center"><@spring.message "DealType"/></th>
+            <th style="text-align:center"><@spring.message "State"/></th>
+            <th style="text-align:center"><@spring.message "tradeMoment"/></th>
 
         </tr>
 
@@ -62,13 +62,13 @@
                 <td>
                     <#switch  "${trade.type}" >
                         <#case "A">
-                            Аукционнная
-                            <#break>
+                        <@spring.message "auctionsDeal"/>
+                        <#break>
                         <#case "B">
-                            Договорная
+                            <@spring.message "Negotiated"/>
                             <#break>
                         <#default>
-                            Неопознанный Тип
+                            <@spring.message "unidentifiedType"/>
                     </#switch>
                 </td>
 
@@ -76,13 +76,13 @@
                 <td>
                     <#switch  "${trade.status}" >
                         <#case "1">
-                            Ждет подтверждения
-                            <#break>
+                        <@spring.message "waitingConf"/>
+                        <#break>
                         <#case "10">
-                            Исполнена
+                            <@spring.message "Executed"/>
                             <#break>
                         <#default>
-                            Неопознанный статус
+                            <@spring.message "unidentifiedType"/>
                     </#switch>
                 </td>
                 <td>${trade.tradeMoment}</td>

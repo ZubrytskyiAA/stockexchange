@@ -23,8 +23,6 @@
             <div class="panel panel-login ">
                 <div class="panel-heading">
                     <div class="row text-center">
-
-
                         <div class="container-fluid" style=" padding-left: 90%">
                             <div class="row">
 
@@ -57,6 +55,11 @@
                                                      width="20" border="0"> - Deutsch
                                             </a>
                                         </li>
+                                        <#--<li>-->
+                                            <#--<a href="/login?mylocale=il" title="עִבְרִית">-->
+                                                <#--<img src="/resources/images/flags/il.gif" alt="IL" height="12"-->
+                                                     <#--width="20" border="0"> - עִבְרִית</a>-->
+                                        <#--</li>-->
                                     </ul>
                                 </div>
                             </div>
@@ -70,7 +73,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="/loginPage" method="post" role="form"
+                            <form id="login-form" action="/login" method="post" role="form"
                                   style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="loginName" id="loginName" tabindex="1" class="form-control"
@@ -84,12 +87,14 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input style="background-color:#46b8da" type="submit" name="login-submit" id="login-submit" tabindex="3"
+                                            <input style="background-color:#46b8da" type="submit" name="login-submit"
+                                                   id="login-submit" tabindex="3"
                                                    class="form-control btn btn-primary"
                                                    value="<@spring.message "Login"/>">
                                         </div>
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <p><a href="/users/create" style=" background-color: #2e6da4"  class="btn btn-info btn-block">Yes please, register now!</a></p>
+                                            <p><a href="/users/create" style=" background-color: #2e6da4"
+                                                  class="btn btn-info btn-block"><@spring.message "registatuinUserButton"/></a></p>
                                         </div>
                                     </div>
                                 </div>

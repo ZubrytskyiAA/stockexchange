@@ -86,7 +86,7 @@ EROOR:
                             <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
                             <div class="col-sm-3 col-md-3 col-lg-4 col-xs-10 mobileLabel"
                                  style=" padding-top: 7px; text-align: right;">
-                                Login <span style="color: red">*</span> :
+                            <@spring.message "login"/> <span style="color: red">*</span> :
                             </div>
 
                             <div class="col-sm-7 col-md-7 col-lg-6 col-xs-9 input-group mobilePad"

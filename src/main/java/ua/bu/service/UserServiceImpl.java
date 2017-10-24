@@ -55,51 +55,28 @@ public class UserServiceImpl implements UserService {
 
         System.out.println("begin");
         if (login == null || password == null || email == null) {
-            System.out.println(1);
             return false;
         } else if (login.length() < 1) {
-            System.out.println(2);
             return false;
         } else if (getListNamesAllUsers().contains(login)) {
-            System.out.println(3);
             return false;
         } else if (!password.matches("^(?=.{6,}).*$")) {
-            System.out.println(4);
             return false;
         } else if (!password.matches("^(?=.*[0-9]).*$")) {
-            System.out.println(5);
             return false;
         } else if (!password.matches("^(?=.*[a-z]).*$")) {
-            System.out.println(6);
             return false;
         } else if (!password.matches("^(?=.*[A-Z]).*$")) {
-            System.out.println(7);
             return false;
         } else if (!password.matches("^(?=.*[!@#$%^&_+=\\\\*\\\\-\\\\(\\\\)\\\\{\\\\}\\\\:\\\\;\\\\<\\\\>\\\\|\\\\,\\\\.\\\\?\\\\/\\\\'\\\\\"]).*$")) {
-            System.out.println(8);
             return false;
         } else if ((email.indexOf(".") > 2) && (email.indexOf("@") > 0)) {
-
-            User user = new User();
-            Role role = new Role();
-            user.setPassword(password);
-            user.setLoginName(login);
-            user.setEmail(email);
-            user.setFirstName(fname);
-            user.setLastName(lname);
-
-            role.setLoginName(login);
-            role.setRole("ROLE_TRADER");
-
+            User user = new User(login, password, email, fname, lname);
+            Role role = new Role(login, "ROLE_TRADER");
             save(user);
             roleService.save(role);
-
-            System.out.println(9);
-            System.out.println(true);
             return true;
         } else {
-            System.out.println(10);
-            System.out.println(false);
             return false;
         }
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UserData</title>
+    <title>User Information</title>
 </head>
 <body class="container">
 <#include "*/header.ftl">
@@ -32,7 +32,7 @@
         <div class="col-sm-1 col-md-1 col-lg-1 col-xs-1"></div>
         <div class="col-sm-1 col-md-3 col-lg-2 col-xs-10 mobileLabel"
              style=" padding-top: 7px; ">
-            Quickly search:
+        <@spring.message "quicklySearch"/>:
         </div>
 
         <div class="col-sm-7 col-md-7 col-lg-6 col-xs-9 input-group mobilePad"
@@ -47,12 +47,12 @@
 
     <table class="table table-striped" style="text-align: center" width="400px  ">
         <tr>
-            <td><a href="/users?order=loginName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}">Login</a></td>
-            <td><a href="/users?order=firstName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}">First Name</a>
+            <td><a href="/users?order=loginName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}"><@spring.message "login"/></a></td>
+            <td><a href="/users?order=firstName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}"><@spring.message "registerForm.firstName"/></a>
             </td>
-            <td><a href="/users?order=lastName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}">Last Name</a></td>
-            <td><a href="/users?order=email&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}">Email</a></td>
-            <td><a href="/users?order=active&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}">Activities</a></td>
+            <td><a href="/users?order=lastName&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}"><@spring.message "registerForm.lastName"/></a></td>
+            <td><a href="/users?order=email&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}"><@spring.message "registerForm.email"/></a></td>
+            <td><a href="/users?order=active&prevOrder=${prevOrder}&prevOrderType=${prevOrderType}"><@spring.message "activities"/></a></td>
             <td>Actions</td>
         </tr>
 
@@ -64,7 +64,7 @@
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td>${user.email}</td>
-            <td>${user.active?then("Активна","Деактивированный")}</td>
+            <td>${user.active?then("On","Off")}</td>
             <td>
                 <#include "changeActivitiesUserForm.ftl">
 

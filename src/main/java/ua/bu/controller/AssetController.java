@@ -105,6 +105,7 @@ public class AssetController {
             return "redirect:/asset/" + userName;
         }
 
+
         Asset asset = new Asset();
         asset.setFree(Math.abs(qtyAdd));
         asset.setIssueId(issueService.getByName(issueName));

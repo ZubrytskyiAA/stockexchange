@@ -34,6 +34,11 @@
                         <img src="/resources/images/flags/de.gif" alt="DE" height="12" width="20" border="0"> - Deutsch
                     </a>
                 </li>
+                <#--<li>-->
+                    <#--<a href="/login?mylocale=il" title="עִבְרִית">-->
+                        <#--<img src="/resources/images/flags/il.gif" alt="IL" height="12"-->
+                             <#--width="20" border="0"> - עִבְרִית</a>-->
+                <#--</li>-->
             </ul>
         </div>
     </div>

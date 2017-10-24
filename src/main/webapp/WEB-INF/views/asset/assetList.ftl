@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <label class="control-label" for="price"> Клиент:</label>
+            <label class="control-label" for="price"><@spring.message "quote.client"/>:</label>
             <select class="form-control" name="userName"
                     onchange="document.location=this.options[this.selectedIndex].value">
             <#if "${selectUserName}" = "">
@@ -30,8 +30,8 @@
     <div class="container">
         <br>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#replenish">Бумаги</a></li>
-            <li><a data-toggle="tab" href="#withdraw">Деньги</a></li>
+            <li class="active"><a data-toggle="tab" href="#replenish"><@spring.message "header.issues"/></a></li>
+            <li><a data-toggle="tab" href="#withdraw"><@spring.message "money"/></a></li>
 
         </ul>
 

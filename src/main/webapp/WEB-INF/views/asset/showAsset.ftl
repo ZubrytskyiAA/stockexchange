@@ -5,9 +5,9 @@
     <table class="table table-striped col-sm-5">
         <thead>
         <tr>
-            <th>Название инструмента</th>
-            <th>Доступные средства</th>
-            <th>Заблокированные средства</th>
+            <th><@spring.message "tiker"/></th>
+            <th><@spring.message "freeAssets"/></th>
+            <th><@spring.message "blockAssets"/></th>
         </tr>
         </thead>
         <tbody>
@@ -22,10 +22,10 @@
     </table>
 
 <#else >
-
+    
 
     <p>
-    <h3>There isn't any assets</h3>
+    <h3><@spring.message "noAssets"/></h3>
     </p>
 </#if>
 

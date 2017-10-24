@@ -12,6 +12,14 @@ public class Role {
     private String loginName;
     private String role;
 
+    public Role() {
+    }
+
+    public Role(String loginName, String role) {
+        this.loginName = loginName;
+        this.role = role;
+    }
+
     public long getId() {
         return id;
     }
@@ -20,7 +28,6 @@ public class Role {
         this.id = id;
     }
 
-
     public String getRole() {
         return role;
     }
@@ -28,7 +35,6 @@ public class Role {
     public void setRole(String role) {
         this.role = role;
     }
-
 
     public String getLoginName() {
         return loginName;

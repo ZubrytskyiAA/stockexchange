@@ -63,8 +63,8 @@ public class QuoteDaoImpl implements QuoteDao {
     }
 
     @Override
-    public void update(Quote quote) {
-        entityManager.merge(quote);
+    public Quote update(Quote quote) {
+        return entityManager.merge(quote);
     }
 
     @Override

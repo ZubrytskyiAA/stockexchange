@@ -137,6 +137,8 @@ function submitForm1(obj) {
 
     }
     else if (newValPassPoilcy() === false) {
+        $('#message1').css('color', 'red');
+        $('#message1').html('<@spring.message "registerForm.incorrectValPassPolicy"/>');
     }
     else if (document.getElementById("password").value.trim() === "" && document.getElementById("password").value !== null) {
         $('#message1').css('color', 'red');
@@ -181,7 +183,7 @@ function submitForm() {
 
     $.ajax({
         method: "GET",
-        url: "http://localhost:8080/values?login=" + login + "&password=" + password + "&fname=" + firstName + "&lname=" + lastName + "&email=" + email,
+        url: "/values?login=" + login + "&password=" + password + "&fname=" + firstName + "&lname=" + lastName + "&email=" + email,
         success: function (data) {
             submitForm1(data);
         }

@@ -1,7 +1,10 @@
 package ua.bu.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import ua.bu.dao.interfaces.IssueDao;
 import ua.bu.entity.Issue;
 import ua.bu.service.interfaces.IssueService;
@@ -10,6 +13,9 @@ import java.util.List;
 
 @Service
 public class IssueServiceImpl implements IssueService {
+
+
+    private static final Logger logger = Logger.getLogger(QuoteServiceImpl.class);
 
     @Autowired
     private IssueDao issueDao;
@@ -27,9 +33,18 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public void save(Issue issue) {
-        if (issueDao.isLoginNameUnique(issue.getName()))
-            issueDao.save(issue);
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
 
+        if (issueDao.isLoginNameUnique(issue.getName()) && !StringUtils.isEmpty(issue.getName()) && !StringUtils.isEmpty(issue.getFullName())) {
+            try {
+                issueDao.save(issue);
+                logger.info(" issue saved by " + user + ", " + issue);
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+            }
+        } else {
+            logger.info("User: " + user + " try save invalid issue :" + issue);
+        }
     }
 
     @Override
@@ -37,9 +52,6 @@ public class IssueServiceImpl implements IssueService {
         return issueDao.getById(id);
 
     }
-
-
-
 
 
     @Override
@@ -54,7 +66,17 @@ public class IssueServiceImpl implements IssueService {
 
     @Override
     public Issue updateIssue(Issue issue) {
-        return issueDao.updateIssue(issue);
+        String user = SecurityContextHolder.getContext().getAuthentication().getName();
+        try {
+            Issue updatedIssue = issueDao.updateIssue(issue);
+            logger.info(" issue updated by " + user + ", " + updatedIssue);
+            return updatedIssue;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return null;
+        }
+
+
     }
 
     @Override
