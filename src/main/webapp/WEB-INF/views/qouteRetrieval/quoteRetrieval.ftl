@@ -134,6 +134,29 @@
         <td colspan="2" valign="top"><#include "quoteRetrievalSellPart.ftl"></td>
     </tr>
 
+
+        <#if error??>
+        <tr>
+            <td colspan="4">
+
+                <#switch  "${error}" >
+                    <#case "badPrice">
+                        <label class="control-label" style="color:red"><@spring.message "badPrice"/></label>
+                        <#break>
+                    <#case "badQty">
+                        <label class="control-label" style="color:red"><@spring.message "badQty"/></label>
+                        <#break>
+                    <#case "badIssue">
+                        <label class="control-label" style="color:red"><@spring.message "badIssue"/></label>
+                        <#break>
+                </#switch>
+
+
+            </td>
+        </tr>
+        </#if>
+
+
         <@security.authorize access="hasRole('ROLE_TRADER')">
         <tr>
             <td colspan="4"> <#include "tradeForm1.ftl"></td>

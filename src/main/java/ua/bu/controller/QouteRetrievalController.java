@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.bu.entity.Asset;
 import ua.bu.service.interfaces.AssetService;
 import ua.bu.service.interfaces.IssueService;
@@ -36,22 +38,22 @@ public class QouteRetrievalController {
 
         //-----
         String loginName = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Asset> listAssetList =  assetService.getListAssetsByUserName(loginName);
+        List<Asset> listAssetList = assetService.getListAssetsByUserName(loginName);
         List<Asset> assetListOnlyIssue = new ArrayList<>();
         List<Asset> assetListOnlyMoney = new ArrayList<>();
-        if(!listAssetList.isEmpty()){
-            for(Asset asset: listAssetList){
-                if (asset.getIssueId().getName().equals("UAH")){
+        if (!listAssetList.isEmpty()) {
+            for (Asset asset : listAssetList) {
+                if (asset.getIssueId().getName().equals("UAH")) {
                     assetListOnlyMoney.add(asset);
-                }else{
+                } else {
                     assetListOnlyIssue.add(asset);
                 }
             }
 
-            if(!assetListOnlyMoney.isEmpty())
-                model.addAttribute("assetListOnlyMoney" , assetListOnlyMoney);
-            if(!assetListOnlyIssue.isEmpty())
-                model.addAttribute("assetListOnlyIssue" , assetListOnlyIssue);
+            if (!assetListOnlyMoney.isEmpty())
+                model.addAttribute("assetListOnlyMoney", assetListOnlyMoney);
+            if (!assetListOnlyIssue.isEmpty())
+                model.addAttribute("assetListOnlyIssue", assetListOnlyIssue);
         }
         //-----
         List<String> activeList = issueService.getListNamesActiveIssue();
@@ -66,40 +68,39 @@ public class QouteRetrievalController {
 
 
     @GetMapping("/{issueName}")
-    public String getQRByName(@PathVariable("issueName") String issueName, Model model) {
+    public String getQRByName(@PathVariable("issueName") String issueName, Model model,
+                              @RequestParam(value = "error", required = false) String errorAfterAddQuote) {
 
         //-----
         String loginName = SecurityContextHolder.getContext().getAuthentication().getName();
-        List<Asset> listAssetList =  assetService.getListAssetsByUserName(loginName);
+        List<Asset> listAssetList = assetService.getListAssetsByUserName(loginName);
         List<Asset> assetListOnlyIssue = new ArrayList<>();
         List<Asset> assetListOnlyMoney = new ArrayList<>();
-        if(!listAssetList.isEmpty()){
-            for(Asset asset: listAssetList){
-                if (asset.getIssueId().getName().equals("UAH")){
+        if (!listAssetList.isEmpty()) {
+            for (Asset asset : listAssetList) {
+                if (asset.getIssueId().getName().equals("UAH")) {
                     assetListOnlyMoney.add(asset);
-                }else{
+                } else {
                     assetListOnlyIssue.add(asset);
                 }
             }
 
-            if(!assetListOnlyMoney.isEmpty())
-                model.addAttribute("assetListOnlyMoney" , assetListOnlyMoney);
-            if(!assetListOnlyIssue.isEmpty())
-                model.addAttribute("assetListOnlyIssue" , assetListOnlyIssue);
+            if (!assetListOnlyMoney.isEmpty())
+                model.addAttribute("assetListOnlyMoney", assetListOnlyMoney);
+            if (!assetListOnlyIssue.isEmpty())
+                model.addAttribute("assetListOnlyIssue", assetListOnlyIssue);
         }
         //-----
-
 
 
         if (issueService.isIssueActiveByName(issueName)) {
             model.addAttribute("selectedIssueName", issueName);
             model.addAttribute("quotes", quoteService.getAllQuoteByIssueName(issueName));
             model.addAttribute("listIssue", issueService.getListNamesActiveIssue());
+            if (!StringUtils.isEmpty(errorAfterAddQuote)) model.addAttribute("error", errorAfterAddQuote);
+
             return "quoteRetrieval";
         } else {
-
-            String error = "dsdadasad";
-            model.addAttribute("errorMsg", error);
             return "redirect:/qouteRetrieval";
         }
 

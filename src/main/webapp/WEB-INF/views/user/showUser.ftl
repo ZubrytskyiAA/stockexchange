@@ -79,7 +79,7 @@
                 </#list>
             </select>
         </#if>
-        <input type="submit" title=<@spring.message "changeAssets"/> value=<@spring.message "changeAssets"/>>
+        <#--<input type="submit" title=<@spring.message "changeAssets"/> value=<@spring.message "changeAssets"/>>-->
 
     </form>
 

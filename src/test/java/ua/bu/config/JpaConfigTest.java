@@ -32,7 +32,7 @@ public class JpaConfigTest extends JpaConfig{
     }
 
     @Override
-    public DataSource dataSource() {
+    public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setUrl("jdbc:mysql://localhost:3306/testdb?userSll=false&createDatabaseIfNotExist=true");
         dataSource.setUsername("root");

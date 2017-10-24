@@ -33,7 +33,7 @@ public class QuoteController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 
-        List<Quote> quoteList ;
+        List<Quote> quoteList;
         List<Integer> intList = new ArrayList<>();
         if (auth.getAuthorities().toString().contains("ADMIN")) {
             quoteList = quoteService.getAll();
@@ -112,7 +112,15 @@ public class QuoteController {
     @PostMapping("/addNewQuote")
     public String createUser(@ModelAttribute("price") double price, @ModelAttribute("userId") long userId, @ModelAttribute("issueName") String issueName, @ModelAttribute("optradio") String type, @ModelAttribute("qty") long qty) {
 
-        if (issueService.isIssueActiveByName(issueName) && price > 0 && qty > 0) {
+        String errorMsg = "";
+
+        if (!issueService.isIssueActiveByName(issueName)) {
+            errorMsg = "badIssue";
+        } else if (price < 0) {
+            errorMsg = "badPrice";
+        } else if (qty < 0) {
+            errorMsg = "badQty";
+        } else if (issueService.isIssueActiveByName(issueName) && price > 0 && qty > 0) {
             Quote quote = new Quote();
             quote.setQty(qty);
             quote.setIssueId(issueService.getByName(issueName));
@@ -121,9 +129,11 @@ public class QuoteController {
             String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
             quote.setUserId(userService.getByName(currentUserName));
             quoteService.addQuote(quote);
+        } else {
+            errorMsg = "неопознанная ошибка";
         }
+        return "redirect:/qouteRetrieval/" + issueName + "?error=" + errorMsg;
 
-        return "redirect:/qouteRetrieval/" + issueName;
     }
 
 

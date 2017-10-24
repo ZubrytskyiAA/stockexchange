@@ -8,14 +8,13 @@
 <#--<link rel="stylesheet" href="http://bootstraptema.ru/plugins/2015/bootstrap3/bootstrap.min.css"/>-->
 
 
-
 </head>
 <body class="container">
 <#include "*/header.ftl">
 <br><br><br>
 
-
 <#if "${selectedIssueName}"??>
+    <@spring.message "tiker"/>:
 <select name="active" onchange="document.location=this.options[this.selectedIndex].value">
     <#if "${selectedIssueName}" = "" >
         <option selected disabled hidden value=></option>
@@ -23,9 +22,9 @@
         <option selected value="/report/${selectedIssueName}">${selectedIssueName}</option>
     </#if>
     <#list uniqNames as h>
-
-        <option value="/report/${h}">${h}</option>
-
+        <#if "${selectedIssueName}" != "${h}" >
+            <option value="/report/${h}">${h}</option>
+        </#if>
     </#list>
 </select>
 
@@ -51,7 +50,7 @@
         $("#chart").shieldChart({
             theme: "light",
             primaryHeader: {
-                text: "Обзор изменения цен за весь период "
+                text: <@spring.message "report.changingPrice"/>
             },
             exportOptions: {
                 image: false,
@@ -73,8 +72,7 @@
                 data: [
                     <#list trades as trade>
                     ${trade.price?c}<#sep>,
-                    </#list>
-                ]
+                    </#list>]
             }]
         });
     });
@@ -102,29 +100,29 @@
 
 
 <#--<div class="container col-md-10  col-md-offset-1"  style="width: 100%; height: 500px">-->
-    <#--<h2>Modal Example</h2>-->
-    <#--<!-- Trigger the modal with a button &ndash;&gt;-->
-    <#--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#chart">Open Modal</button>-->
+<#--<h2>Modal Example</h2>-->
+<#--<!-- Trigger the modal with a button &ndash;&gt;-->
+<#--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#chart">Open Modal</button>-->
 
-    <#--<!-- Modal &ndash;&gt;-->
-    <#--<div class="modal fade" id="chart" role="dialog"  style="margin-left: 10%; margin-top: 5%;width: 100%; height: 100%">-->
-        <#--<div class="modal-dialog">-->
+<#--<!-- Modal &ndash;&gt;-->
+<#--<div class="modal fade" id="chart" role="dialog"  style="margin-left: 10%; margin-top: 5%;width: 100%; height: 100%">-->
+<#--<div class="modal-dialog">-->
 
-            <#--<!-- Modal content&ndash;&gt;-->
-            <#--<div class="modal-content">-->
-                <#--<div class="modal-header">-->
-                    <#--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-                    <#--<h4 class="modal-title">Modal Header</h4>-->
-                <#--</div>-->
-                <#--<div class="modal-body" id="chart">-->
-                <#--</div>-->
-                <#--<div class="modal-footer">-->
-                    <#--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-                <#--</div>-->
-            <#--</div>-->
+<#--<!-- Modal content&ndash;&gt;-->
+<#--<div class="modal-content">-->
+<#--<div class="modal-header">-->
+<#--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<#--<h4 class="modal-title">Modal Header</h4>-->
+<#--</div>-->
+<#--<div class="modal-body" id="chart">-->
+<#--</div>-->
+<#--<div class="modal-footer">-->
+<#--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+<#--</div>-->
+<#--</div>-->
 
-        <#--</div>-->
-    <#--</div>-->
+<#--</div>-->
+<#--</div>-->
 
 <#--</div>-->
 

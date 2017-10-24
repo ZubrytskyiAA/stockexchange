@@ -30,11 +30,14 @@
                 <input class="form-control" id="qty" pattern="^[0-9]{1,8}" step="1" type="number" name="qty"
                        placeholder="" required/>
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-5">
                 <button type="submit" class="btn btn-success"><@spring.message "Send"/></button>
+
             </div>
+
         </div>
     </form>
 </div>

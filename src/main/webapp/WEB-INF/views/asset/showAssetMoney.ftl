@@ -6,10 +6,8 @@
         <label class="control-label" for="price"><@spring.message "addMoney"/></label>
         <select class="form-control" name="issueName" required>
             <option selected></option>
-            <#list listIssueNamesActive?sort as issueNames>
-                <#if issueNames == "UAH">
-                    <option value=${issueNames}>${issueNames}</option>
-                </#if>
+            <#list listQuantityMoney?sort as assets>
+                <option value=${assets.issueId.name}>${assets.issueId.name}</option>
             </#list>
         </select>
         <input title="quantity" type="number" step="0.01" name="qtyAdd" required>
